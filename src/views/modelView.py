@@ -1,8 +1,7 @@
 import math
 from controllers.modelController import ModelController
-from CUI.cui import CUI
-
-exec_bad_chars = set('{}()[],;\'\"')
+from CUI.constructor import CUI
+exec_bad_chars = set('{}()[],;\\/\'\"')
 
 
 class EntityView:
@@ -15,7 +14,7 @@ class EntityView:
         self.Controller = ModelController(instance)
 
         self.CUI.addField(f'Add {self.instance.__name__}', lambda: self.__addItem())
-        self.CUI.addField(f'{self.instance.__name__}s', lambda: self.__getItems())
+        self.CUI.addField(f'{self.instance.__name__}', lambda: self.__getItems())
 
     def __supportFillItemFunc(self, key, value, item):
         try:
@@ -29,7 +28,7 @@ class EntityView:
                 raise Exception('Incorrect input')
             self.currentMenu.renameField(f'{key}:        <{value}>', f'{key}:        <{new_value}>')
         except Exception as err:
-            self.currentMenu.setError(str(err))
+            self.currentMenu.setMsg(str(err))
 
     def __supportFillFunc(self, key, mapped):
         try:
@@ -49,7 +48,7 @@ class EntityView:
             else:
                 self.currentMenu.renameField(f'{key}:        <{old_value}>', f'{key}:        <{value}>')
         except Exception as err:
-            self.currentMenu.setError(str(err))
+            self.currentMenu.setMsg(str(err))
 
     def __fillEntityMenu(self, *args):
         self.currentMenu = CUI(f'{self.instance.__name__} fill menu')
@@ -68,7 +67,7 @@ class EntityView:
                 raise Exception('Invalid arguments')
 
         except Exception as err:
-            self.currentMenu.setError(str(err))
+            self.currentMenu.setMsg(str(err))
         self.currentMenu.run('Save and Return')
 
     def run(self):
@@ -91,9 +90,9 @@ class EntityView:
             exec("self.entity = self.instance(%s)" % exec_str[:-1])
 
             entityId = self.Controller.add(self.entity)
-            self.CUI.setError(f'New Entity created! Id: {entityId}')
+            self.CUI.setMsg(f'New Entity created! Id: {entityId}')
         except Exception as err:
-            self.CUI.setError(str(err))
+            self.CUI.setMsg(str(err))
 
     def __changePageParams(self, page: int, per_page: int):
         self.page = page
@@ -102,11 +101,10 @@ class EntityView:
         self.__getItems()
 
     def __getItems(self):
-        itemsMenu = CUI(self.instance.__name__ + 's')
+        itemsMenu = CUI(self.instance.__name__)
         self.itemsCurrentMenu[0] = itemsMenu
         try:
-            maxPage = self.Controller.getCount() / self.per_page
-            if self.page < math.ceil(maxPage):
+            if self.page < math.ceil(self.Controller.getCount() / self.per_page):
                 itemsMenu.addField('NEXT', lambda: self.__changePageParams(self.page + 1, self.per_page))
             if self.page > 1:
                 itemsMenu.addField('PREV', lambda: self.__changePageParams(self.page - 1, self.per_page))
@@ -116,9 +114,9 @@ class EntityView:
                     itemsMenu.addField(f"<{entity.id}> {entity.name}", lambda id=entity.id: self.__getItem(id))
                 else:
                     itemsMenu.addField(f"<{entity.id}>", lambda id=entity.id: self.__getItem(id))
-            itemsMenu.setError(f' [Page {self.page}/{math.ceil(maxPage)}]')
+
         except Exception as err:
-            itemsMenu.setError(str(err))
+            itemsMenu.setMsg(str(err))
         itemsMenu.run('Return to main menu')
 
     def __updateItem(self, item):
@@ -148,5 +146,5 @@ class EntityView:
             itemMenu.addField('UPDATE', lambda: self.__updateItem(item))
             itemMenu.addField('Return to prev menu', lambda: self.__supportCUIFunc())
         except Exception as err:
-            itemMenu.setError(str(err))
+            itemMenu.setMsg(str(err))
         itemMenu.run(False)

@@ -20,6 +20,7 @@ class ModelController(object):
                 .all()
         except Exception as err:
             print("Get error! ", err)
+            session.rollback()
             raise err
         return items
 
@@ -34,6 +35,7 @@ class ModelController(object):
             return item.id
         except Exception as err:
             print("Add error! ", err)
+            session.rollback()
             raise err
 
     def getById(self, itemId):
@@ -41,6 +43,7 @@ class ModelController(object):
             return session.query(self.instance).get(itemId)
         except Exception as err:
             print("Get by id error! ", err)
+            session.rollback()
             raise err
 
     def delete(self, itemId):
@@ -52,6 +55,7 @@ class ModelController(object):
             return deletedItem
         except Exception as err:
             print("Delete error! ", err)
+            session.rollback()
             raise err
 
     def update(self, item):
@@ -66,6 +70,7 @@ class ModelController(object):
             return True
         except Exception as err:
             print("Update error! ", err)
+            session.rollback()
             raise err
 
     def getCount(self):
@@ -73,6 +78,7 @@ class ModelController(object):
             return session.execute(select([func.count()]).select_from(self.instance)).scalar()
         except Exception as err:
             print("Get count error! ", err)
+            session.rollback()
             raise err
 
     def getModelKeys(self):
@@ -89,6 +95,6 @@ class ModelController(object):
         for entity in item.__dict__.items():
             key = entity[0]
             value = entity[1]
-            if key is not '_sa_instance_state':
+            if key is not '_sa_instance_state' and key is not 'id':
                 mapped_values[key] = value
         return mapped_values
