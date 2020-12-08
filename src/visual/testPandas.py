@@ -8,7 +8,7 @@ from sqlalchemy import func
 from CUI.constructor import CUI
 
 
-def getTop10Categories():
+def getTop15Categories():
     results = session.query(Category.name, func.count(Category.name).label('count')) \
         .join(Product, Category.Products) \
         .group_by(Category.name) \
@@ -23,7 +23,8 @@ def getTop10Categories():
     plt.plot(series)
     plt.show()
 
+
 def run():
     menu = CUI('Visual models')
-    menu.addField('Get top 15 categories', lambda: getTop10Categories())
+    menu.addField('Get top 15 categories', lambda: getTop15Categories())
     menu.run('Return to prev menu')
