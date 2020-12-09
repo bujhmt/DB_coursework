@@ -5,7 +5,6 @@ from db import session
 from models.category import Category
 from models.product import Product
 from sqlalchemy import func
-from CUI.constructor import CUI
 
 
 def getTop15Categories():
@@ -23,8 +22,3 @@ def getTop15Categories():
     plt.plot(series)
     plt.show()
 
-
-def run():
-    menu = CUI('Visual models')
-    menu.addField('Get top 15 categories', lambda: getTop15Categories())
-    menu.run('Return to prev menu')

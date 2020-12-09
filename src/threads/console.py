@@ -1,41 +1,34 @@
 # from tkinter import *
-# import threading
-#
-# class FakeConsole(Frame):
-#     def __init__(self, root, *args, **kargs):
-#         Frame.__init__(self, root, *args, **kargs)
-#
-#         #white text on black background,
-#         self.text = Text(self, bg="black", fg="white")
-#         self.text.pack()
-#
-#         #list of things not yet printed
-#         self.printQueue = []
-#         self.printQueueLock = threading.Lock()
-#         self.after(5, self.__on_idle)
-#
-#     #check for new messages every five milliseconds
-#     def __on_idle(self):
-#         with self.printQueueLock:
-#             for msg in self.printQueue:
-#                 self.text.insert(END, msg)
-#                 self.text.see(END)
-#             self.printQueue = []
-#         self.after(5, self.__on_idle)
-#
-#     #print msg to the console
-#     def show(self, msg, sep="\n"):
-#         with self.printQueueLock:
-#             self.printQueue.append(str(msg) + sep)
-#
-# def makeConsoles(amount):
-#     root = Tk()
-#     consoles = [FakeConsole(root) for n in range(amount)]
-#     for c in consoles:
-#         c.pack()
-#     threading.Thread(target=root.mainloop).start()
-#     return consoles
+from db import session
+from models.product import Product
+from CUI.constructor import CUI
+import math
 
-from subprocess import call, ne
+class test(object):
 
-call('python Threads.py', creationflags=CREATE_NEW_CONSOLE)
+    def __init__(self):
+        self.tags_page = 1
+        self.per_page = 10
+
+
+    def updateTags(self, newPage: int, menu):
+        self.tags_page = newPage
+        menu.stop()
+        self.getTags()
+
+    def getTags(self):
+        menu = CUI('Tags menu')
+        tags = session.query(Product).filter(Product.cost > 2000)\
+            .offset(self.tags_page * self.per_page).limit(self.per_page) \
+            .all()
+        count = session.query(Product).filter(Product.cost > 2000).count()
+        menu.setMsg(f'Page: {self.tags_page}/{math.floor(count / self.per_page)}')
+
+        if self.tags_page < math.floor(count / self.per_page):
+            menu.addField('NEXT', lambda: self.updateTags(self.tags_page + 1, menu))
+        if self.tags_page > 1:
+            menu.addField('PREV', lambda: self.updateTags(self.tags_page - 1, menu))
+
+        for tag in tags:
+            menu.addField(f"{tag.name}")
+        menu.run('Back to prev menu')

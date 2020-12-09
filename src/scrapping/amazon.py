@@ -1,11 +1,16 @@
 from selectorlib import Extractor
-import requests 
-import json 
-from time import sleep
+import requests
+import random
+import re
+from datetime import datetime
+from models.category import Category
+from models.product import Product
+from db import session
+from models.links import links_products_categories
 
 
 # Create an Extractor by reading from the YAML file
-e = Extractor.from_yaml_file('selectors.yml')
+e = Extractor.from_yaml_file('./scrapping/search_results.yml')
 
 def scrape(url):  
 
@@ -24,23 +29,58 @@ def scrape(url):
 
     # Download the page using requests
     print("Downloading %s"%url)
-    res = requests.get(url, headers=headers)
+    r = requests.get(url, headers=headers)
     # Simple check to check if page was blocked (Usually 503)
-    if res.status_code > 500:
+    if r.status_code > 500:
         if "To discuss automated access to Amazon data please contact" in r.text:
             print("Page %s was blocked by Amazon. Please try using better proxies\n"%url)
         else:
             print("Page %s must have been blocked by Amazon as the status code was %d"%(url,r.status_code))
         return None
     # Pass the HTML of the page and create 
-    return e.extract(res.text)
+    return e.extract(r.text)
 
-# product_data = []
-with open("urls.txt",'r') as urllist, open('output.jsonl','w') as outfile:
-    for url in urllist.read().splitlines():
-        data = scrape(url) 
-        if data:
-            json.dump(data,outfile)
-            outfile.write("\n")
-            # sleep(5)
+def getProductsByCategory():
+    category = input('Enter category for scrapping: ')
+    data = scrape(f'https://www.amazon.com/s?k={category}')
+    if data:
+        products_count = 0
+        categories_count = 0
+        links_count = 0
+        for raw in data['products']:
+            print(f"Get product from {raw['url']}")
+            if raw['price'] != None: price = int(float(re.findall("\d+\.\d+", raw['price'])[0]))
+            else: price = random.randint(200, 5000)
 
+            new_product = Product(raw['title'],
+                                  '',
+                                  '',
+                                  datetime.today().strftime('%Y-%m-%d'),
+                                  price)
+            session.add(new_product)
+            session.commit()
+            products_count += 1
+            session.refresh(new_product)
+
+            # Adding categories to database:
+
+            checked_categories = session.query(Category).filter(Category.name == category).all()
+            if len(checked_categories) == 0:
+                new_category = Category(category, category)
+                session.add(new_category)
+                session.commit()
+                categories_count += 1
+                session.refresh(new_category)
+
+                # Adding link:
+                ins = links_products_categories.insert().values(product_id=new_product.id,
+                                                                category_id=new_category.id)
+                session.execute(ins)
+            else:
+                ins = links_products_categories.insert().values(product_id=new_product.id,
+                                                                category_id=checked_categories[0].id)
+                session.execute(ins)
+            links_count += 1
+        session.commit()
+        print(f'\nAdded {products_count} products, {categories_count} categories and {links_count} links.\nPlease, press any key to continue')
+        input()

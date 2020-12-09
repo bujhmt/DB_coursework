@@ -104,11 +104,13 @@ class EntityView:
         itemsMenu = CUI(self.instance.__name__)
         self.itemsCurrentMenu[0] = itemsMenu
         try:
-            if self.page < math.ceil(self.Controller.getCount() / self.per_page):
+            count = math.ceil(self.Controller.getCount() / self.per_page)
+            if self.page < count:
                 itemsMenu.addField('NEXT', lambda: self.__changePageParams(self.page + 1, self.per_page))
             if self.page > 1:
                 itemsMenu.addField('PREV', lambda: self.__changePageParams(self.page - 1, self.per_page))
             entities = self.Controller.getRange(self.page, self.per_page)
+            itemsMenu.setMsg(f' Page: {self.page}/{count}')
             for entity in entities:
                 if 'name' in self.Controller.getModelKeys():
                     itemsMenu.addField(f"<{entity.id}> {entity.name}", lambda id=entity.id: self.__getItem(id))
