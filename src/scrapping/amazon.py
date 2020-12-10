@@ -82,5 +82,5 @@ def getProductsByCategory():
                 session.execute(ins)
             links_count += 1
         session.commit()
-        print(f'\nAdded {products_count} products, {categories_count} categories and {links_count} links.\nPlease, press any key to continue')
-        input()
+        print(f'\nAdded {products_count} products, {categories_count} categories and {links_count} links.')
+        input('\nPress any key to continue...')

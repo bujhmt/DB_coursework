@@ -1,7 +1,7 @@
-from sqlalchemy import Column, Integer, Numeric, String, Date, func, ForeignKey
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy import Column, Integer, Numeric, String, Date, func
+from sqlalchemy.orm import relationship
 from db import Base
-from models.links import links_products_categories
+from models.links import links_products_categories, links_products_orders
 
 class Product(Base):
     __tablename__ = 'Product'
@@ -12,15 +12,15 @@ class Product(Base):
     manufacturer = Column(String)
     manufacture_date = Column(Date, default=func.now())
     cost = Column(Numeric)
-    #order_id = Column(Integer, ForeignKey('Order.id'))
-    #Order = relationship("Order", backref=backref("Product", uselist=False), cascade="all, delete")
+    Orders = relationship("Order", secondary=links_products_orders, cascade="all, delete")
     Categories = relationship("Category", secondary=links_products_categories, cascade="all, delete")
+
     def __repr__(self):
       return "<Product(name='%s'," \
              " brand='%s'," \
              " manufacturer='%s'," \
              " manufacture_date='%s'," \
-             " cost='%i', " % \
+             " cost=%i, " % \
              (self.name,
               self.brand,
               self.manufacturer,

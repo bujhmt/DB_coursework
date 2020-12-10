@@ -9,10 +9,9 @@ from models.product import Product
 from views.graphsView import GraphsView
 from views.dataView import DataView
 
-#recreate_database()
+
 if __name__ == '__main__':
     #recreate_database()
-
     cui = CUI('CUI')
     cui.addMenu('Models')
     cui.addField('Clients', lambda: EntityView(Client).run())

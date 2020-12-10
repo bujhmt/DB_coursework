@@ -1,6 +1,4 @@
 from sqlalchemy import Column, Integer, String, Date, func
-from sqlalchemy.orm import relationship
-from models.links import links_orders_association
 from db import Base
 
 class Client(Base):
@@ -10,8 +8,6 @@ class Client(Base):
     name = Column(String)
     birthday_date = Column(Date, default=func.now())
     email = Column(String)
-
-    Orders = relationship("Order", secondary=links_orders_association, cascade="all, delete")
 
     def __repr__(self):
       return "<Client(name='%s', birthday_date='%s', email='%s')>" % \

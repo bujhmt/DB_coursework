@@ -19,6 +19,7 @@ def parseCsv(path: str, keys: [], filterKey):
                     print(f'Detected {str(len(entities))} new Entities with filter key [{filterKey}]')
 
             prev_product = row[filterKey]
+        print(f'Detected {str(len(entities))} new Entities with filter key [{filterKey}]')
 
         filteredEntities = []
         for entity in entities:
@@ -72,8 +73,8 @@ def parse1():
             links_count += 1
         session.commit()
 
-    print(f'Added {products_count} products, {categories_count} categories and {links_count} links.\nPlease, press any key to continue')
-    input()
+    print(f'Added {products_count} products, {categories_count} categories and {links_count} links.')
+    input('\nPress any key to continue...')
 
 def parse2():
     data_dict = parseCsv('../data/csv/DatafinitiElectronicsProductsPricingData.csv',
@@ -118,5 +119,5 @@ def parse2():
         session.commit()
 
     print(
-        f'Added {products_count} products, {categories_count} categories and {links_count} links.\nPlease, press any key to continue')
-    input()
+        f'Added {products_count} products, {categories_count} categories and {links_count} links.')
+    input('\nPress any key to continue...')
