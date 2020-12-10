@@ -35,6 +35,7 @@ class ModelController(object):
             return item.id
         except Exception as err:
             print("Add error! ", err)
+            exit(1)
             session.rollback()
             raise err
 

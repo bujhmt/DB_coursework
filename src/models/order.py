@@ -7,8 +7,8 @@ class Order(Base):
     __tablename__ = 'Order'
 
     id = Column(Integer, primary_key=True)
-    taxes_sum = Column(Numeric)
     transaction_date = Column(Date, default=func.now())
+    taxes_sum = Column(Numeric)
     client_id = Column(Integer, ForeignKey('Client.id', ondelete='CASCADE'))
     Client = relationship("Client", backref=backref("Order", uselist=False, cascade="all,delete"))
     Products = relationship("Product", secondary=links_products_orders, cascade="all, delete")
