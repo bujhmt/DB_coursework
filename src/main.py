@@ -8,6 +8,7 @@ from models.product import Product
 
 from views.graphsView import GraphsView
 from views.dataView import DataView
+from views.searchView import SearchView
 
 
 if __name__ == '__main__':
@@ -22,6 +23,7 @@ if __name__ == '__main__':
 
     cui.addField('Graphs', lambda: GraphsView().run())
     cui.addField('Data', lambda: DataView().run())
+    cui.addField('Search', lambda: SearchView().run())
 
     cui.run()
     session.close()

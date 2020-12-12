@@ -7,7 +7,7 @@ class GraphsView(object):
         self.CUI = CUI('Graphs menu')
         self.CUI.addField('Top 15 categories', lambda: getTop15Categories())
         self.CUI.addField('Products per year statistic', lambda: getManufactureDateStat())
-        self.CUI.addField('Sale statistics', lambda :getTransactionDateStat())
+        self.CUI.addField('Sale statistics', lambda: getTransactionDateStat())
 
     def run(self):
         self.CUI.run()
