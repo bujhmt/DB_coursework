@@ -1,4 +1,4 @@
-from db import session, recreate_database
+from db import session, recreate_database, initCustomFunctions
 from views.modelView import EntityView
 from CUI.constructor import CUI
 from models.client import Client

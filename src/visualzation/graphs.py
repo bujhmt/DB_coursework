@@ -51,3 +51,17 @@ def getTransactionDateStat():
     ts.plot(kind='bar', figsize=(9, 7), title="Sale statistics")
     plt.plot(ts)
     plt.show()
+
+
+def getTotalMoneyPerYear():
+    results = session.query(func.sum(Product.cost).label('sum'),
+                           func.extract('year', Order.transaction_date).cast(Integer).label('year'))\
+        .join(Product.Orders)\
+        .group_by('year')\
+        .order_by('year').all()
+
+    listed = list(zip(*results))
+    series = pd.DataFrame(np.array([int(num) for num in listed[0]]), index=listed[1])
+    series.plot(figsize=(9, 7), title="Total money per year")
+    plt.plot(series)
+    plt.show()
