@@ -16,7 +16,7 @@ class SearchView:
         self.searchController = SearchController()
         self.CUI.addField('Search products cost by cost range', lambda: self.__getProductsByCostRange())
         self.CUI.addField('Search all client orders', lambda: self.__getClientOrders())
-        self.CUI.addField('Search all category products', lambda: self.__getCategoryProducts())
+        self.CUI.addField('Search all product categories', lambda: self.__getCategoryProducts())
 
     def run(self):
         self.CUI.run()

@@ -28,55 +28,56 @@ def scrape(url):
 
     print("Downloading %s"%url)
     r = requests.get(url, headers=headers)
-    if r.status_code > 500:
+    if r.status_code >= 500:
         if "To discuss automated access to Amazon data please contact" in r.text:
-            print("Page %s was blocked by Amazon. Please try using better proxies\n"%url)
+            raise Exception("Page %s was blocked by Amazon. Please try using better proxies\n"%url)
         else:
-            print("Page %s must have been blocked by Amazon as the status code was %d"%(url,r.status_code))
-        return None
+            raise Exception("Page %s must have been blocked by Amazon as the status code was %d"%(url,r.status_code))
     return e.extract(r.text)
 
 def getProductsByCategory():
     category = input('Enter category for scrapping: ')
     data = scrape(f'https://www.amazon.com/s?k={category}')
-    if data:
-        products_count = 0
-        categories_count = 0
-        links_count = 0
-        for raw in data['products']:
-            print(f"Get product from {raw['url']}")
-            if raw['price'] != None: price = int(float(re.findall("\d+\.\d+", raw['price'])[0]))
-            else: price = random.randint(200, 5000)
+    if not data['products']:
+        raise Exception('Null')
 
-            new_product = Product(raw['title'],
-                                  '',
-                                  '',
-                                  datetime.today().strftime('%Y-%m-%d'),
-                                  price)
-            session.add(new_product)
-            session.commit()
-            products_count += 1
-            session.refresh(new_product)
+    products_count = 0
+    categories_count = 0
+    links_count = 0
+    for raw in data['products']:
+        print(f"Get product from {raw['url']}")
+        if raw['price'] != None: price = int(float(re.findall("\d+\.\d+", raw['price'])[0]))
+        else: price = random.randint(200, 5000)
 
-            # Adding categories to database:
-
-            checked_categories = session.query(Category).filter(Category.name == category).all()
-            if len(checked_categories) == 0:
-                new_category = Category(category, category)
-                session.add(new_category)
-                session.commit()
-                categories_count += 1
-                session.refresh(new_category)
-
-                # Adding link:
-                ins = links_products_categories.insert().values(product_id=new_product.id,
-                                                                category_id=new_category.id)
-                session.execute(ins)
-            else:
-                ins = links_products_categories.insert().values(product_id=new_product.id,
-                                                                category_id=checked_categories[0].id)
-                session.execute(ins)
-            links_count += 1
+        new_product = Product(raw['title'],
+                              '',
+                              '',
+                              datetime.today().strftime('%Y-%m-%d'),
+                              price)
+        session.add(new_product)
         session.commit()
-        print(f'\nAdded {products_count} products, {categories_count} categories and {links_count} links.')
-        input('\nPress any key to continue...')
+        products_count += 1
+        session.refresh(new_product)
+
+        # Adding categories to database:
+
+        checked_categories = session.query(Category).filter(Category.name == category).all()
+        if len(checked_categories) == 0:
+            new_category = Category(category, category)
+            session.add(new_category)
+            session.commit()
+            categories_count += 1
+            session.refresh(new_category)
+
+            # Adding link:
+            ins = links_products_categories.insert().values(product_id=new_product.id,
+                                                            category_id=new_category.id)
+            session.execute(ins)
+        else:
+            ins = links_products_categories.insert().values(product_id=new_product.id,
+                                                            category_id=checked_categories[0].id)
+            session.execute(ins)
+        links_count += 1
+    session.commit()
+    print(f'\nAdded {products_count} products, {categories_count} categories and {links_count} links.')
+    input('\nPress any key to continue...')

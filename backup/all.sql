@@ -100,6 +100,20 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
+--
 -- Name: generatedate(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -2362,22 +2376,16 @@ COPY public."Category" (id, name, type) FROM stdin;
 2011	HDMI Cables	Electronics
 2012	See more Logitech G230 Black/Red Headband Headsets for ...	Electronics
 2013	Sling Bags	Electronics
-2014	stone products	Electronics
-2015	brick manufacturing	Electronics
-2016	landmark stone	Electronics
-2017	brick manufacturing process	Electronics
-2018	natural stone	Electronics
-2019	brick designs	Electronics
-2020	brick	Electronics
-2021	thin brick	Electronics
-2022	brick sizes	Electronics
-2023	glen gery	Electronics
-2024	manufactured stone	Electronics
-2025	Apple CarPlay Receivers	Electronics
-2026	brick colors	Electronics
-2027	See more Logitech Harmony Ultimate One IR Remote With C...	Electronics
-2028	Microft	Microft
-2029	Minecraft	Minecraft
+2014	dgbgf	dgbgf
+2015	lugk	lugk
+2016	vfdv	vfdv
+2017	32342423	32342423
+2018	apple	apple
+2019	minecraft	minecraft
+2020	hi	hi
+2021	gaming	gaming
+2022	microsoft	microsoft
+2023	Upple	Upple
 \.
 
 
@@ -2386,307 +2394,206 @@ COPY public."Category" (id, name, type) FROM stdin;
 --
 
 COPY public."Client" (id, name, birthday_date, email) FROM stdin;
-1	pyurbdktep	2009-10-04	glywoaob@uvsxw.com
-2	ekpsmtncof	2020-02-28	vqyehojq@umtcc.com
-3	jknmtaiqpx	2003-04-14	jvfwymyh@gcjve.com
-4	haiuceatlv	2001-03-06	tasjcwwf@mcrky.com
-5	mbcdqghxsc	2017-01-06	hquruhho@bvrdb.com
-6	xjgkkasike	2004-09-05	avkwgpbx@xrdqt.com
-7	axdspktyrc	2018-03-20	waicfymo@qmqow.com
-8	dwuslstpun	2004-04-28	bgjmmgaj@uiakx.com
-9	oqnjdqqqxf	2009-10-10	gyacuvbj@mcmgc.com
-10	vybcrvywog	2020-11-17	hiwxknhn@tkvyx.com
-11	tucmimfhux	2007-10-04	lhaxpars@ajwdb.com
-12	mxhfdjbqwi	2014-04-19	wlguvdfo@paubq.com
-13	rklmlkekhs	2003-05-26	gpeqtndf@kfesk.com
-14	jipxaoqdgs	2013-12-18	apnoqngt@muuvq.com
-15	npbepnkjyx	2008-11-24	bnrfmdur@gfcot.com
-16	aatlmwckdg	2001-03-02	bttkxrag@pjxyc.com
-17	mkncsemhnb	2018-08-05	jeyknvdh@wiykq.com
-18	bomxombllu	2007-12-16	xlivsyyo@xmslp.com
-19	ffrdbyyxhp	2016-05-16	dvnastfj@pogri.com
-20	jjlrplqbwd	2019-11-15	tvudblbd@uwqot.com
-21	gnfqwokphi	2018-05-21	jfwlcuco@rwwkl.com
-22	jnticnvklv	2010-03-25	fycmdduk@yelyy.com
-23	exfwlkwakb	2019-06-03	simpexwy@wcvta.com
-24	veqvrxbbuh	2018-12-24	pqlvyeay@euooo.com
-25	difclclslp	2010-07-14	npihkrbp@islav.com
-26	aryvsicnmh	2005-04-25	fioguyah@fbdje.com
-27	avaymevulb	2009-09-29	vxabfmfd@lkfdp.com
-28	ejajsidjxw	2006-06-28	tlggdomj@fmoro.com
-29	sjphyswwws	2010-12-06	ydybrivf@iqabb.com
-30	djjqbdqyur	2006-08-08	aotgvasw@rmaun.com
-31	dbfnjelxpk	2013-03-15	asivfqyg@icfsr.com
-32	xnqvxvqyhn	2016-03-30	jxoumhum@ixtfd.com
-33	gpvgrltntr	2004-06-06	fbnfgxua@tsqlp.com
-34	yfvahtapbq	2008-04-26	jbkhgjyc@olehx.com
-35	redosnebpl	2008-09-03	kldlotgr@eijui.com
-36	nmnhncqshv	2011-05-25	aibfsddq@brsty.com
-37	nvlkrfdqeo	2018-09-01	prrybnqm@pcfhg.com
-38	pxsisvksai	2016-05-21	bgvhleta@rgfwv.com
-39	kilurbeiwu	2017-09-01	agbuhmaf@crxaf.com
-40	lhxpctjpju	2008-06-26	mauwcnvr@xolkk.com
-41	urfwnvxoht	2006-04-16	gcooodud@treyd.com
-42	fhswvxumrl	2000-07-29	hvuvjoua@sbnqx.com
-43	olxgaeycjq	2018-02-08	iysvgnsw@mnful.com
-44	hxxblmtgrc	2012-08-01	uboflini@jlwjs.com
-45	usumeljueh	2008-03-09	gtnbdgkw@tdnuo.com
-46	xkduduutvl	2009-07-02	mprsllsa@rvrxu.com
-47	greoodtadx	2007-11-01	fegtyicu@qsatm.com
-48	rhkthfabby	2005-01-04	wwbkfnif@cnbiq.com
-49	wpbwiqfhsr	2020-02-28	xiyvfgwy@fduaf.com
-50	sitgraivsh	2017-12-19	fywphaao@dsidh.com
-51	lgvvrstwpe	2018-05-01	xgijbjay@rxpli.com
-52	mwplwngjoa	2015-03-01	jiaqklag@omoqu.com
-53	xqrjhncqln	2014-07-18	ccxxtehp@rmqvu.com
-54	vuywtyumei	2000-02-16	sxkrxnfq@vdida.com
-55	gtyjcoiwtd	2005-02-15	wxbmktkv@svrjq.com
-56	uxjuvanfyb	2013-11-21	kmkmpfpi@grdsq.com
-57	fvgydfvaik	2001-04-17	gfqvdffm@strdk.com
-58	vkbeyvivdb	2007-12-19	ankngaru@cfeme.com
-59	nrsukrrcpi	2003-06-08	gyfxshuj@vpigv.com
-60	sedndebkki	2016-12-20	wgipscwi@koecw.com
-61	xifahhfsok	2013-01-08	geufdric@wshcb.com
-62	rvjufawwos	2013-08-23	ahpsltfk@kywga.com
-63	erdfnsswye	2013-06-20	yfcxxndn@csocn.com
-64	ordtmehxvs	2010-03-08	pjiuenwq@alkov.com
-65	vatdpqdqme	2003-07-06	jwpepuql@didov.com
-66	esivpsnjnw	2009-02-25	qtadcbmv@aaell.com
-67	wmhqlmnlhu	2004-01-02	kuexaowm@eibnw.com
-68	ncvarruqhe	2000-06-03	shxnnaow@grsmd.com
-69	kavtuomicj	2006-02-25	cgsgjuld@klymu.com
-70	jfeywaiosr	2016-10-20	rusmcotd@skvma.com
-71	prumvysaae	2002-08-08	syxwnxtv@laofw.com
-72	uirahhnofb	2014-06-08	oqdhsifi@wyvky.com
-73	ecdsgsuraw	2016-11-13	knffnvnn@ddbqu.com
-74	tmxyyjkklf	2000-01-18	vqesdcrl@iqrvh.com
-75	rnknlvnouf	2010-01-28	erqctbwc@kojab.com
-76	greoqwfhxg	2013-08-14	ygsatbig@mxmij.com
-77	moytetbvug	2010-12-23	ovxewkre@jqwun.com
-78	uwuqxxvluv	2000-02-20	jhgucvrs@ppnxr.com
-79	jhvjrjvtef	2001-08-29	dxmbpssq@ndbpv.com
-80	jvdnssxtil	2008-05-27	xcqbnfrd@icblo.com
-81	wwgemwdfev	2020-07-10	oogcemfq@kfndd.com
-82	sxaxcgrjcy	2005-02-12	yjcfcfwu@bqvdm.com
-83	dkbckxawky	2004-05-08	weomnjnm@rljxi.com
-84	awlsjqxunp	2004-09-19	aolcxgwu@hdcdk.com
-85	gfqssnfsxl	2009-07-23	xyaagwpp@nigyj.com
-86	lytiqqnacm	2002-08-22	mfmuhxsc@ummbl.com
-87	nunacshrnm	2009-01-02	jbyccdxg@trmyb.com
-88	gjyedsqjpu	2003-01-15	ksfvldul@eiama.com
-89	tpemnsjmil	2019-11-20	hryaxuls@tprvh.com
-90	uqyudfmewd	2017-02-10	hocolqrw@iksyi.com
-91	kpbpqhlbpr	2000-08-14	njcdbxcm@taacq.com
-92	chuxmyrsmn	2018-07-12	sxhphoqh@lhvik.com
-93	durqqwrkxk	2009-10-03	klmbaoer@cpnxd.com
-94	ckbsuduuys	2015-09-07	dpimfjan@siymp.com
-95	jrpqbbxdgn	2012-04-20	mnukwecf@qubat.com
-96	ckqmwxntxd	2006-09-23	ihwowudo@ccapo.com
-97	avivcqkjsj	2005-01-04	tmnxpvmk@pappd.com
-98	ldfctcoesn	2008-07-27	gjakatot@kvjhm.com
-99	womkktubjl	2003-06-28	wxymjmxy@bejnx.com
-100	hawtawonrj	2020-05-16	pvtvbiyb@tqgeb.com
-101	seyhnurcvm	2019-06-11	ojvdbsyk@ermis.com
-102	rvujeqvkdh	2020-10-21	pelkrplx@moqra.com
-103	tqvfmravqx	2004-03-15	fxutoyle@wjjib.com
-104	bnpyntqrhl	2008-11-20	miewycwi@gvtfl.com
-105	gkvteasrbk	2014-11-13	mdxqycdf@dsiin.com
-106	gpodfosypp	2005-12-14	rbdccagn@wafmb.com
-107	usrlyqukwj	2006-05-23	irnhdbdj@eepui.com
-108	atpkkqmtre	2006-01-26	fsqbychd@chjav.com
-109	vsjmcglvdd	2020-01-05	qdqpxbvb@vkqah.com
-110	owlbvojhnr	2009-11-20	jtbhfygo@tkgwt.com
-111	kanoponbdc	2002-10-28	fnbojnxg@tlfkv.com
-112	gawulebmgl	2018-11-02	ocrvuump@odppq.com
-113	bjfjajkype	2008-08-30	lscwdxev@wtqqw.com
-114	eukqvvkycf	2018-09-09	nstgelby@ivdei.com
-115	yodunywxdy	2008-03-10	bdwfxdxf@gwvam.com
-116	vmthewfmgj	2001-11-17	lpamiyac@alkrl.com
-117	dlopqhtbwm	2011-03-04	gevcvwib@ycpml.com
-118	yvrlaqdvhe	2020-05-19	cutcdrmo@giwdx.com
-119	cfmhbwfmfq	2012-05-24	mkuvhatu@junww.com
-120	awebaolxje	2014-01-18	doavivgb@qhcmv.com
-121	rcxdqrdlop	2012-10-07	rqmxjxvy@rowet.com
-122	wjnqthyjsx	2004-08-26	iyhhqxpo@wwymu.com
-123	kebnlrkeaf	2015-05-28	rcignguk@gybdc.com
-124	bniclhlxww	2012-02-02	cnakbbpk@ittko.com
-125	ciqhytfdil	2006-11-15	qlibixoj@rgadg.com
-126	wdgejtuyrb	2020-06-12	mgtntmkc@pqecy.com
-127	fqpummddls	2001-11-06	riuwbbtr@ppqwv.com
-128	yoekdpiger	2011-12-11	beklhjoh@dstfm.com
-129	lwwdqhpvco	2003-11-04	kcpptvtq@jelsi.com
-130	vfspwypnnx	2007-11-17	tgywdjun@fwikv.com
-131	jbvxtwhyye	2012-10-18	adjhoboc@uaweu.com
-132	hdtwwmyfdq	2019-02-22	dcyvmina@jhanx.com
-133	bxydxvsdvy	2005-08-31	xiwjavob@mfrej.com
-134	fcjwekjekq	2002-12-15	vwdbehho@gitlx.com
-135	dtusdjxevu	2010-04-10	ndyfadxl@ynpck.com
-136	iqkobykgck	2011-10-10	gpexvliq@djvad.com
-137	xmodykpovm	2020-02-16	gjvviroy@jvunb.com
-138	fcgdhrqvni	2011-09-02	vofsvjcs@melmb.com
-139	joaoqyhcyo	2006-12-07	yvkywgul@twhuf.com
-140	hahmmxjmge	2007-07-13	tdbprcsv@wpjot.com
-141	cbvcrrclgi	2019-12-10	mekwrgfv@mhnal.com
-142	yexoeipjru	2004-11-23	lxlrlvwn@nllfp.com
-143	pclwioigmx	2009-07-01	byvpehxk@pxiao.com
-144	jumixiibru	2015-05-06	abpfiija@lonll.com
-145	obrtkjpqiv	2004-04-24	oogwgyyd@nmusa.com
-146	hqfdmlfisr	2002-08-21	vwkqpxyn@hcpft.com
-147	hwcehlqifx	2017-05-13	rfuwbial@avyvj.com
-148	ssfdfpmkic	2008-02-13	hrqemdsy@dbrom.com
-149	kudhiyrocc	2005-06-22	iplxqnum@arqsw.com
-150	aruawqffev	2006-01-28	vxnhokwm@lkpfl.com
-151	yrlwujghoj	2002-12-03	xdtmciyk@uwysd.com
-152	srecosugtw	2011-01-01	blvjattv@qascw.com
-153	rdeudctlih	2008-09-06	lvslemtg@oprba.com
-154	jqwvqvgomk	2018-12-31	mgodxiux@nijyy.com
-155	broqxjjnkq	2010-02-06	mlkxbyag@kbvcf.com
-156	rhpmayssry	2000-10-14	xuvllgjn@omwxa.com
-157	wwmuiauygu	2006-02-27	jrupbhtj@jixuy.com
-158	tvlugrslxt	2001-01-05	atyxdseh@ftsyb.com
-159	yudttmtaoj	2003-08-04	jslljcqo@suapm.com
-160	aeikpwnxvj	2004-11-10	jgbyslol@xaaeb.com
-161	plfrplgbqm	2006-07-03	mvilcahe@jadqj.com
-162	orojnatqvp	2015-02-15	jaloufvx@gypsc.com
-163	coamllghxp	2004-04-20	eabweioh@hvkax.com
-164	bewyathbnm	2011-04-07	dgmgkvjm@gcljt.com
-165	vcpvvdvrcq	2010-01-16	hpsouoqu@fxpjs.com
-166	jwrhcsapio	2013-02-15	dcrrrnho@iciut.com
-167	hmsbrpplqf	2017-07-06	bcpsbykf@febkt.com
-168	dwtxsbviyr	2015-04-20	cluatbrs@sdqxd.com
-169	gbvhpkqjgq	2002-09-01	lmyrupvp@vmngr.com
-170	cyllxlkouc	2004-05-01	qhnnkdjj@wkgkj.com
-171	uksiagplnp	2016-03-25	svpkfqll@wxdhp.com
-172	hcxfwrvdus	2003-04-04	ejydubtd@cqdfn.com
-173	cbsjsbxmfo	2020-08-02	clyuoxga@rplev.com
-174	xjuxjlwyty	2009-02-22	ywysytpq@yfayq.com
-175	dxcculuypo	2011-04-04	exknnsbg@ajbuy.com
-176	jbfnjyhpst	2009-09-07	loyuhfhw@brewl.com
-177	ktneqeofmc	2002-08-01	esdyotqk@ubpqy.com
-178	rgthhoctvs	2017-12-07	xqxmbbgm@jutdh.com
-179	dekyulyjen	2008-06-16	aufaxmjk@dircb.com
-180	owfxqtbhgu	2006-10-14	qrsttwrb@uqdvy.com
-181	jjmlbpvcgg	2007-03-06	qfhyvcfq@eioly.com
-182	gdybmbxvgf	2007-10-14	pikhtsgk@lrwmj.com
-183	aogilnpyoy	2010-10-03	bbfdrnjv@hcyqp.com
-184	mgvribqslh	2014-05-08	ienipwun@lbbmp.com
-185	itaoqhwrof	2007-04-22	aablvgwi@iyfjy.com
-186	jhjvracxrt	2006-07-13	mevjokqi@hofdl.com
-187	ttdjmvctyj	2012-04-23	aqoovnmj@srtue.com
-188	vpnwplbtwq	2020-10-23	thudbpom@sghmd.com
-189	svwmwyxrha	2007-11-23	rghvrnqr@baglc.com
-190	nypjmeqxhk	2004-09-01	wyokpsmp@vmdtw.com
-191	cwugcrrtiu	2016-05-28	ufriahka@ernel.com
-192	gwyhcwavqf	2019-11-05	rkstbweb@aqlao.com
-193	coqhnssxkm	2013-12-09	knecsucs@fpkls.com
-194	jhjgtojckw	2019-07-23	sptdvbdc@cdonm.com
-195	hlpxkcjoss	2003-07-29	ysovyhfx@mctfd.com
-196	svqdlniymd	2005-02-01	imqimpjn@yvtgg.com
-197	lytgfpsuvd	2006-07-08	wtiwkndh@wqnoj.com
-198	pylkfnyvcs	2007-07-01	vxfjdnkm@gwuru.com
-199	heggbsmsud	2007-05-19	jibjlhls@uadvo.com
-200	urufbajtxl	2017-05-28	ofskxwgb@vrnqb.com
-201	lwtcxsmqks	2006-06-11	xlmfxoad@qyrxh.com
-202	dskeqeoufy	2014-08-11	dswbaxqk@wvetl.com
-203	cxeyodycsr	2020-08-01	cuatrrgl@pdver.com
-204	uxgqhsrqxo	2007-03-17	hipeltna@gjlpp.com
-205	gopjbkfbtx	2005-12-09	mljimqkw@juysc.com
-206	cftumjruuu	2000-06-04	smyrbxar@sylxo.com
-207	penrkujclp	2002-12-02	mwocpmgg@dhjwi.com
-208	vhwismdvoh	2006-10-29	myroefka@aashg.com
-209	jxjbfyomra	2005-06-24	sealusig@pltvi.com
-210	adyxtsqdvo	2010-07-03	qoocrcvg@msqkr.com
-211	hheajjxivc	2010-11-04	shcdwqdu@mqjon.com
-212	bgsfwfrslv	2001-10-03	yrgbdbky@kblcx.com
-213	tcrccwnbmx	2014-09-22	kgayydpu@ansvr.com
-214	nkrfulipdn	2019-05-18	oabkgbyb@uyfyi.com
-215	rcjldewich	2004-02-16	qewwkunb@ewutp.com
-216	hbxajmqiyv	2003-04-18	wkrkjxuf@denmh.com
-217	jsbtljddhv	2005-01-20	cjidtwjf@enfpv.com
-218	ehcryviyoa	2000-07-07	kbxpkpeh@rwark.com
-219	jbmahnpbmb	2016-10-04	esovqdna@nfnhf.com
-220	nvakgkchfw	2012-08-10	ttanfgpj@pyirt.com
-221	aqdmubjdyi	2005-04-22	enungsia@fewlg.com
-222	dkgyrqpvqk	2017-02-27	wdatqlij@wobre.com
-223	xtutipkimw	2008-08-09	nblqlvpy@tniuh.com
-224	pdhyoucbxi	2007-12-09	usogqiky@ayvkm.com
-225	iuvyijmgyp	2011-03-22	asrbeege@beyti.com
-226	allpehengw	2008-09-29	feofgjcv@pvutc.com
-227	yiiqxygvlo	2008-07-12	bcdlcjbj@jijtn.com
-228	jhyetcwfqi	2000-02-14	rowscusp@xmjjm.com
-229	vxclralflp	2013-02-10	uvfgydfy@shhla.com
-230	glxqncikcb	2018-06-02	vahlwdmy@mlaea.com
-231	aksxrexnxb	2013-06-12	ntwtvyce@egipo.com
-232	bpdybpbbfy	2019-12-11	skppftab@cvbrh.com
-233	dtgkkjvwrr	2005-03-21	cufcfbmj@oxsqh.com
-234	vjfdssvpyn	2011-02-09	ttptiihm@ymhuh.com
-235	xicwkornjc	2010-11-18	krsnrdps@netke.com
-236	ogtkyqgxlj	2005-11-04	jrojajqk@obktt.com
-237	cgpbxxbfub	2008-04-11	fwxjyxuf@hcwhc.com
-238	xkdoomhcjc	2006-09-17	lskvfsyc@udvac.com
-239	rdxcpkjidi	2009-06-05	alifnjnj@lfbtg.com
-240	owltmwodop	2001-06-06	gwpqlnmm@ieows.com
-241	evkdlmsogb	2010-10-22	ntueldcg@gpvuk.com
-242	hupvwguaun	2013-10-29	nfgbqirr@bqnua.com
-243	iivwlxqdew	2003-09-19	tqbyrwxr@fbwxk.com
-244	dfythubooq	2001-05-01	pqtuunom@mfgod.com
-245	xaleflnwgg	2007-08-02	ljoeojho@ffibr.com
-246	wawomksrtf	2005-08-09	ckcqamwt@eopke.com
-247	prpqkwxjdi	2010-04-17	swkmwjpb@xfvlu.com
-248	ebykhetseu	2001-11-21	egnepcsi@hhwpn.com
-249	qbxnodltuf	2019-11-04	heycvwdr@kgrbo.com
-250	jkkyintlxy	2011-02-26	uukumeqn@rqwik.com
-251	pbwbrgtwyo	2016-12-28	wdqnodlx@iuvsm.com
-252	rokqlinrap	2015-03-05	ksnavjoq@fwfvf.com
-253	tompqwashb	2002-09-01	twcuajrq@gvtyk.com
-254	lylpvwckta	2018-01-16	jjshsovt@tfvvp.com
-255	wpfbxwanwu	2003-04-02	royxivle@udyol.com
-256	msqvyjqfgh	2014-11-02	eabseftm@axcjc.com
-257	urouwghjbx	2007-02-07	qgkunsrn@gides.com
-258	nodjxyugqi	2011-05-17	ecrcqxgx@qrqyu.com
-259	bougjuhyxf	2020-11-14	ifsoeait@orkjt.com
-260	abyhrhmamc	2013-04-18	awjyogjp@cbnuq.com
-261	dywvwephmv	2019-06-19	qjabdpgh@pefee.com
-262	wvmyiijmpr	2012-12-12	yrrbwlyt@qutsd.com
-263	kjmogjiuve	2009-10-04	rwnxpxrq@abkyv.com
-264	mufvpehfco	2007-09-30	ndkdatyf@nyjbt.com
-265	uslyesjnfx	2013-05-13	ubddlesk@tigwk.com
-266	erqjvemyyi	2005-01-05	alpumpex@gqyet.com
-267	jaolcslutd	2010-02-06	prtiqfxb@bhdsj.com
-268	dddihvjnpw	2015-07-05	nctisbgq@oocsc.com
-269	vijrnplmev	2014-12-06	blhmeaes@fvqqr.com
-270	twdispbbvf	2001-01-30	aemcnnes@ufyjm.com
-271	sbsnplepvm	2004-07-09	tbnvpdao@ffjbm.com
-272	utwupdcidw	2020-03-17	gpqgibym@wkxhs.com
-273	dtjmcriyqf	2002-09-27	xjxfqpix@niksy.com
-274	dtgsxugrkg	2001-05-05	mgbkqvmf@cbwlp.com
-275	ssxnyouhxp	2009-08-30	hkwxvchh@byoya.com
-276	nvymtnuvcb	2007-04-19	kpdekpnf@acjbj.com
-277	tglswgklsw	2009-12-19	bhavfimo@hywkd.com
-278	aaulnhyhho	2011-02-25	jdmxrjss@tpajs.com
-279	ewjuopemgb	2007-10-05	nmjtjlsg@mrgje.com
-280	vdpnsqqhmh	2015-05-16	iuvxghgu@pnapr.com
-281	hcmtfpuboy	2019-03-25	hhppgckq@xconq.com
-282	tdqqdlgsae	2007-02-07	msvxihyy@ijcuc.com
-283	asggbvfrvh	2001-08-25	voyhcaab@vjbcd.com
-284	ocinrhlpix	2003-11-16	pymcxitq@jotbd.com
-285	hongrfxooj	2017-08-23	tnrtngcl@hajyc.com
-286	qipvlmatxm	2008-03-05	pxoblpfx@grpai.com
-287	eoulstaqka	2014-09-26	qgdujabu@nvyyq.com
-288	nyghhtjtog	2009-08-02	hnweknjh@bhiab.com
-289	rbbnwejoxm	2012-07-31	tuasneia@pgrcj.com
-290	aglfnucume	2010-06-26	foxlvoky@smfgi.com
-291	ykfotblfmc	2004-06-03	aqoowxik@fckmj.com
-292	cminjeuogx	2014-06-22	ltarfcqo@nrxfl.com
-293	mgpkpkwmhj	2018-08-23	hrtjemjk@skggs.com
-294	iruupmedme	2006-01-30	whmwtpjp@erxxw.com
-295	qjkngdmfhr	2014-07-01	xexpyquw@wjhjq.com
-296	cdievfufbv	2018-05-08	abiqvmnt@edqvk.com
-297	oprrsutnsu	2005-05-04	noxcdmcv@cwnti.com
-298	siqbhjghsq	2012-05-14	opjkiejb@npysb.com
-299	ghcjyosryk	2009-12-24	eyirfknc@pwaxu.com
-300	rlydedskhc	2011-11-22	iykxfjca@qwulx.com
-301	Andruxa	2002-08-28	andrew@hmail.com
+1	emagyhbuhb	2005-10-25	srfstfnd@hbefy.com
+2	plcsfeuyng	2007-12-21	peywnnjp@gvpjc.com
+3	ktwcpgfjvo	2005-05-08	ywmwkafm@hkgyx.com
+4	aldhthfdww	2016-05-04	dooygxvp@cfslq.com
+5	qlworarswr	2016-04-19	yeadodih@dudsf.com
+6	tfnobcmpxs	2013-03-26	xoitjuas@lljvw.com
+7	efsuxkhnpi	2005-06-24	lcgyusmd@fcqip.com
+8	ftedtohpmw	2008-09-05	gibwdpaq@vykmu.com
+9	kdbfviqypo	2012-03-30	gmtfghkp@ttqlx.com
+10	vetyrhtels	2017-01-15	yhdlxblb@vmsec.com
+11	sblxdftnja	2019-08-16	nsimvdsb@ramhr.com
+12	hispiupreo	2014-07-14	csxiglhs@uqxsh.com
+13	wpabilbjxg	2008-07-15	fhmlirry@dawhb.com
+14	frsacyuyuk	2014-06-23	lyknjuxl@uqebd.com
+15	ofysnnnbdc	2018-06-23	clhblhox@mvomv.com
+16	ywpopgbtsi	2012-10-21	ulqcejgp@gymty.com
+17	mvjjbfpits	2001-04-17	wasbmqrp@nlqcv.com
+18	ibxslmvppr	2002-08-14	qxssoypu@dsifj.com
+19	uoxeurihpi	2015-12-21	bfwydxep@qiehl.com
+20	sldlbogpuu	2009-09-15	dewuxaio@xdolx.com
+21	uevqbyvdow	2015-07-10	ylnwrxvs@lnleq.com
+22	rpkknhhaio	2001-06-03	jidujhcb@uscjb.com
+23	npvjqbhyvq	2015-06-03	rbtjebos@jndpv.com
+24	ulrbbekxrk	2009-04-21	rvqhddxx@huhkx.com
+25	housxtjybx	2010-02-21	bwsoptqt@vheec.com
+26	toxtiehskt	2013-04-20	ourqlsny@sluln.com
+27	hrvemholip	2017-10-16	qorjbxiu@blqng.com
+28	calpekwoni	2001-07-15	plwjikte@maooo.com
+29	mnvbkknunf	2007-11-08	irevoqre@mybgu.com
+30	twcmrkummd	2015-12-08	jbqedlml@cxvaw.com
+31	kmefiryagu	2018-07-17	jjimstcl@oxnhh.com
+32	qkyyodivpt	2020-03-09	precgpwu@inqub.com
+33	xfagnvswdv	2019-05-03	jpohuuhw@eobxs.com
+34	qacnovirrf	2019-10-25	kgcdyinf@wogay.com
+35	wuwjtabunj	2003-07-31	cykonvwa@pdhfp.com
+36	yrvoimbjcl	2008-05-12	jufhihpb@olbkn.com
+37	hjfqenngga	2003-04-30	scgfwrdi@cqkxr.com
+38	qkivdyacsv	2011-12-25	aoheujgt@vqqxx.com
+39	enqtxlqewd	2017-10-17	ptfgrfeo@nckew.com
+40	robbvyqgak	2005-11-23	okdnrynb@dycrf.com
+41	mtvfqxgolx	2020-01-10	coeuwdoy@tytuv.com
+42	agkqlahoky	2006-07-11	adsrxpag@mpkvr.com
+43	wcnfyhwstu	2001-09-21	hhyehxbj@vwslw.com
+44	ieqwbnsuma	2018-04-12	ewortkju@fgtqa.com
+45	xycphyifcf	2000-05-02	ragqsepi@lqmsd.com
+46	mtdkctehax	2002-04-11	kgnluwpc@uiedm.com
+47	dvdywojmhf	2015-10-11	asffddhe@pcauy.com
+48	hibtweggko	2018-07-06	ldvlkvrc@yximu.com
+49	tuellweqlj	2002-06-24	xwyluexd@wwjqt.com
+50	atfffaxmno	2005-03-23	hiprpeix@yqchd.com
+51	vhixnjxbwd	2001-07-31	gsawewum@fijoq.com
+52	yqlqllugkr	2008-06-21	ugqqkcko@ohyji.com
+53	fkaqavtawq	2000-06-13	pvabgwnb@npray.com
+54	tukuwwgyks	2000-03-09	emiyhjog@qfbya.com
+55	oynqoeuthj	2014-12-01	ggjphrpt@gucuu.com
+56	feiajnjnvm	2003-03-23	bnwwpnmg@ahibu.com
+57	qtqfexcyhl	2012-10-23	crjrildf@gfqub.com
+58	biokhmeeuc	2008-02-25	fkamyhpy@cjijk.com
+59	pbyeptaywl	2016-10-05	dxkaglgb@pmexm.com
+60	ounhcefakn	2011-10-23	ymehmdma@liinb.com
+61	nogtjyrsqq	2015-05-01	augnlykf@ljbyf.com
+62	ywpmuddymy	2008-11-20	ttojiwje@kuhxf.com
+63	gcqtnqgaqm	2009-11-28	gltkquex@qfmat.com
+64	gcsxfddhyr	2004-01-13	jyebeiri@xqjth.com
+65	gbgxetmqoq	2004-12-27	llvlhbdm@oeney.com
+66	ddoupvxufg	2012-04-06	fmhglglp@fkkbu.com
+67	lbbytfjngr	2006-09-16	ngkdxqau@yrmuy.com
+68	rbonmsykqq	2020-09-05	tfybgwpk@amhko.com
+69	evygqetoom	2015-10-24	xyrgnaus@eevcs.com
+70	lqaoeqaymc	2015-10-06	sgtvvkmg@kbimv.com
+71	bohcxxspvb	2006-05-23	unkucdwr@plngf.com
+72	umvflnjddd	2017-09-26	dqcdpkcf@qdmqw.com
+73	twnqdjawro	2013-01-24	haswubkk@kpwwd.com
+74	javiiyfxjy	2005-10-10	pirptqbu@nbprp.com
+75	pssbempaet	2013-06-29	ghmbjjdv@hnotw.com
+76	bwsthoromg	2001-01-28	lukmdkic@ukrtv.com
+77	mlechcllgc	2012-04-17	mtcbgcsf@ttlkt.com
+78	tdtjkwfrfp	2013-01-18	lqdxqrsd@dkxln.com
+79	jsrwfljfaq	2002-11-17	bwrqouim@jwcdx.com
+80	yaqkjipdbe	2000-02-13	ljetvned@nidbx.com
+81	fvogqjeivt	2013-09-11	wgvfblnv@mmgko.com
+82	vjqtsiksmy	2001-12-04	pqlyyiho@xwmar.com
+83	wgvjvaouhg	2009-11-14	xryfytfb@weubs.com
+84	llqofhhxvx	2016-12-11	apgfogsd@uahpl.com
+85	gtbnfuqxhb	2014-05-11	xkaqsikr@ilhmm.com
+86	ytlwxoghqf	2002-09-29	catxlvvn@ploes.com
+87	hvhmepbnji	2019-12-14	rrtmuyxj@fqpdt.com
+88	sfenuqomcy	2003-06-04	vhamwhip@rsyeg.com
+89	repgwjlicw	2003-11-07	tlsatetp@vjgdr.com
+90	nrwojfeqdt	2015-01-03	fyelyfmm@rdjad.com
+91	rqdvhesmuu	2004-08-07	hdobmftv@ptqdj.com
+92	fqdnvfuwff	2002-10-06	pnivvyja@djywu.com
+93	rgruwbyeue	2016-08-18	swytiraw@tfdlp.com
+94	kcxsqlyvjo	2006-10-02	vdgdntxo@ymblc.com
+95	dlncxmkmst	2008-09-06	dikqhcne@xvnxn.com
+96	nosdtknewg	2004-01-29	pxcmbovf@nbegy.com
+97	turprwjdsc	2020-11-02	rtxoqpgb@novyy.com
+98	txpsngybsx	2020-08-23	oincwrdo@ysalk.com
+99	haugggobkk	2005-12-27	kskwypne@shmag.com
+100	rfndbttjse	2003-05-23	toxqimxb@pybxr.com
+101	ietihrsmqr	2010-11-28	xxfauqye@jkueq.com
+102	mhfdboemrv	2019-04-18	hbgtndmf@csjhd.com
+103	isfyowvuib	2016-04-25	tkbpoyxf@mcsyx.com
+104	vwdihhhsvb	2008-08-22	fnhrving@uhtsu.com
+105	bmvftfdfxs	2020-07-17	lyqpnvfv@qidee.com
+106	rnlcugmhyh	2005-04-24	rjyadavh@rgqff.com
+107	djkqslonuo	2011-09-15	klysjnrs@voydi.com
+108	ldbfiolgho	2020-02-22	bwdatdoo@swqkc.com
+109	kwxvmecvni	2003-07-13	ancewudl@xrwvd.com
+110	ahviqjelrg	2006-07-22	euowelrv@tetfx.com
+111	ojossfclui	2000-03-18	byxoumae@hwtje.com
+112	kslgmicsex	2018-01-09	aqjaggju@lmgsf.com
+113	euyxfsceoh	2012-11-29	mjmfyvkl@ecemx.com
+114	bmrsfcvypb	2000-02-15	yxydnbub@umdgi.com
+115	pjusmebqlp	2003-11-03	fyrrxcnl@yjlbu.com
+116	uhtioerind	2009-02-21	yxlngjuq@auqjd.com
+117	fhufbngsod	2016-12-29	nlexayot@vutrd.com
+118	mymhiwahns	2016-07-29	ghlltnoj@akbpi.com
+119	bqjepgrupe	2004-01-07	fwvjkesf@ltnaj.com
+120	giosaoycej	2017-12-17	kyqwpfmy@ahnwi.com
+121	wdsphiaskn	2013-09-17	dbnbdjxh@qkfrg.com
+122	ipkuafflmi	2014-11-06	omkylidm@sqjpy.com
+123	eolrlpqcjp	2012-03-17	qsnkhrdf@dfuat.com
+124	xjbuawrggx	2010-11-28	btaxsmta@hqnsk.com
+125	anyxekfgxw	2012-10-30	kynnccki@thyec.com
+126	wpkgfyovhg	2000-06-03	nuaypwvi@kffmf.com
+127	dnmwcpdrlp	2003-02-07	mjqrhktg@hgcvm.com
+128	hkncnbmsoh	2016-09-15	yhjaonoh@kfbgn.com
+129	ldxxjibtjx	2001-07-06	ojwtuhfl@osfgm.com
+130	yitjlxvqup	2019-03-12	mdcsqgur@ttdsc.com
+131	iuaepopqlh	2014-11-29	tcxwpipx@xsiad.com
+132	qehklukcsh	2012-03-07	hdhroujc@outsk.com
+133	awlnmmlqar	2008-09-17	jecxvfay@kqsdv.com
+134	pptduccwqv	2016-07-28	qfagpvtj@dmhld.com
+135	dfgohsrrfd	2007-04-02	sengvnco@ehtlo.com
+136	burnqahqhb	2004-01-08	yaqmorys@mpgoy.com
+137	hbslhdhdei	2005-12-09	ssyqsgit@krkxp.com
+138	birrggxapb	2013-04-27	forqdmru@igxcf.com
+139	cqcmcnruvf	2012-02-20	pbvhuthp@mbcbb.com
+140	etxyvfumdq	2002-01-12	qwbortcn@bpkcl.com
+141	pcdqwbdpko	2011-11-04	qfhagnhl@hjugy.com
+142	mntsbeaihn	2020-07-29	tbtellhy@uoiqy.com
+143	iavideeexb	2000-07-29	bldosmxw@pvrxw.com
+144	qrihyjidko	2020-05-11	dnjaehwm@ktdwm.com
+145	axthuwobju	2012-03-02	skpqjlmv@rlhkk.com
+146	wvssocivqi	2019-08-21	rswpawuv@xrjvg.com
+147	anjfjvhpmk	2000-03-26	vwgljjmy@utgjd.com
+148	jmqqvcodta	2012-03-06	csqnlqpr@byrtl.com
+149	brysrykmqs	2020-07-21	rwghhyjn@eclbi.com
+150	kieicuusyu	2016-12-12	ehqysbqk@voxph.com
+151	mgxjiviube	2012-09-21	skeulnbe@nxecq.com
+152	bonmnmcams	2000-05-10	qfqkchxj@uwfcu.com
+153	hesqhrhidx	2017-09-01	fxxmjtrm@jotgm.com
+154	gviudhtsii	2016-10-23	bgpyfiux@myiaw.com
+155	qsrwylonhv	2013-12-28	ajtdcawe@yscnj.com
+156	wmsxybedif	2015-08-06	rddykheq@xgdqn.com
+157	yqpqwrbdvr	2010-03-14	movotymt@qsusu.com
+158	wrbownjsnw	2006-04-30	uoewmrsw@ahsml.com
+159	hmpvquuadm	2006-04-14	ovcxlidc@wmtox.com
+160	nggyhaeprx	2020-07-14	lgflxgqg@laqdw.com
+161	nlvtwltmxc	2010-03-14	lmvcacxk@lupwu.com
+162	qsaqthdkys	2005-01-20	fiuptbwf@hsbvv.com
+163	fvxyfobads	2006-03-24	sumylbir@xlsae.com
+164	cftmpjwyry	2019-05-04	vmkbshsi@ilxad.com
+165	ppgdaqgjsy	2008-04-05	yeddqhcb@qdmpk.com
+166	axxmkqmdnc	2000-11-17	nydqvdfa@ecdig.com
+167	gfovhhmimo	2000-06-28	fbixmckv@nagpq.com
+168	mboicdfpwa	2006-04-05	rhnuxevv@bnrcn.com
+169	kskepuojah	2014-01-20	wqojiuhe@vgehg.com
+170	vggmuvhtkc	2013-08-21	kxhkadtx@ovtfs.com
+171	ujnfjvivjk	2005-07-28	kuhjsuiq@oklsl.com
+172	pqsqsjimho	2015-08-24	brpifbpu@pqhke.com
+173	yssqryrprq	2006-09-18	oqdylfhv@quhko.com
+174	qxvxtxmwkg	2002-12-08	tminexqo@iboet.com
+175	skmboqoyko	2011-02-24	ccgqwhuq@byeuc.com
+176	hohqpctekl	2010-12-17	lrjlajlu@kjgtk.com
+177	rogcxniqfw	2015-07-22	yincuwmh@qyhgr.com
+178	qkcrifpasr	2008-09-08	vetpidyw@xieow.com
+179	fpoavohykd	2006-07-19	bxduvjii@sgjid.com
+180	tdcslwdjvl	2001-04-04	uovtknma@pqivu.com
+181	mhbheexsos	2005-08-30	imwjaelj@uhjir.com
+182	viyfwylsdq	2009-11-27	pfaqdsxk@yptjo.com
+183	iruexymyie	2016-10-22	cbympewd@iyghi.com
+184	sgwuvwtofp	2017-08-08	voqccqgw@tewma.com
+185	nrydntscex	2019-10-20	fdgybotr@goiuy.com
+186	abnjbcoieo	2016-03-09	yvhyvgjt@ojrxt.com
+187	rrghwidqup	2011-11-07	ltreegas@qcvwy.com
+188	nygyagwock	2002-01-09	qgfufbgp@nwccu.com
+189	omqlkmabfe	2020-03-13	tqmrihcg@naiwy.com
+190	mxlsfkelma	2003-06-07	ulffiaxq@ldiks.com
+191	lmotcsrdie	2014-03-19	cvyrydoo@amjah.com
+192	hmlorhxsno	2018-05-20	eroaotkl@jxywf.com
+193	sxahiboosl	2007-08-28	joajbdrk@gdyuq.com
+194	giujxlooro	2019-04-11	omvmslbf@athee.com
+195	mgfmfqdqha	2016-12-06	hfftrpvu@uovbm.com
+196	paimcjggvr	2018-09-28	ovruifpf@kotiy.com
+197	vfqytagxmm	2008-07-10	ooonxmab@ggcfi.com
+198	iqghutyefx	2006-10-10	lkonwvkd@yypts.com
+199	epmqksxneq	2015-12-20	dceofmon@irtfs.com
+200	bbbttuthkv	2015-09-15	mysbfduh@isxlu.com
 \.
 
 
@@ -14569,827 +14476,319 @@ COPY public."Link_Product-Category" (product_id, category_id) FROM stdin;
 835	207
 835	208
 835	219
-836	4
-836	26
-836	28
-836	170
-836	171
-836	170
-836	172
-836	59
-836	29
-836	170
-836	173
-836	32
-836	174
-836	175
-836	176
-836	177
-836	178
-836	179
-836	180
-836	176
-836	181
-836	182
-836	183
-836	184
-836	185
-836	186
-836	41
-836	187
-836	180
-837	4
-837	13
-837	16
-837	22
-837	17
-837	12
-837	18
-837	10
-837	11
-837	20
-837	14
-837	23
-837	8
-837	15
-837	24
-837	21
-837	9
-837	19
-838	1
-838	2
-838	3
-838	4
-838	5
-838	6
-838	7
-839	9
-839	36
-839	13
-839	4
-839	37
-839	23
-839	188
-840	203
-840	206
-840	207
-840	218
-840	209
-840	69
-840	201
-840	207
-840	208
-840	212
-840	4
-840	199
-840	210
-840	179
-840	211
-840	217
-840	213
-840	219
-840	215
-840	220
-840	214
-840	216
-841	26
-841	62
-841	59
-841	63
-841	65
-841	64
-841	4
-841	32
-841	66
-841	247
-842	9
-842	8
-842	26
-842	36
-842	28
-842	12
-842	13
-842	4
-842	233
-842	234
-842	15
-842	16
-842	235
-842	37
-842	236
-842	23
-842	237
-843	26
-843	82
-843	404
-843	4
-843	436
-843	134
-843	136
-843	437
-843	438
-843	439
-843	440
-843	102
-843	441
-843	442
-843	133
-843	24
-844	4
-844	233
-844	117
-844	122
-844	293
-844	294
-844	121
-844	114
-844	295
-844	296
-844	116
-844	297
-844	298
-844	162
-845	4
-845	121
-845	114
-845	116
-845	15
-845	119
-845	126
-845	112
-845	275
-846	32
-846	29
-846	30
-846	31
-846	26
-846	4
-846	28
-847	344
-847	345
-847	121
-847	346
-847	41
-847	4
-847	114
-847	23
-847	347
-847	116
-847	126
-848	348
-848	102
-848	62
-848	349
-848	59
-848	63
-848	350
-848	65
-848	4
-848	32
-848	66
-849	230
-849	365
-849	366
-849	41
-849	4
-849	367
-849	231
-849	43
-849	54
-849	368
-849	369
-849	370
-850	9
-850	381
-850	382
-850	36
-850	91
-850	383
-850	13
-850	41
-850	4
-850	384
-850	385
-850	16
-850	386
-850	17
-850	93
-850	301
-850	302
-850	18
-850	271
-850	47
-850	22
-850	37
-850	23
-850	272
-851	4
-851	233
-851	292
-851	286
-851	23
-851	288
-851	289
-851	290
-851	13
-851	291
-852	4
-852	26
-852	28
-852	371
-852	6
-852	372
-852	200
-852	198
-852	373
-852	69
-852	374
-852	375
-852	18
-852	10
-852	11
-852	10
-852	376
-852	377
-852	378
-852	379
-852	130
-852	380
-853	9
-853	381
-853	36
-853	91
-853	13
-853	4
-853	43
-853	15
-853	16
-853	386
-853	17
-853	301
-853	302
-853	18
-853	339
-853	425
-853	235
-853	22
-853	37
-853	23
-853	426
-853	340
-854	57
-854	59
-854	29
-854	4
-854	32
-854	60
-854	61
-855	117
-855	122
-855	124
-855	431
-855	238
-855	432
-855	126
-855	116
-855	433
-855	434
-855	18
-855	125
-855	115
-855	111
-855	114
-855	435
-855	239
-855	4
-855	121
-856	88
-856	89
-856	443
-856	4
-856	674
-856	23
-856	93
-857	10
-857	11
-857	254
-857	4
-857	43
-857	529
-857	18
-857	530
-857	531
-857	56
-857	256
-857	675
-857	22
-857	676
-857	23
-857	677
-857	25
-858	9
-858	36
-858	13
-858	4
-858	37
-858	23
-859	2014
-859	1518
-859	111
+836	2014
+837	2014
+838	2014
+839	2014
+840	2014
+841	2014
+842	2014
+843	2014
+844	2014
+845	2014
+846	2014
+847	2014
+848	2014
+849	2015
+850	2015
+851	2015
+852	2015
+853	2015
+854	2015
+855	2015
+856	2015
+857	2015
+858	2015
 859	2015
-859	2016
-859	114
-859	2017
-859	115
-859	2018
-859	2019
-859	539
-859	297
-859	125
-859	2020
-859	39
-859	1870
-859	295
-859	2021
-859	1153
-859	116
-859	18
-859	2022
-859	2023
-859	2024
-859	1872
-859	2025
-859	1013
-859	2026
-859	126
-860	26
-860	501
-860	499
-860	502
-860	32
-860	498
-860	496
-860	4
-860	59
-860	497
-860	493
-860	102
-860	503
-860	504
-861	88
-861	89
-861	90
-861	4
-861	23
-861	93
-862	228
-862	227
-862	352
-862	230
-862	4
-862	223
-862	231
-862	224
-862	43
-863	38
-863	39
-863	40
-863	41
-863	4
-863	42
-863	43
-863	15
-863	16
-863	44
-863	45
-863	46
-863	20
-863	47
-863	48
-863	22
-863	49
-863	50
-863	23
-864	38
-864	10
-864	11
-864	40
-864	4
-864	42
-864	43
-864	15
-864	18
-864	20
-864	48
-864	56
-864	22
-864	23
-865	26
-865	648
-865	28
-865	29
-865	170
-865	171
-865	4
-865	927
-865	130
-865	657
-865	329
-865	1445
-865	32
-865	651
-865	659
-866	4
-866	535
-866	114
-866	536
-866	537
-866	538
-866	160
-866	116
-866	162
-866	121
-866	297
-866	539
-866	163
-866	165
-866	126
-867	9
-867	381
-867	36
-867	91
-867	13
-867	4
-867	233
-867	234
-867	15
-867	16
-867	386
-867	93
-867	301
-867	302
-867	18
-867	271
-867	235
-867	1728
-867	37
-867	23
-867	272
-867	188
-868	4
-868	16
-868	49
-868	20
-868	18
-868	91
-868	301
-868	302
-868	381
-868	43
-868	360
-868	361
-868	23
-868	22
-868	25
-868	41
-868	620
-868	538
-868	233
-869	144
-869	4
-869	145
-869	43
-869	15
-869	16
-869	17
-869	698
-869	22
-869	251
-869	699
-869	23
-869	700
-870	4
-870	69
-870	70
-870	71
-870	72
-870	73
-870	74
-870	75
-870	59
-870	29
-870	1
-870	76
-870	77
-870	78
-870	79
-870	80
-870	81
-870	82
-870	26
-870	83
-870	84
-870	85
-870	86
-870	87
-871	273
-871	39
-871	4
-871	43
-871	15
-871	251
-871	22
-871	16
-871	23
-871	17
-872	117
-872	122
-872	124
-872	113
-872	118
-872	126
-872	116
-872	112
-872	4
-872	121
-872	114
-872	15
-872	119
-873	26
-873	681
-873	132
-873	59
-873	28
-873	29
-873	682
-873	41
-873	4
-873	135
-873	134
-873	136
-873	137
-873	34
-873	109
-873	109
-873	110
-873	507
-873	18
-873	683
-873	684
-873	108
-873	685
-873	686
-873	140
-873	687
-874	88
-874	4
-874	550
-874	23
-874	551
-875	93
-875	88
-875	89
-875	4
-875	23
-875	551
-875	550
-875	614
-875	615
-875	41
-876	27
-876	35
-876	444
-876	445
-876	662
-876	663
-876	664
-876	71
-876	72
-876	665
-876	666
-876	667
-876	668
-876	39
-876	669
-876	670
-876	671
-876	672
-876	673
-877	88
-877	4
-877	550
-877	23
-877	551
-878	20
-878	13
-878	4
-878	67
-878	22
-878	16
-878	546
-878	23
-878	25
-879	4
-879	16
-879	22
-879	17
-879	12
-879	23
-879	36
-879	188
-879	8
-879	15
-880	274
-880	626
-880	4
-880	43
-880	15
-880	22
-880	627
-880	23
-880	628
-881	26
-881	94
-881	95
-881	96
-881	97
-881	59
-881	98
-881	99
-881	29
-881	100
-881	4
-881	60
-881	101
-881	102
-881	63
-881	32
-881	61
-882	26
-882	556
-882	82
-882	59
-882	552
-882	405
-882	4
-882	156
-882	158
-882	554
-882	555
-883	130
-883	131
-883	132
-883	133
-883	134
-883	135
-883	136
-883	137
-883	138
-883	139
-883	140
-883	141
-884	4
-884	6
-884	1
-884	1113
-884	230
-884	320
-884	51
-884	43
-884	822
-884	130
-884	18
-884	10
-884	11
-884	10
-884	376
-884	2027
-884	52
-884	54
-884	55
-884	53
-884	1329
-884	39
-885	27
-885	146
-885	147
-885	148
-885	149
-885	150
-885	151
-885	152
-885	4
-885	54
-885	35
-885	153
-885	154
-885	5
-885	156
-885	157
-885	158
-886	2028
-887	2028
-888	2028
-889	2028
-890	2028
-891	2028
-892	2028
-893	2028
-894	2028
-895	2028
-896	2028
-897	2028
-898	2028
-899	2028
-900	2028
-901	2028
-902	2028
-903	2028
-904	2028
-905	2028
-906	2028
-907	2028
-908	2028
-909	2028
-910	2028
-911	2028
-912	2028
-913	2028
-914	2028
-915	2028
-916	2028
-917	2028
-918	2028
-919	2028
-920	2028
-921	2028
-922	2028
-923	2028
-924	2028
-925	2028
-926	2028
-927	2028
-928	2028
-929	2028
-930	2028
-931	2028
-932	2028
-933	2028
-934	2029
-935	2029
-936	2029
-937	2029
-938	2029
-939	2029
-940	2029
-941	2029
-942	2029
-943	2029
-944	2029
-945	2029
-946	2029
-947	2029
-948	2029
-949	2029
-950	2029
-951	2029
-952	2029
-953	2029
-954	2029
-955	2029
-956	2029
-957	2029
-958	2029
-959	2029
-960	2029
-961	2029
-962	2029
-963	2029
-964	2029
-965	2029
-966	2029
-967	2029
-968	2029
-969	2029
-970	2029
-971	2029
-972	2029
-973	2029
-974	2029
-975	2029
-976	2029
-977	2029
-978	2029
-979	2029
-980	2029
-981	2029
-982	2029
-983	2029
-984	2029
-985	2029
-986	2029
-987	2029
-988	2029
+860	2015
+861	2015
+862	2015
+863	2015
+864	2015
+865	2015
+866	2015
+867	2015
+868	2015
+869	2015
+870	2015
+871	2016
+872	2016
+873	2016
+874	2016
+875	2016
+876	2016
+877	2016
+878	2016
+879	2016
+880	2016
+881	2016
+882	2016
+883	2016
+884	2016
+885	2016
+886	2016
+887	2016
+888	2016
+889	2016
+890	2016
+891	2016
+892	2017
+893	2017
+894	2017
+895	2017
+896	2017
+897	2017
+898	2018
+899	2018
+900	2018
+901	2018
+902	2018
+903	2018
+904	2018
+905	2018
+906	2018
+907	2018
+908	2018
+909	2018
+910	2018
+911	2018
+912	2018
+913	2018
+914	2018
+915	2018
+916	2018
+917	2018
+918	2018
+919	2018
+920	2018
+921	2018
+922	2018
+923	2018
+924	2018
+925	2018
+926	2018
+927	2018
+928	2018
+929	2018
+930	2018
+931	2018
+932	2018
+933	2018
+934	2018
+935	2018
+936	2018
+937	2018
+938	2018
+939	2018
+940	2018
+941	2018
+942	2018
+943	2018
+944	2018
+945	2018
+946	2019
+947	2019
+948	2019
+949	2019
+950	2019
+951	2019
+952	2019
+953	2019
+954	2019
+955	2019
+956	2019
+957	2019
+958	2019
+959	2019
+960	2019
+961	2019
+962	2019
+963	2019
+964	2019
+965	2019
+966	2019
+967	2019
+968	2019
+969	2019
+970	2019
+971	2019
+972	2019
+973	2019
+974	2019
+975	2019
+976	2019
+977	2019
+978	2019
+979	2019
+980	2019
+981	2019
+982	2019
+983	2019
+984	2019
+985	2019
+986	2019
+987	2019
+988	2019
+989	2019
+990	2019
+991	2019
+992	2019
+993	2019
+994	2019
+995	2019
+996	2019
+997	2020
+998	2020
+999	2020
+1000	2020
+1001	2020
+1002	2020
+1003	2020
+1004	2020
+1005	2020
+1006	2020
+1007	2020
+1008	2020
+1009	2020
+1010	2020
+1011	2020
+1012	2020
+1013	2020
+1014	2020
+1015	2018
+1016	2018
+1017	2018
+1018	2018
+1019	2018
+1020	2018
+1021	2018
+1022	2018
+1023	2018
+1024	2018
+1025	2018
+1026	2018
+1027	2018
+1028	2018
+1029	2018
+1030	2018
+1031	2018
+1032	2018
+1033	2018
+1034	2018
+1035	2018
+1036	2018
+1037	2018
+1038	2018
+1039	2018
+1040	2018
+1041	2018
+1042	2018
+1043	2018
+1044	2018
+1045	2018
+1046	2018
+1047	2018
+1048	2018
+1049	2018
+1050	2018
+1051	2018
+1052	2018
+1053	2018
+1054	2018
+1055	2018
+1056	2018
+1057	2018
+1058	2018
+1059	2018
+1060	2018
+1061	2018
+1062	2018
+1063	2021
+1064	2021
+1065	2021
+1066	2021
+1067	2021
+1068	2021
+1069	2021
+1070	2021
+1071	2021
+1072	2021
+1073	2021
+1074	2021
+1075	2021
+1076	2021
+1077	2021
+1078	2021
+1079	2021
+1080	2021
+1081	2021
+1082	2021
+1083	2021
+1084	2021
+1085	2022
+1086	2022
+1087	2022
+1088	2022
+1089	2022
+1090	2022
+1091	2022
+1092	2022
+1093	2022
+1094	2022
+1095	2022
+1096	2022
+1097	2022
+1098	2022
+1099	2022
+1100	2022
+1101	2022
+1102	2022
+1103	2022
+1104	2022
+1105	2022
+1106	2022
+1107	2022
+1108	2022
+1109	2022
+1110	2022
+1111	2022
+1112	2022
+1113	2022
+1114	2022
+1115	2022
+1116	2022
+1117	2022
+1118	2022
+1119	2022
+1120	2022
+1121	2022
+1122	2022
+1123	2022
+1124	2022
+1125	2022
+1126	2022
+1127	2022
+1128	2022
+1129	2022
+1130	2022
+1131	2022
+1132	2022
+1133	2023
+1134	2023
+1135	2023
+1136	2023
+1137	2023
+1138	2023
+1139	2023
+1140	2023
+1141	2023
+1142	2023
+1143	2023
+1144	2023
+1145	2023
+1146	2023
+1147	2023
+1148	2023
 \.
 
 
@@ -15398,5006 +14797,10006 @@ COPY public."Link_Product-Category" (product_id, category_id) FROM stdin;
 --
 
 COPY public."Link_Product-Order" (product_id, order_id) FROM stdin;
-586	399
-296	78
-407	299
-641	405
-65	45
-163	311
-691	10
-817	412
-837	108
-46	172
-410	105
-102	275
-569	191
-189	156
-135	56
-808	124
-261	109
-345	302
-710	181
-397	371
-171	135
-466	488
-70	95
-547	260
-773	270
-267	180
-426	160
-113	393
-101	62
-95	60
-725	312
-294	232
-474	390
-826	5
-458	397
-871	37
-729	28
-89	201
-851	117
-430	370
-665	393
-568	241
-20	483
-79	267
-101	132
-844	346
-609	488
-24	173
-393	254
-98	401
-756	95
-848	5
-529	71
-807	438
-726	428
-199	10
-496	247
-360	348
-131	127
-812	473
-604	143
-112	258
-569	224
-687	233
-676	101
-751	211
-43	191
-802	343
-662	256
-240	202
-840	312
-355	459
-184	83
-644	474
-477	363
-619	463
-197	335
-210	143
-594	143
-221	209
-156	250
-401	432
-655	158
-353	420
-43	112
-496	422
-560	73
-114	182
-174	331
-832	31
-869	283
-157	62
-72	72
-370	44
-249	345
-312	178
-735	65
-724	470
-561	387
-777	464
-826	300
-452	373
-241	475
-771	460
-206	352
-196	200
-443	397
-353	347
-497	335
-187	323
-380	290
-251	204
-250	38
-125	455
-533	200
-686	40
-126	92
-67	137
-643	195
-77	402
-785	311
-858	297
-41	210
-125	175
-778	147
-59	8
-200	448
-104	129
-54	499
-345	341
-540	87
-309	276
-694	80
-553	67
-58	18
-392	111
-538	387
-504	477
-835	445
-719	7
-685	214
-295	390
-86	443
-699	227
-508	195
-177	450
-664	193
-512	353
-151	91
-181	345
-501	124
-303	202
-445	117
-51	121
-766	324
-745	393
-64	373
-80	463
-676	79
-520	415
-226	326
-161	473
-485	284
-249	99
-383	235
-171	171
-312	231
-407	355
-483	99
-205	57
-12	252
-190	343
-61	478
-106	400
-292	464
-786	431
-534	171
-298	323
-479	216
-190	38
-514	245
-136	274
-198	73
-356	198
-740	457
-321	253
-570	238
-821	447
-444	346
-576	154
-719	478
-435	482
-727	68
-476	103
-569	489
-813	234
-674	77
-358	478
-291	39
-864	145
-188	258
-647	197
-154	177
-143	18
-443	23
-325	263
-258	327
-365	45
-279	8
-604	450
-421	189
-619	434
-60	122
-843	202
-173	480
-11	145
-355	333
-134	125
-244	263
-485	138
-377	324
-700	496
-733	54
-407	332
-57	456
-83	316
-144	315
-541	423
-432	245
-360	309
-741	45
-594	381
-281	251
-480	116
-220	24
-227	336
-26	376
-658	58
-437	284
-343	222
-518	251
-208	435
-411	226
-720	229
-34	123
-668	341
-796	75
-12	307
-211	324
-72	332
-622	298
-858	294
-52	19
-61	123
-347	93
-543	262
-702	88
-493	489
-382	280
-459	313
-357	33
-731	469
-693	437
-682	482
-284	94
-423	302
-847	272
-101	486
-317	216
-378	164
-785	463
-611	276
-300	124
-724	399
-285	159
-393	74
-714	493
-110	162
-592	464
-315	6
-120	414
-50	256
-21	363
-587	63
-788	259
-712	154
-567	443
-149	182
-570	437
-328	30
-213	126
-206	284
-239	354
-520	424
-469	189
-852	293
-441	214
-317	14
-359	54
-132	230
-475	376
-783	141
-415	386
-284	235
-478	207
-454	19
-528	75
-751	427
-474	164
-609	377
-53	278
-281	53
-802	383
-302	414
-89	250
-471	124
-749	280
-562	256
-642	227
-882	193
-43	302
-663	399
-543	164
-288	437
-807	230
-853	457
-808	351
-295	476
-606	157
-117	231
-249	235
-8	60
-634	491
-540	29
-163	466
-214	228
-513	124
-51	187
-68	366
-654	240
-525	30
-362	52
-413	478
-668	76
-136	293
-89	310
-246	108
-597	429
-776	431
-747	305
-819	18
-377	435
-742	435
-309	23
-151	262
-871	328
-755	55
-348	274
-280	412
-883	159
-285	236
-516	141
-374	486
-470	344
-587	65
-796	138
-730	273
-431	81
-587	246
-421	136
-403	20
-265	70
-384	241
-382	373
-702	114
-81	123
-337	124
-170	323
-138	237
-421	274
-255	255
-536	39
-377	397
-81	201
-73	202
-476	50
-555	159
-830	379
-185	37
-713	204
-60	176
-708	446
-285	21
-171	145
-23	79
-395	88
-661	34
-444	277
-308	237
-634	148
-596	499
-440	64
-531	189
-882	116
-772	412
-56	336
-21	337
-277	286
-673	461
-743	16
-352	419
-587	244
-275	494
-404	155
-633	79
-481	165
-110	42
-292	385
-36	161
-27	497
-256	436
-234	238
-835	350
-239	31
-476	42
-409	480
-110	139
-502	77
-846	394
-304	415
-726	65
-816	285
-883	105
-297	232
-18	329
-875	54
-853	134
-779	419
-786	322
-169	297
-544	466
-616	140
-609	456
-154	34
-514	149
-614	372
-348	483
-259	195
-680	172
-630	431
-148	29
-354	444
-29	102
-516	162
-851	44
-340	393
-309	85
-20	217
-337	54
-485	125
-272	86
-804	96
-736	339
-99	245
-841	197
-201	343
-454	151
-436	496
-481	144
-807	457
-833	213
-509	339
-44	460
-735	434
-610	48
-759	92
-800	330
-876	278
-373	90
-677	400
-360	480
-691	58
-136	67
-316	252
-5	381
-273	154
-798	359
-47	79
-730	476
-642	168
-371	368
-273	51
-801	44
-640	299
-774	115
-858	7
-687	180
-821	84
-477	417
-519	486
-103	322
-358	100
-692	452
-785	26
-189	371
-871	88
-348	471
-167	243
-444	436
-213	217
-512	200
-670	20
-28	339
-698	314
-652	465
-501	225
-416	306
-103	476
-313	416
-289	199
-256	51
-225	87
-493	120
-869	266
-503	24
-727	328
-842	48
-871	241
-226	389
-354	116
-103	225
-429	424
-598	53
-743	126
-121	345
-469	164
-845	313
-331	405
-482	84
-34	251
-451	83
-353	363
-566	380
-134	439
-225	33
-372	486
-769	150
-344	481
-24	353
-350	417
-608	490
-195	84
-142	476
-830	8
-206	101
-641	112
-446	124
-850	350
-143	100
-456	369
-628	330
-808	248
-282	299
-142	225
-465	423
-118	428
-410	264
-342	191
-265	201
-287	484
-453	78
-448	441
-588	327
-112	487
-824	50
-370	18
-598	121
-107	39
-99	197
-240	136
-393	356
-748	355
-275	392
-854	330
-829	36
-52	74
-321	345
-601	497
-231	21
-658	5
-90	125
-813	221
-328	332
-687	233
-442	407
-273	385
-878	56
-72	168
-133	409
-674	27
-771	240
-214	193
-459	411
-635	341
-26	36
-507	375
-131	238
-59	294
-171	193
-454	82
-277	361
-367	20
-643	197
-635	255
-559	263
-551	28
-587	252
-508	305
-14	384
-476	245
-443	333
-284	149
-731	122
-210	321
-787	480
-591	277
-611	357
-484	479
-476	201
-826	379
-319	243
-509	246
-316	19
-661	215
-715	217
-525	263
-451	62
-609	272
-627	247
-33	247
-176	316
-82	462
-817	411
-476	21
-700	470
-178	9
-212	259
-138	334
-505	179
-440	476
-346	103
-372	322
-197	386
-385	11
-86	454
-485	377
-812	248
-218	327
-870	453
-531	137
-561	263
-835	173
-655	45
-714	281
-590	359
-752	226
-554	405
-407	411
-783	270
-863	491
-480	21
-398	34
-249	32
-339	201
-757	257
-641	319
-208	67
-864	79
-713	477
-643	116
-205	152
-203	398
-776	284
-524	305
-652	412
-286	117
-47	359
-824	499
-591	290
-698	176
-260	489
-338	322
-232	132
-692	363
-446	340
-115	295
-537	55
-700	44
-760	155
-429	216
-655	331
-324	46
-197	100
-344	132
-874	250
-789	164
-345	273
-391	205
-221	87
-175	251
-53	102
-745	428
-82	13
-147	405
-273	29
-556	416
-517	387
-753	243
-365	330
-423	141
-551	128
-617	346
-444	1
-232	359
-282	474
-437	399
-632	146
-51	310
-781	237
-548	48
-797	486
-432	244
-717	131
-182	467
-580	170
-622	20
-313	151
-761	462
-89	106
-671	342
-702	271
-883	375
-693	393
-499	179
-867	312
-24	267
-449	247
-615	485
-748	309
-650	284
-765	101
-863	21
-434	447
-4	382
-400	60
-391	444
-266	288
-100	255
-858	29
-490	494
-420	390
-759	238
-142	84
-614	449
-384	92
-288	399
-171	395
-598	103
-438	14
-578	474
-203	245
-389	232
-617	213
-204	188
-776	421
-816	456
-119	465
-750	204
-674	70
-519	119
-655	105
-188	88
-50	42
-797	404
-82	148
-386	338
-235	302
-613	202
-508	333
-443	208
-349	324
-387	500
-758	463
-757	26
-714	167
-692	226
-415	268
-767	285
-825	476
-783	408
-411	228
-245	416
-102	155
-25	240
-141	490
-810	193
-722	222
-355	245
-789	241
-626	48
-805	301
-879	415
-36	257
-133	336
-487	230
-756	203
-418	68
-834	207
-468	152
-492	114
-672	278
-615	280
-339	185
-543	330
-120	196
-539	84
-665	117
-387	248
-388	407
-829	188
-554	28
-823	165
-724	493
-530	489
-443	359
-805	281
-784	106
-670	289
-303	218
-48	121
-668	427
-624	346
-626	475
-641	335
-571	301
-690	297
-119	382
-550	105
-530	320
-317	305
-28	335
-472	492
-94	316
-881	173
-699	388
-294	495
-38	471
-540	73
-603	375
-49	376
-716	236
-605	170
-675	264
-464	491
-815	22
-411	363
-617	25
-503	298
-133	173
-665	122
-95	467
-494	396
-718	451
-791	373
-139	60
-332	60
-848	167
-538	63
-592	27
-707	186
-202	185
-59	399
-39	286
-240	479
-189	425
-820	103
-85	90
-861	277
-871	237
-703	188
-536	480
-210	333
-834	351
-670	402
-710	409
-128	252
-529	173
-842	132
-463	481
-748	283
-662	73
-576	442
-102	50
-788	406
-761	282
-343	199
-259	417
-831	322
-181	38
-187	413
-689	445
-209	387
-118	458
-804	91
-445	267
-222	297
-415	7
-827	256
-262	395
-401	422
-546	185
-465	409
-855	468
-488	418
-725	11
-664	106
-177	135
-281	381
-714	248
-304	465
-678	73
-866	247
-302	59
-434	354
-720	490
-80	198
-688	221
-877	294
-843	271
-113	370
-273	200
-58	254
-163	229
-97	275
-481	74
-358	84
-816	196
-224	315
-700	335
-22	435
-621	291
-730	2
-854	326
-822	101
-721	253
-531	201
-422	321
-558	391
-605	422
-632	113
-469	211
-27	484
-401	202
-464	373
-486	154
-405	387
-788	123
-870	165
-347	79
-661	427
-808	456
-112	247
-629	472
-365	24
-205	178
-597	310
-152	408
-95	472
-793	64
-435	362
-293	487
-266	345
-58	204
-317	146
-688	437
-117	105
-421	490
-429	357
-354	500
-495	225
-469	343
-725	32
-14	474
-222	126
-853	29
-284	159
-584	318
-365	333
-477	226
-249	462
-61	130
-353	48
-231	196
-289	366
-737	450
-431	424
-460	86
-60	290
-533	231
-407	398
-845	299
-32	473
-112	271
-45	137
-492	338
-29	90
-799	459
-792	88
-402	293
-330	154
-861	339
-536	58
-682	236
-585	395
-398	346
-214	106
-122	21
-577	3
-607	366
-62	291
-168	310
-140	303
-425	407
-759	323
-461	383
-650	208
-334	114
-300	224
-260	214
-460	211
-878	476
-8	25
-748	40
-476	31
-90	90
-283	113
-446	348
-614	439
-128	351
-205	269
-552	355
-836	211
-125	2
-336	253
-220	61
-462	159
-493	394
-189	225
-479	306
-711	229
-191	115
-400	129
-133	375
-659	90
-868	403
-188	420
-183	90
-93	379
-525	427
-165	231
-239	111
-718	450
-75	263
-434	230
-279	289
-686	161
-152	268
-617	210
-782	215
-165	477
-849	379
-833	320
-198	107
-734	199
-161	358
-879	484
-879	29
-115	162
-40	473
-841	92
-387	414
-149	483
-652	192
-392	377
-273	408
-746	442
-264	269
-593	439
-473	450
-435	350
-111	230
-614	115
-9	362
-431	293
-45	201
-469	452
-884	46
-467	27
-473	161
-43	403
-184	492
-478	34
-484	162
-705	488
-809	90
-225	428
-275	2
-225	444
-873	446
-129	276
-429	467
-447	214
-214	447
-811	26
-100	327
-117	323
-30	72
-534	416
-406	406
-796	337
-263	405
-510	23
-455	262
-785	297
-81	490
-625	153
-391	376
-429	160
-94	67
-339	21
-120	237
-313	196
-727	349
-549	43
-341	32
-462	19
-550	108
-122	236
-491	184
-810	58
-253	308
-622	266
-682	387
-257	26
-14	488
-318	54
-798	143
-100	121
-268	54
-216	370
-34	83
-97	413
-590	222
-837	235
-752	400
-220	214
-723	316
-381	409
-601	307
-45	171
-557	132
-600	346
-372	197
-342	373
-153	414
-362	422
-135	172
-441	66
-47	450
-530	473
-194	47
-726	295
-602	36
-802	301
-390	332
-848	367
-258	411
-239	192
-142	84
-209	127
-418	479
-243	28
-351	89
-208	286
-251	351
-753	94
-211	68
-508	46
-259	369
-783	402
-642	313
-416	494
-521	413
-601	246
-840	494
-748	210
-80	354
-844	491
-615	443
-522	78
-777	460
-363	244
-504	416
-863	94
-26	169
-400	171
-639	19
-395	186
-817	28
-234	179
-217	343
-539	209
-314	22
-596	323
-206	478
-397	222
-822	83
-58	228
-634	414
-405	374
-820	53
-345	228
-840	28
-304	201
-123	281
-41	67
-755	498
-281	304
-53	127
-701	377
-31	486
-748	468
-127	23
-836	46
-618	339
-432	341
-475	14
-809	210
-293	494
-601	131
-153	24
-418	362
-305	70
-266	396
-349	316
-639	366
-301	131
-737	121
-233	180
-482	125
-127	371
-288	43
-674	424
-722	234
-27	363
-820	317
-609	498
-570	10
-231	168
-618	26
-25	450
-820	206
-387	79
-282	37
-652	450
-434	112
-4	190
-117	281
-765	167
-407	302
-607	2
-284	479
-236	165
-831	71
-270	447
-191	185
-64	308
-334	424
-439	413
-737	229
-848	117
-187	206
-659	145
-780	252
-467	490
-143	488
-471	341
-233	340
-587	273
-249	439
-266	368
-357	136
-740	395
-753	164
-496	70
-150	432
-144	170
-782	30
-18	392
-541	433
-307	144
-723	45
-128	178
-566	439
-24	230
-89	464
-159	42
-38	461
-763	40
-841	1
-395	351
-482	322
-584	367
-580	398
-631	246
-468	327
-613	384
-838	237
-269	112
-128	364
-436	435
-453	357
-240	238
-194	166
-91	285
-790	150
-592	221
-440	457
-753	246
-839	66
-724	421
-183	346
-160	393
-677	276
-433	4
-383	327
-827	143
-558	270
-115	44
-432	269
-7	165
-791	442
-625	285
-299	333
-552	98
-21	187
-421	98
-816	65
-873	366
-243	198
-623	370
-53	200
-337	297
-543	125
-617	262
-40	428
-256	172
-558	94
-50	129
-756	108
-379	228
-884	457
-188	11
-65	443
-277	112
-71	420
-539	248
-265	322
-679	475
-551	366
-503	67
-739	24
-518	12
-778	48
-587	388
-348	253
-392	379
-229	131
-527	286
-777	222
-493	406
-242	324
-595	335
-523	2
-715	197
-136	417
-12	352
-9	357
-455	209
-434	164
-255	148
-870	477
-156	185
-48	390
-553	195
-552	258
-79	132
-82	63
-544	459
-302	382
-485	70
-353	78
-117	276
-689	498
-638	420
-635	313
-537	122
-24	86
-54	334
-486	402
-355	195
-64	131
-755	347
-635	255
-717	396
-741	283
-885	75
-245	346
-50	436
-96	170
-194	469
-95	166
-91	38
-707	443
-136	145
-253	348
-282	127
-327	31
-45	192
-285	62
-371	421
-567	106
-835	24
-434	3
-171	80
-818	288
-176	495
-371	150
-210	261
-69	170
-864	195
-850	147
-752	263
-679	221
-676	148
-40	115
-70	282
-797	320
-447	98
-405	464
-491	356
-534	401
-630	74
-646	298
-525	273
-629	445
-603	202
-861	347
-390	35
-151	44
-815	122
-683	141
-303	353
-433	168
-495	7
-738	15
-85	129
-632	382
-706	358
-134	443
-492	434
-409	341
-760	406
-398	431
-551	466
-541	340
-479	292
-790	148
-178	112
-547	190
-743	1
-131	402
-103	297
-790	481
-69	484
-683	418
-225	335
-820	455
-611	342
-98	1
-60	166
-667	400
-627	32
-155	50
-260	341
-138	2
-19	63
-854	129
-12	425
-233	118
-134	155
-717	401
-419	126
-147	178
-266	64
-611	130
-748	116
-222	195
-221	378
-453	303
-535	40
-678	427
-703	50
-725	202
-534	7
-619	378
-296	487
-182	138
-706	274
-101	57
-467	168
-144	109
-254	352
-170	262
-683	272
-639	495
-491	373
-580	12
-136	294
-511	51
-591	482
-30	67
-564	239
-187	6
-217	362
-799	9
-183	403
-106	395
-231	58
-877	21
-317	280
-611	306
-311	80
-58	171
-17	147
-83	254
-708	114
-119	188
-182	178
-388	494
-823	161
-312	311
-139	359
-509	191
-471	284
-658	425
-550	363
-628	313
-104	408
-330	458
-576	336
-57	322
-284	76
-399	55
-756	133
-292	381
-287	472
-576	460
-638	279
-104	261
-565	84
-5	187
-268	117
-867	340
-261	70
-447	468
-80	144
-517	390
-739	478
-174	416
-72	182
-601	27
-347	414
-692	403
-40	500
-663	35
-351	459
-650	78
-715	496
-596	356
-734	396
-463	84
-160	29
-825	473
-130	381
-551	384
-661	398
-860	257
-316	165
-335	179
-147	98
-249	238
-70	43
-598	46
-114	380
-138	202
-478	223
-831	324
-164	109
-755	104
-272	399
-485	198
-151	468
-685	431
-419	12
-531	106
-597	485
-584	134
-457	361
-671	327
-285	345
-633	24
-795	458
-215	159
-680	139
-693	459
-584	278
-39	247
-561	42
-750	106
-776	183
-302	338
-879	439
-747	41
-851	84
-148	378
-592	179
-9	380
-699	459
-116	292
-857	476
-58	405
-74	284
-194	62
-843	94
-820	326
-445	220
-764	160
-270	382
-89	117
-409	417
-877	136
-330	34
-491	428
-9	188
-758	24
-244	477
-860	444
-11	428
-881	220
-350	472
-820	221
-663	390
-786	41
-64	28
-451	312
-414	365
-863	417
-512	407
-522	404
-561	408
-659	54
-872	358
-366	263
-433	272
-494	9
-637	280
-748	428
-6	351
-477	155
-840	232
-60	15
-399	66
-620	60
-441	171
-747	45
-647	212
-33	309
-187	223
-323	299
-229	67
-795	9
-357	425
-217	7
-759	424
-329	339
-444	282
-327	39
-17	362
-216	213
-201	15
-718	173
-805	334
-828	329
-171	242
-816	310
-162	377
-325	68
-540	494
-804	499
-373	186
-299	86
-7	120
-239	366
-668	234
-86	281
-869	198
-426	133
-181	434
-343	358
-659	217
-462	154
-39	284
-447	498
-473	21
-59	430
-360	212
-102	175
-278	393
-865	183
-579	126
-731	334
-378	492
-102	271
-238	429
-858	64
-658	305
-210	93
-305	195
-644	298
-204	332
-56	380
-572	299
-41	416
-310	293
-594	461
-313	167
-633	436
-466	44
-626	32
-298	288
-53	279
-491	256
-619	264
-402	291
-541	490
-21	208
-790	16
-400	274
-100	310
-68	472
-38	454
-810	203
-31	163
-536	481
-265	56
-396	17
-149	249
-653	231
-353	234
-185	333
-310	214
-836	38
-450	159
-861	466
-525	195
-146	61
-276	193
-538	259
-652	204
-112	329
-412	259
-646	295
-61	98
-753	256
-248	154
-488	34
-646	95
-258	475
-844	287
-649	80
-881	461
-284	424
-507	454
-343	251
-693	293
-567	18
-41	258
-710	312
-296	108
-551	367
-505	112
-179	121
-771	81
-173	452
-88	337
-736	491
-821	374
-147	200
-507	499
-27	390
-644	101
-603	317
-863	390
-193	63
-251	493
-416	337
-690	81
-224	299
-380	194
-628	292
-812	342
-435	261
-434	196
-737	184
-80	424
-606	185
-223	485
-233	105
-460	153
-833	486
-872	147
-802	140
-98	195
-405	404
-769	316
-344	78
-241	344
-713	319
-197	59
-185	204
-421	339
-221	382
-566	239
-823	46
-277	315
-42	354
-184	72
-376	163
-36	34
-737	298
-421	299
-652	366
-488	298
-242	244
-11	111
-495	264
-354	43
-627	369
-167	146
-38	346
-659	455
-251	3
-142	59
-181	79
-35	298
-575	330
-877	112
-20	479
-582	453
-847	225
-30	175
-500	406
-143	238
-371	223
-443	48
-791	136
-401	180
-476	496
-258	463
-74	444
-60	386
-108	81
-37	354
-378	218
-270	1
-745	220
-143	208
-426	429
-218	419
-725	279
-278	437
-164	300
-443	482
-442	49
-103	307
-188	60
-259	3
-65	233
-192	103
-630	343
-473	140
-715	47
-167	269
-590	402
-483	7
-52	216
-266	292
-813	380
-562	333
-125	169
-564	370
-54	175
-282	103
-218	139
-861	282
-560	133
-565	316
-187	157
-12	248
-329	66
-746	201
-175	134
-99	9
-462	428
-658	200
-692	116
-713	35
-157	157
-430	223
-146	260
-11	470
-799	413
-841	447
-159	162
-476	62
-342	270
-166	149
-872	200
-874	74
-286	278
-580	397
-795	434
-842	284
-168	120
-89	153
-729	47
-876	261
-321	312
-649	367
-171	388
-495	292
-862	152
-179	3
-99	320
-638	218
-147	182
-331	454
-493	274
-821	16
-47	328
-368	265
-717	274
-858	55
-463	120
-819	290
-587	270
-145	144
-786	169
-673	93
-10	279
-562	317
-529	450
-352	473
-13	392
-259	287
-288	261
-595	145
-113	203
-620	178
-640	159
-390	88
-517	348
-710	406
-729	211
-358	92
-295	32
-348	5
-287	467
-661	481
-603	168
-606	152
-539	68
-506	342
-491	412
-6	19
-157	301
-530	186
-473	394
-740	227
-126	145
-94	227
-679	362
-603	275
-545	177
-399	57
-754	88
-400	101
-782	277
-295	268
-266	298
-471	362
-760	337
-171	490
-271	239
-880	254
-788	264
-109	316
-106	409
-17	492
-532	480
-113	118
-7	7
-641	341
-416	17
-559	491
-312	373
-237	472
-268	367
-189	51
-527	129
-732	414
-519	9
-444	412
-810	6
-628	32
-151	397
-55	87
-254	23
-593	218
-459	284
-251	116
-830	98
-662	463
-552	83
-54	480
-821	125
-775	404
-491	400
-647	266
-430	158
-329	89
-159	102
-19	294
-576	465
-188	171
-833	388
-385	25
-149	402
-798	407
-736	50
-880	158
-674	82
-137	354
-745	75
-60	199
-318	167
-300	213
-366	282
-167	61
-268	378
-246	198
-16	459
-875	152
-846	413
-61	71
-93	28
-479	279
-331	119
-437	33
-197	487
-20	462
-321	417
-778	160
-411	90
-802	82
-683	435
-311	400
-754	244
-213	179
-19	185
-404	349
-646	441
-847	416
-811	64
-179	116
-219	278
-224	332
-456	183
-479	89
-449	70
-84	164
-395	374
-79	492
-241	425
-656	56
-570	389
-596	382
-777	325
-141	425
-845	274
-113	366
-694	493
-529	444
-380	140
-376	479
-868	382
-559	344
-315	129
-176	137
-251	47
-192	342
-279	166
-578	279
-668	218
-634	253
-302	127
-61	131
-196	223
-90	142
-83	405
-562	69
-850	300
-85	176
-531	396
-363	151
-589	310
-120	240
-229	332
-409	34
-485	435
-498	175
-502	69
-831	453
-845	162
-190	404
-10	416
-256	324
-132	172
-840	286
-81	401
-714	299
-545	427
-248	248
-33	160
-785	309
-155	52
-319	110
-339	285
-42	48
-392	442
-865	117
-291	323
-679	240
-213	365
-836	104
-106	60
-676	448
-684	127
-729	104
-847	475
-83	226
-610	219
-880	369
-48	355
-132	32
-721	147
-839	483
-33	108
-97	75
-868	55
-247	34
-303	8
-148	235
-35	430
-680	492
-433	241
-308	326
-256	255
-367	299
-878	115
-623	192
-620	331
-127	63
-270	92
-854	438
-26	75
-559	442
-309	33
-621	94
-685	169
-678	287
-414	200
-92	405
-528	273
-617	386
-455	177
-151	244
-337	33
-623	297
-640	41
-24	207
-168	326
-851	137
-316	489
-722	386
-537	383
-530	473
-747	52
-139	338
-272	45
-689	394
-387	118
-483	56
-461	317
-203	351
-342	14
-277	433
-522	132
-529	302
-391	158
-293	286
-114	262
-596	65
-819	64
-372	46
-635	251
-317	278
-371	25
-20	19
-338	17
-101	168
-754	34
-616	363
-436	318
-202	392
-451	445
-387	69
-703	179
-227	427
-153	437
-104	267
-817	356
-443	250
-344	270
-97	368
-631	300
-799	332
-456	301
-862	99
-450	236
-121	237
-130	450
-574	104
-872	434
-760	189
-115	139
-176	149
-35	136
-735	301
-104	91
-245	96
-96	446
-850	488
-305	309
-78	276
-111	416
-632	72
-630	337
-697	419
-5	147
-181	42
-152	460
-361	24
-681	28
-436	11
-440	304
-434	48
-665	321
-107	97
-141	345
-773	331
-563	342
-875	38
-66	42
-368	3
-510	202
-42	20
-438	240
-80	433
-690	275
-581	160
-573	161
-663	266
-100	374
-799	98
-87	398
-265	436
-779	228
-262	33
-143	108
-560	22
-738	491
-107	184
-531	24
-776	322
-366	500
-731	289
-717	311
-355	31
-30	33
-734	90
-740	430
-295	58
-62	134
-720	171
-835	26
-325	170
-796	229
-87	86
-386	104
-216	31
-169	407
-276	56
-773	317
-361	413
-163	19
-52	100
-458	274
-2	350
-745	472
-671	87
-14	85
-591	456
-71	189
-342	18
-95	487
-855	54
-498	364
-781	446
-150	180
-87	329
-658	467
-90	81
-604	250
-417	101
-298	286
-482	329
-787	412
-129	181
-816	348
-195	318
-677	437
-41	187
-414	230
-760	426
-812	93
-695	357
-740	470
-187	419
-301	407
-656	200
-53	36
-321	27
-241	146
-417	291
-475	59
-456	296
-179	339
-793	33
-604	265
-110	188
-164	229
-825	316
-345	243
-142	172
-671	49
-467	467
-561	380
-438	463
-536	16
-379	236
-92	491
-439	20
-641	142
-756	18
-81	328
-299	456
-551	127
-326	125
-11	208
-733	436
-31	317
-495	500
-273	304
-787	234
-675	416
-728	267
-676	406
-531	192
-231	116
-321	302
-561	56
-695	399
-204	75
-543	472
-550	420
-520	121
-544	422
-693	343
-523	244
-700	236
-679	337
-452	113
-257	150
-113	389
-578	290
-640	152
-780	323
-304	94
-741	252
-475	342
-254	309
-414	493
-433	229
-429	4
-503	258
-258	350
-198	492
-353	292
-340	105
-95	67
-786	119
-736	321
-491	327
-676	180
-380	51
-175	207
-241	405
-731	73
-852	488
-289	120
-636	334
-551	499
-12	86
-366	244
-72	371
-243	370
-304	472
-396	71
-30	480
-865	57
-317	310
-719	213
-41	43
-566	291
-710	142
-310	11
-56	13
-342	303
-452	442
-831	285
-140	470
-80	465
-620	462
-245	173
-230	89
-462	346
-167	397
-242	375
-21	481
-244	304
-646	10
-385	9
-517	250
-72	66
-556	265
-759	81
-750	45
-647	156
-204	175
-771	83
-824	152
-146	258
-702	488
-187	492
-645	270
-273	327
-11	321
-669	361
-579	205
-210	401
-2	446
-630	100
-676	257
-633	3
-372	306
-200	139
-35	126
-152	1
-41	145
-574	89
-76	294
-663	34
-359	330
-742	2
-436	185
-43	141
-568	226
-502	13
-569	141
-818	118
-867	343
-205	350
-418	21
-577	366
-862	14
-344	302
-649	13
-760	234
-656	392
-841	383
-648	124
-691	7
-766	92
-863	253
-556	12
-885	168
-727	36
-42	356
-545	210
-741	101
-479	472
-219	184
-617	51
-350	216
-303	313
-88	42
-394	442
-453	325
-824	327
-339	446
-578	330
-790	453
-301	457
-95	334
-691	234
-299	351
-57	252
-631	155
-592	45
-773	279
-130	410
-768	188
-55	273
-687	25
-765	463
-174	437
-662	58
-529	311
-829	320
-742	278
-726	114
-798	341
-504	157
-530	149
-347	56
-128	435
-286	318
-201	274
-687	98
-509	244
-732	281
-188	239
-544	378
-813	251
-542	123
-579	28
-830	468
-693	190
-761	449
-776	492
-276	122
-121	383
-136	343
-538	30
-567	415
-549	455
-623	293
-285	295
-748	389
-461	154
-484	123
-110	192
-530	206
-686	92
-712	64
-213	110
-797	267
-6	116
-226	214
-657	173
-306	327
-125	300
-631	9
-883	251
-154	284
-313	300
-460	333
-679	145
-180	219
-317	458
-39	287
-703	495
-392	184
-848	195
-384	25
-37	429
-594	488
-611	367
-287	135
-170	176
-347	208
-704	285
-236	283
-494	132
-427	40
-393	257
-741	249
-256	411
-689	415
-828	359
-349	230
-390	474
-549	336
-343	271
-125	25
-292	193
-610	133
-838	315
-602	426
-722	126
-847	497
-284	45
-45	252
-865	218
-690	359
-463	448
-443	78
-633	25
-407	227
-785	48
-368	53
-121	226
-485	42
-646	19
-129	494
-774	473
-494	442
-227	60
-731	274
-308	195
-90	175
-613	415
-646	208
-182	424
-746	459
-282	493
-15	337
-398	428
-373	50
-160	187
-605	297
-67	434
-763	367
-714	27
-180	208
-328	377
-807	134
-758	164
-311	121
-651	70
-42	383
-835	213
-695	138
-491	462
-171	185
-389	32
-270	432
-551	151
-261	448
-111	20
-644	393
-165	250
-554	371
-342	394
-333	147
-746	99
-291	32
-660	487
-107	288
-683	258
-155	211
-419	76
-565	189
-864	253
-209	287
-605	125
-340	340
-873	373
-757	83
-232	484
-306	311
-727	448
-212	414
-684	177
-1	124
-860	475
-863	78
-875	191
-201	383
-13	487
-142	76
-525	392
-239	341
-590	379
-507	305
-321	2
-569	286
-721	413
-731	36
-34	478
-229	469
-184	75
-9	38
-104	303
-833	497
-51	82
-855	271
-270	288
-37	67
-576	32
-575	27
-451	362
-847	65
-725	340
-492	182
-153	432
-28	156
-715	324
-584	480
-225	283
-177	494
-366	372
-149	492
-218	494
-755	89
-856	367
-528	114
-743	427
-602	70
-372	180
-459	500
-863	215
-331	274
-235	222
-40	406
-579	491
-561	214
-727	494
-294	428
-299	405
-538	71
-831	96
-835	245
-345	314
-500	43
-388	41
-587	92
-3	449
-447	478
-208	94
-742	114
-465	120
-468	37
-708	82
-138	275
-369	215
-353	4
-267	92
-217	342
-592	306
-715	41
-49	455
-846	175
-17	270
-300	369
-87	163
-461	336
-342	226
-467	399
-325	369
-42	247
-283	191
-823	228
-609	337
-551	310
-274	413
-145	92
-638	353
-744	67
-689	87
-443	339
-337	155
-836	311
-65	294
-709	435
-32	117
-512	164
-827	155
-819	154
-652	469
-300	303
-791	122
-882	370
-40	225
-261	21
-610	95
-837	430
-403	462
-856	27
-692	94
-739	332
-204	479
-722	61
-445	145
-868	101
-344	275
-881	272
-486	460
-774	369
-151	67
-361	297
-418	413
-212	270
-771	409
-736	452
-645	448
-445	205
-744	159
-391	362
-577	252
-768	91
-552	60
-466	483
-851	383
-676	281
-736	265
-105	247
-132	352
-323	124
-536	313
-360	229
-115	101
-816	157
-124	495
-349	232
-393	305
-66	246
-637	478
-694	268
-547	429
-387	480
-316	484
-589	396
-663	349
-53	220
-491	161
-79	323
-104	1
-138	419
-674	202
-456	334
-169	30
-245	346
-98	121
-778	450
-708	209
-94	9
-577	130
-745	231
-46	422
-857	366
-8	260
-412	453
-783	471
-544	373
-554	132
-318	241
-19	383
-90	162
-481	50
-316	249
-747	207
-266	161
-179	255
-451	252
-623	216
-465	258
-862	448
-379	145
-102	493
-412	286
-459	270
-111	83
-584	57
-662	107
-746	355
-47	322
-697	495
-346	247
-448	428
-876	436
-801	255
-398	336
-840	484
-313	233
-816	480
-232	100
-603	192
-809	391
-156	238
-643	353
-338	250
-754	457
-11	488
-215	297
-209	223
-696	372
-780	48
-489	90
-573	358
-646	271
-457	212
-270	300
-355	489
-160	414
-252	55
-699	145
-94	473
-700	267
-654	465
-637	47
-387	172
-672	333
-598	117
-568	188
-482	165
-402	106
-71	147
-574	426
-110	242
-246	350
-146	312
-274	278
-284	493
-368	182
-495	388
-519	85
-765	103
-752	98
-686	54
-198	20
-147	450
-548	138
-689	263
-751	433
-408	152
-275	352
-622	106
-617	461
-857	353
-568	163
-22	214
-201	495
-250	93
-34	146
-492	225
-378	168
-458	327
-32	121
-258	104
-82	225
-863	335
-854	367
-544	275
-196	381
-677	133
-415	301
-135	23
-794	203
-633	243
-758	447
-614	438
-82	377
-619	426
-91	301
-472	453
-697	263
-387	500
-504	50
-625	202
-539	58
-255	64
-775	284
-739	384
-19	62
-558	147
-159	208
-112	457
-863	64
-578	19
-799	388
-261	286
-277	292
-291	33
-282	457
-826	301
-721	331
-24	128
-751	195
-459	326
-710	205
-648	109
-654	491
-338	255
-567	308
-389	465
-379	200
-272	382
-608	186
-50	486
-237	319
-803	423
-448	402
-725	262
-380	85
-650	19
-756	191
-111	170
-91	237
-527	228
-162	225
-19	472
-621	95
-646	158
-481	76
-182	13
-738	19
-308	500
-319	85
-582	498
-576	500
-790	456
-544	26
-591	35
-503	183
-564	265
-531	330
-477	400
-881	328
-265	234
-566	267
-349	248
-183	66
-109	476
-522	234
-166	477
-848	379
-66	135
-234	266
-717	371
-241	48
-408	374
-766	194
-95	255
-145	253
-850	349
-605	92
-388	431
-57	327
-668	82
-192	213
-686	48
-873	31
-825	484
-563	360
-388	126
-637	203
-578	483
-584	130
-128	394
-614	452
-173	198
-373	460
-831	466
-570	202
-349	471
-797	472
-610	221
-463	46
-325	75
-823	132
-1	493
-330	484
-124	284
-866	482
-840	166
-245	400
-448	441
-650	150
-823	31
-854	460
-147	204
-577	53
-599	142
-696	202
-508	246
-151	305
-756	24
-270	73
-96	271
-725	87
-532	152
-524	215
-679	329
-515	330
-767	320
-702	122
-443	467
-743	260
-168	122
-373	158
-849	475
-761	75
-433	75
-491	3
-377	491
-457	408
-692	326
-793	144
-71	407
-483	489
-346	373
-88	114
-555	470
-689	386
-235	365
-458	416
-223	414
-248	300
-447	334
-270	498
-862	67
-303	428
-808	329
-275	445
-249	120
-165	325
-818	414
-126	422
-838	20
-99	148
-234	101
-589	396
-296	369
-496	355
-329	334
-770	148
-308	30
-120	367
-506	471
-679	341
-346	446
-70	500
-851	253
-797	59
-511	387
-237	154
-502	488
-412	480
-779	47
-188	85
-13	184
-635	313
-318	458
-694	1
-415	232
-244	79
-622	189
-659	296
-338	80
-564	122
-589	369
-184	243
-836	116
-799	369
-710	148
-526	223
-101	63
-619	411
-396	210
-314	275
-22	235
-230	130
-765	146
-577	358
-793	65
-400	479
-389	232
-653	207
-404	249
-164	429
-625	203
-451	117
-137	38
-320	460
-265	453
-792	301
-629	182
-316	278
-301	353
-876	277
-79	431
-759	286
-501	124
-704	243
-169	17
-228	295
-437	40
-455	459
-608	494
-19	182
-824	121
-488	7
-695	312
-552	471
-369	18
-216	407
-445	313
-194	150
-243	454
-800	177
-751	284
-47	158
-540	323
-541	354
-145	226
-31	262
-554	136
-309	214
-20	191
-92	229
-385	375
-122	131
-91	443
-173	483
-201	161
-364	245
-694	127
-324	448
-27	71
-478	289
-261	325
-126	356
-268	135
-514	410
-164	416
-862	186
-629	404
-765	409
-839	272
-413	136
-373	382
-48	148
-327	456
-372	127
-831	151
-770	268
-647	498
-248	277
-488	421
-621	144
-550	338
-606	76
-575	161
-162	287
-439	467
-271	425
-791	256
-554	346
-485	400
-28	385
-742	365
-802	170
-432	106
-546	379
-676	119
-857	120
-286	157
-588	281
-491	120
-8	14
-123	468
-293	252
-277	407
-234	327
-114	384
-156	3
-837	201
-226	274
-770	23
-818	437
-104	301
-869	147
-754	114
-333	253
-682	134
-313	89
-155	196
-715	313
-873	331
-848	277
-827	107
-80	162
-154	124
-756	434
-348	455
-621	76
-527	352
-685	397
-813	376
-863	354
-760	178
-885	474
-287	434
-139	208
-858	45
-615	245
-867	100
-378	415
-568	349
-150	88
-494	30
-124	221
-295	320
-617	145
-10	366
-457	47
-162	145
-542	119
-82	402
-480	433
-653	481
-41	400
-377	259
-701	313
-388	57
-686	364
-159	173
-186	264
-17	437
-61	251
-74	387
-200	437
-445	332
-461	316
-69	170
-354	171
-598	41
-653	2
-243	355
-429	384
-639	427
-368	113
-340	432
-816	100
-140	86
-326	347
-582	296
-425	183
-730	429
-508	65
-686	66
-105	295
-310	300
-817	474
-171	35
-412	223
-435	432
-699	345
-255	161
-92	354
-179	100
-736	394
-710	365
-665	136
-333	144
-343	158
-867	482
-209	489
-579	342
-102	142
-548	372
-454	351
-253	173
-165	415
-822	31
-256	460
-269	98
-426	443
-365	108
-238	256
-431	206
-490	97
-875	451
-590	299
-451	361
-314	241
-739	118
-709	29
-612	404
-397	115
-50	18
-756	132
-794	348
-50	248
-507	303
-155	166
-423	23
-466	468
-654	150
-666	295
-215	372
-392	325
-760	68
-571	164
-73	321
-473	302
-59	438
-178	396
-419	271
-236	479
-326	276
-18	150
-573	6
-4	261
-429	307
-82	389
-789	361
-217	23
-333	40
-538	144
-190	270
-129	336
-266	461
-844	300
-792	187
-370	112
-48	129
-273	313
-584	47
-824	441
-120	52
-475	452
-297	37
-786	320
-763	116
-279	466
-713	339
-845	395
-340	256
-140	134
-387	2
-823	16
-460	24
-503	347
-584	188
-784	497
-442	21
-539	470
-356	70
-628	500
-543	207
-808	367
-305	228
-387	220
-756	30
-603	296
-612	114
-166	73
-363	91
-591	289
-567	47
-405	71
-487	288
-164	203
-41	465
-802	11
-799	240
-52	307
-431	55
-78	56
-217	490
-794	370
-27	131
-447	282
-363	258
-688	458
-437	472
-613	279
-660	31
-242	425
-282	303
-302	414
-402	387
-771	25
-485	49
-236	302
-155	242
-856	202
-262	344
-157	493
-539	493
-142	91
-588	446
-254	115
-725	193
-552	473
-459	404
-364	482
-468	468
-2	157
-343	240
-866	59
-285	39
-388	220
-826	177
-150	254
-327	390
-612	395
-56	457
-382	404
-176	56
-248	17
-573	187
-769	345
-541	428
-378	321
-834	91
-737	440
-492	10
-876	152
-314	493
-184	56
-21	107
-782	454
-805	83
-466	354
-427	70
-336	152
-774	421
-704	470
-680	480
-884	104
-12	476
-607	307
-528	5
-686	129
-805	87
-361	169
-256	480
-752	351
-353	84
-431	48
-626	294
-145	177
-837	40
-806	127
-855	455
-563	1
-155	349
-406	294
-245	159
-538	77
-757	122
-39	474
-394	76
-793	149
-556	161
-172	167
-284	219
-658	417
-283	246
-553	390
-61	337
-563	465
-427	54
-813	331
-807	321
-825	275
-587	351
-857	394
-644	288
-293	339
-684	234
-481	356
-867	481
-177	361
-307	411
-140	59
-256	37
-667	220
-811	283
-503	348
-297	480
-250	499
-46	297
-146	300
-209	259
-414	154
-179	338
-432	389
-175	490
-222	160
-310	254
-330	185
-283	258
-586	361
-654	378
-718	484
-191	184
-227	284
-151	46
-433	267
-3	404
-484	485
-308	31
-92	48
-750	94
-103	96
-400	50
-594	275
-103	211
-328	199
-37	323
-122	270
-4	412
-542	144
-463	276
-240	160
-413	283
-335	351
-212	469
-593	117
-52	295
-782	273
-239	356
-431	339
-736	82
-830	147
-459	141
-779	78
-380	133
-554	339
-660	94
-536	75
-219	282
-546	41
-395	200
-878	215
-596	395
-708	192
-418	139
-770	64
-249	393
-413	63
-646	321
-431	321
-867	247
-794	354
-741	395
-366	90
-451	426
-521	451
-508	475
-221	242
-497	35
-553	414
-167	173
-873	275
-308	186
-763	427
-399	483
-650	232
-559	309
-727	316
-451	261
-614	372
-716	348
-561	367
-568	414
-578	24
-82	284
-267	491
-580	381
-335	448
-87	70
-321	191
-752	284
-582	441
-78	221
-233	478
-702	20
-770	437
-598	30
-276	6
-523	348
-809	186
-830	213
-487	470
-89	40
-714	180
-71	487
-665	331
-300	263
-212	102
-814	134
-507	422
-280	66
-385	124
-258	276
-662	16
-278	481
-369	8
-530	242
-134	111
-390	21
-816	420
-684	202
-513	245
-436	400
-223	294
-703	329
-151	403
-135	31
-440	27
-366	331
-109	120
-434	171
-697	375
-872	293
-355	260
-866	167
-409	309
-432	232
-368	317
-702	283
-617	68
-685	184
-559	7
-420	313
-169	402
-73	336
-59	200
-802	163
-838	193
-202	104
-623	457
-709	3
-11	194
-417	91
-484	167
-410	395
-728	138
-742	438
-229	284
-111	9
-273	149
-351	187
-7	218
-646	92
-109	178
-355	254
-798	105
-545	63
-302	103
-122	145
-521	327
-547	475
-333	404
-257	153
-735	145
-771	439
-487	253
-62	223
-555	353
-259	408
-745	227
-728	118
-478	398
-810	222
-524	115
-205	47
-323	409
-622	285
-440	42
-337	5
-292	304
-277	4
-845	104
-585	377
-209	49
-431	498
-475	24
-293	39
-146	479
-874	90
-39	22
-465	190
-208	179
-220	77
-229	472
-681	403
-392	378
-728	355
-782	35
-811	214
-55	242
-772	121
-655	492
-545	360
-216	197
-175	452
-831	455
-660	429
-10	360
-342	440
-11	452
-770	499
-262	259
-527	259
-260	328
-311	413
-566	412
-522	348
-668	316
-359	461
-847	142
-462	33
-388	8
-709	133
-576	361
-43	414
-124	287
-645	120
-849	408
-602	408
-731	314
-570	191
-617	373
-564	431
-113	452
-634	438
-93	487
-715	435
-648	21
-547	325
-150	190
-278	278
-284	480
-777	434
-346	249
-824	415
-169	265
-57	104
-574	290
-468	320
-714	467
-480	420
-403	307
-80	53
-143	489
-658	343
-161	61
-260	168
-149	454
-695	150
-594	126
-760	182
-855	83
-642	487
-407	403
-206	12
-539	73
-751	57
-710	212
-582	468
-478	453
-327	297
-182	53
-200	470
-802	224
-875	240
-680	179
-690	14
-563	242
-644	271
-884	246
-260	92
-677	485
-637	393
-346	229
-111	186
-410	120
-878	384
-198	73
-105	152
-799	326
-136	433
-569	146
-498	84
-401	417
-291	393
-339	67
-779	84
-232	2
-276	55
-337	63
-42	62
-868	428
-228	406
-516	118
-320	345
-280	428
-161	25
-191	436
-627	333
-487	384
-615	109
-296	4
-310	338
-276	122
-544	21
-797	201
-318	391
-518	212
-277	317
-292	296
-310	287
-38	84
-328	380
-825	343
-115	380
-238	287
-838	127
-455	9
-445	323
-660	11
-95	137
-229	347
-755	128
-763	482
-204	46
-361	455
-101	331
-549	307
-549	113
-447	7
-38	250
-632	495
-171	484
-169	373
-217	86
-875	417
-745	244
-36	357
-827	248
-48	128
-589	328
-434	236
-187	363
-737	216
-397	101
-125	414
-145	53
-519	296
-361	311
-329	133
-872	70
-745	342
-686	36
-188	323
-564	48
-26	408
-673	46
-322	82
-486	266
-473	177
-131	81
-767	76
-84	145
-564	343
-653	324
-710	178
-460	73
-319	156
-635	349
-291	242
-205	410
-709	287
-252	341
-765	172
-289	104
-469	370
-112	74
-166	403
-378	87
-115	76
-802	167
-71	129
-47	443
-477	451
-770	488
-399	381
-874	317
-868	490
-380	479
-249	396
-234	484
-616	217
-11	128
-212	378
-538	208
-372	484
-610	19
-813	211
-409	446
-819	35
-858	429
-509	456
-560	251
-293	329
-286	336
-95	129
-138	219
-183	41
-486	174
-655	257
-199	288
-770	5
-703	323
-95	381
-267	163
-76	263
-791	83
-624	88
-646	312
-103	461
-388	430
-50	298
-161	230
-542	58
-663	23
-175	321
-674	72
-415	243
-815	386
-433	96
-347	426
-571	465
-145	433
-358	474
-699	121
-767	290
-361	404
-288	486
-422	335
-856	117
-809	372
-217	434
-715	363
-32	453
-861	312
-479	130
-698	225
-590	146
-279	426
-700	497
-125	167
-368	113
-706	207
-337	235
-267	470
-504	4
-200	158
-594	166
-686	12
-186	277
-327	403
-63	9
-724	112
-438	282
-861	328
-818	3
-220	59
-294	433
-865	394
-773	50
-834	391
-490	111
-768	336
-591	434
-767	239
-818	279
-752	182
-472	357
-788	180
-800	65
-757	222
-563	4
-162	332
-262	294
-67	291
-766	249
-852	494
-15	196
-485	459
-214	330
-482	435
-177	345
-68	400
-756	225
-94	299
-133	420
-702	318
-627	201
-617	345
-565	80
-792	93
-686	226
-263	63
-463	183
-42	366
-425	38
-879	347
-301	193
-129	433
-518	46
-825	71
-761	402
-160	160
-865	109
-705	239
-354	98
-684	81
-852	465
-843	417
-840	371
-566	133
-575	71
-841	305
-223	53
-433	263
-765	343
-113	9
-866	142
-873	309
-198	296
-176	500
-520	460
-748	229
-698	482
-260	338
-304	272
-268	124
-657	7
-860	70
-341	478
-504	55
-385	219
-688	61
-361	475
-11	257
-272	265
-641	497
-220	103
-499	416
-559	166
-136	20
-137	7
-757	244
-47	254
-760	43
-655	416
-357	259
-53	414
-513	257
-553	64
-813	318
-847	150
-867	304
-203	470
-147	191
-366	72
-688	27
-231	58
-534	317
-214	238
-544	7
-361	398
-73	366
-205	369
-846	57
-808	20
-420	78
+7	91
+834	17
+120	754
+226	189
+542	460
+513	477
+648	658
+587	713
+231	757
+125	907
+619	970
+443	141
+632	437
+154	290
+717	188
+471	995
+676	875
+507	193
+715	977
+815	82
+526	927
+703	125
+498	244
+180	408
+19	664
+83	574
+543	816
+639	16
+325	807
+605	801
+130	876
+646	241
+389	475
+744	524
+786	440
+325	58
+336	684
+453	371
+406	226
+423	736
+750	612
+340	351
+651	832
+155	510
+600	553
+184	566
+661	620
+147	314
+17	51
 783	134
-460	244
-712	54
-323	65
-374	500
-364	489
-287	195
-717	278
-710	236
-760	430
-516	113
-109	249
-765	102
-574	209
-175	195
-142	126
-438	6
-723	277
-94	204
-137	139
-127	249
-74	473
-508	161
-809	349
-204	69
-77	474
-186	82
-662	80
-716	26
-849	44
-505	163
-149	245
-719	385
-582	454
-289	309
-51	74
-430	169
-595	196
-631	445
-797	383
-120	471
-367	352
-491	476
-884	121
-419	159
-379	270
-419	118
-183	471
-2	454
-351	173
-711	463
-854	198
-743	432
-501	345
-530	35
-375	484
-362	405
-262	322
-351	332
-719	202
-218	321
-176	326
-549	45
-353	438
-790	215
-770	323
-736	449
-666	387
-72	156
-8	38
-617	402
-215	363
-626	53
-875	234
-381	450
-629	47
-64	147
-322	85
-260	218
-627	341
-44	299
-705	490
-719	312
-741	54
-632	8
-540	331
-851	369
-729	419
-710	230
-674	453
-596	325
-672	493
-396	131
-590	67
-694	434
-84	103
-845	116
-305	30
-608	321
-804	50
-278	333
-267	3
-364	441
-131	279
-140	415
-7	103
-854	140
-713	73
-722	271
-145	368
-447	346
-722	29
-875	278
-817	267
-152	481
-390	143
-282	396
-630	359
-141	422
-773	261
-582	43
-137	106
-578	301
-154	374
-719	267
-823	256
-808	408
-263	297
-701	283
-114	405
-600	330
-490	195
-878	280
-570	177
-489	176
-879	417
-50	235
-295	380
-600	310
-50	338
-688	351
-373	106
-745	489
-164	86
-103	401
-675	500
-393	471
-641	20
-372	71
-476	225
-884	194
-820	456
-648	448
-796	14
-278	99
-373	482
-665	280
-233	426
-233	67
-598	398
-831	306
-853	142
-269	453
-531	149
-541	477
-664	59
-518	244
-669	152
-366	166
-496	370
-71	255
-25	449
-282	467
-315	270
-237	339
-417	217
-560	156
-373	358
-771	75
-103	202
-400	394
-805	393
-240	240
-303	64
-712	439
-554	467
-623	88
-848	125
-458	472
-75	476
-515	334
-203	436
-342	416
-125	334
-617	311
-782	37
-732	6
-127	109
-13	101
-361	100
-768	393
-159	483
-725	387
-650	440
-450	485
-67	18
-721	30
-532	70
-405	58
-632	227
-512	477
-374	272
-699	314
-136	321
-367	118
-225	234
-829	377
-855	404
-188	432
-777	429
-824	220
-703	159
-346	493
-686	91
-845	213
-343	249
-401	400
-308	450
-780	488
-32	379
-324	125
-407	224
-882	41
-110	265
-858	32
-175	412
-620	97
-280	90
-146	112
-742	31
-176	349
-731	412
-416	469
-691	388
-730	263
-227	370
-31	411
-18	308
-531	334
-799	80
-610	406
-552	444
-598	360
-736	326
-40	495
-31	142
-30	427
-809	185
-703	106
-286	410
-439	321
-440	320
-180	450
-562	333
-267	60
-565	99
-381	285
-814	2
-605	383
-472	497
-95	381
-454	459
-199	164
-57	42
-781	155
-86	205
-396	484
-7	500
-539	212
-502	251
-833	498
-851	262
-35	217
-687	248
-261	12
-209	316
-602	298
-360	25
-302	405
-399	348
-110	474
-17	479
-94	469
-196	113
-759	474
-497	33
-885	258
-566	428
-409	112
-836	362
-115	331
+175	966
+636	810
+120	138
+775	904
+154	186
+497	447
+151	965
+134	978
+347	714
+387	382
+750	127
+431	121
+535	399
+258	654
+475	878
+829	266
+615	197
+81	998
+183	561
+561	751
+126	635
+174	67
+788	761
+311	611
+475	159
+96	429
+566	201
+480	237
+423	897
+410	591
+239	48
+375	507
+779	20
+604	270
+233	521
+779	453
+618	947
+313	533
+488	12
+533	658
+365	310
+242	46
+2	46
+497	865
+415	830
+210	698
+667	764
+363	622
+367	804
+672	174
+671	119
+333	270
+194	39
+146	55
+183	97
+63	409
+796	238
+208	606
+592	678
+518	880
+676	60
+769	255
+720	411
+10	742
+555	268
+508	327
+685	272
+818	696
+745	229
+664	183
+518	775
+262	139
+589	38
+745	773
+12	993
+128	142
+18	424
+7	429
+334	89
+807	964
+652	7
+167	923
+587	905
+564	958
+678	906
+383	899
+223	450
+210	617
+537	45
+374	474
+393	969
+627	555
+681	53
+129	746
+604	908
+148	473
+347	651
+321	971
+749	135
+567	881
+377	268
+746	808
+90	91
+632	790
+594	409
+240	573
+422	942
+641	640
+642	78
+327	489
+567	4
+812	150
+743	193
+815	775
+167	821
+74	265
+38	376
+365	176
+830	23
+168	863
+584	629
+763	624
+389	682
+774	826
+785	361
+71	552
+12	15
+825	907
+8	502
+264	73
+40	820
+246	39
+100	921
+286	338
+7	332
+755	632
+799	522
+348	627
+575	405
+103	949
+277	277
+583	394
+93	182
+497	933
+105	617
+484	410
+438	615
+30	160
+529	332
+25	63
+255	587
+256	38
+273	971
+762	364
+201	842
+576	641
+655	445
+644	128
+607	507
+216	151
+215	478
+439	672
+674	704
+800	358
+557	488
+564	363
+33	206
+317	596
+259	96
+542	907
+786	423
+465	876
+443	99
+366	861
+678	258
+91	931
+728	206
+681	181
+492	974
+652	371
+38	914
+126	739
+602	129
+608	854
+449	257
+735	948
+700	599
+559	209
+801	262
+597	594
+129	558
+237	894
+366	828
+52	776
+101	754
+601	482
+327	759
+653	225
+243	966
+649	807
+88	82
+117	310
+590	250
+802	217
+619	645
+791	531
+375	513
+121	18
+18	467
+80	303
+632	935
+520	328
+780	791
+124	934
+799	616
+656	974
+370	218
+75	302
+490	93
+102	129
+833	943
+83	81
+603	428
+27	647
+357	630
+134	187
+155	632
+441	346
+347	721
+733	537
+358	214
+730	813
+630	715
+337	353
+596	249
+110	630
+778	505
+194	353
+68	900
+632	841
+587	428
+412	310
+360	360
+263	851
+286	161
+527	132
+28	178
+682	724
+607	179
+759	744
+137	799
+125	825
+557	180
+463	189
+544	526
+423	610
+294	816
+125	223
+393	808
+258	19
+62	674
+237	551
+421	575
+653	134
+778	32
+196	272
+637	338
+6	492
+683	977
+551	546
+371	722
+130	564
+25	484
+772	925
+650	67
+433	286
+439	642
+276	49
+807	882
+682	966
+358	888
+373	759
+479	890
+238	654
+228	918
+296	724
+286	92
+454	580
+353	288
+606	845
+740	475
+649	856
+575	843
+534	370
+238	385
+338	370
+148	474
+144	70
+797	456
+322	245
+254	654
+835	10
+41	635
+641	235
+103	162
+543	492
+104	223
+188	104
+591	741
+687	154
+602	274
+821	44
+36	976
+393	610
+34	199
+282	730
+392	942
+81	181
+692	396
+319	305
+774	369
+540	541
+806	22
+741	259
+95	989
+758	829
+601	349
+118	800
+793	99
+587	932
+745	940
+267	527
+339	296
+293	112
+371	475
+19	774
+173	9
+106	819
+248	861
+84	177
+342	503
+393	706
+170	214
+398	903
+166	418
+338	184
+733	836
+59	658
+237	191
+746	279
+755	151
+479	671
+53	218
+717	902
+205	945
+298	642
+129	218
+785	802
+773	325
+274	1
+438	144
+297	990
+434	558
+337	751
+500	266
+652	285
+76	796
+58	773
+36	39
+751	742
+554	891
+687	694
+63	36
+477	757
+401	168
+295	361
+619	340
+521	287
+558	737
+39	943
+317	954
+486	615
+456	854
+82	762
+545	132
+1	325
+823	641
+786	367
+261	511
+123	817
+231	529
+430	487
+258	291
+312	856
+692	74
+691	503
+567	610
+147	612
+274	192
+260	335
+16	140
+226	717
+271	73
+466	249
+645	372
+46	126
+777	777
+628	770
+229	357
+595	353
+519	685
+482	114
+290	857
+492	888
+652	816
+282	934
+815	69
+261	155
+173	476
+737	774
+416	894
+334	745
+430	991
+321	393
+404	615
+289	681
+130	924
+539	213
+533	466
+800	339
+367	464
+404	83
+174	788
+243	988
+725	101
+717	453
+46	215
+409	104
+546	328
+549	925
+721	282
+181	140
+797	716
+337	233
+439	716
+623	96
+339	882
+264	27
+246	205
+825	835
+533	579
+573	681
+130	969
+362	509
+389	265
+445	361
+391	604
+505	84
+163	238
+150	473
+312	143
+143	952
+741	820
+406	157
+401	232
+751	406
+69	351
+387	737
+161	386
+674	170
+50	349
+304	758
+774	609
+183	849
+257	73
+137	205
+767	300
+763	364
+63	655
+254	97
+132	165
+525	289
+574	166
+127	476
+20	157
+710	138
+306	949
+827	880
+64	93
+459	473
+763	605
+100	989
+217	23
+239	118
+590	225
+115	405
+44	854
+436	512
+390	483
+121	734
+171	838
+759	534
+710	767
+610	637
+785	542
+607	12
+350	827
+443	263
+35	20
+46	597
+408	445
+749	646
+60	10
+321	759
+171	833
+376	788
+350	939
+613	862
+261	542
+601	75
+471	578
+748	954
+354	89
+497	552
+58	922
+220	109
+508	438
+55	543
+244	396
+125	46
+658	775
+466	890
+592	371
+9	265
+755	152
+679	774
+752	689
+652	548
+232	134
+256	143
+711	798
+797	704
+758	475
+319	833
+803	367
+94	798
+552	446
+443	393
+190	483
+742	902
+289	375
+336	735
+445	976
+598	696
+205	953
+771	534
+818	402
+78	222
+595	212
+339	828
+431	121
+484	677
+525	158
+555	204
+54	53
+669	790
+174	607
+223	154
+350	331
+129	655
+220	707
+446	839
+820	62
+669	718
+788	355
+20	347
+445	332
+353	250
+483	49
+544	965
+215	571
+243	547
+738	245
+61	23
+245	926
+360	134
+273	241
+136	666
+457	157
+189	784
+241	624
+521	441
+761	265
+318	958
+581	36
+385	748
+297	447
+742	122
+138	554
+511	440
+308	263
+72	116
+314	897
+494	480
+793	447
+483	1
+22	864
+177	955
+617	429
+439	164
+41	119
+168	595
+772	569
+550	47
+301	980
+88	724
+428	383
+552	38
+579	273
+247	571
+388	569
+519	14
+27	798
+652	354
+103	988
+348	437
+333	969
+51	689
+10	364
+233	68
+10	350
+745	172
+220	387
+426	214
+9	947
+364	938
+747	61
+563	45
+19	286
+765	688
+771	842
+43	532
+301	606
+719	172
+354	188
+224	141
+425	448
+543	993
+557	154
+476	445
+321	838
+545	651
+98	677
+462	496
+155	466
+205	148
+562	548
+570	586
+613	391
+549	690
+835	663
+52	864
+185	212
+534	902
+213	918
+77	380
+592	529
+657	445
+496	574
+456	211
+478	10
+455	712
+545	781
+463	937
+379	107
+119	199
+736	559
+820	758
+591	357
+502	726
+693	553
+760	563
+477	57
+144	328
+278	244
+827	242
+62	563
+434	880
+156	15
+539	62
+617	193
+516	209
+580	555
+117	92
+629	440
+781	613
+24	446
+179	596
+67	433
+493	658
+393	485
+462	21
+520	362
+405	346
+250	330
+684	832
+433	492
+436	517
+529	740
+79	128
+370	96
+765	104
+567	902
+782	443
+97	711
+664	105
+761	736
+205	61
+76	239
+620	987
+270	626
+181	693
+238	397
+771	312
+765	511
+204	365
+375	325
+680	358
+803	569
+298	741
+749	479
+140	384
+552	74
+653	61
+823	409
+237	315
+822	989
+803	362
+184	270
+495	995
+763	166
+684	981
+158	878
+353	695
+607	352
+634	824
+726	224
+237	859
+814	285
+101	758
+413	883
+357	746
+804	423
+706	405
+176	280
+483	728
+773	379
+731	73
+244	538
+137	994
+163	653
+546	512
+351	784
+322	475
+334	144
+618	229
+258	931
+806	724
+30	336
+661	922
+576	423
+395	516
+824	970
+692	430
+590	863
+659	286
+612	630
+456	847
+335	444
+357	173
+387	869
+334	342
+337	866
+295	989
+274	818
+714	68
+319	825
+240	251
+443	453
+426	936
+109	348
+659	137
+591	368
+414	818
+162	637
+123	338
+534	57
+80	830
+732	931
+601	906
+756	102
+273	474
+165	490
+668	833
+343	874
+301	319
+246	453
+272	577
+237	94
+288	233
+54	203
+38	458
+123	731
+196	915
+308	207
+38	59
+149	308
+780	373
+183	876
+133	679
+453	428
+570	444
+628	938
+551	949
+122	51
+711	936
+217	485
+716	329
+344	6
+153	520
+825	907
+641	50
+238	209
+69	700
+152	711
+82	26
+304	902
+666	510
+738	453
+592	877
+745	795
+641	621
+330	7
+414	696
+808	38
+728	246
+625	295
+297	147
+558	636
+668	365
+628	726
+133	562
+320	530
+169	372
+255	272
+316	975
+420	900
+682	457
+658	863
+493	192
+170	87
+300	462
+210	640
+220	237
+629	309
+712	111
+486	223
+671	190
+16	223
+56	799
+537	263
+207	382
+446	916
+445	202
+758	506
+219	923
+259	949
+51	993
+499	446
+278	551
+612	832
+98	997
+120	80
+488	312
+276	731
+630	554
+697	349
+620	326
+226	618
+615	485
+19	910
+229	585
+569	90
+705	661
+27	784
+665	747
+800	843
+416	293
+40	272
+191	432
+733	562
+799	121
+800	377
+707	75
+711	344
+274	415
+499	554
+683	911
+779	158
+278	89
+559	662
+402	141
+703	908
+220	831
+218	854
+533	907
+674	183
+336	925
+503	172
+557	670
+93	517
+353	470
+819	577
+230	664
+807	721
+563	720
+328	176
+630	556
+122	970
+10	747
+293	199
+470	345
+378	566
+708	75
+500	411
+50	645
+720	269
+463	260
+308	406
+185	583
+72	586
+682	121
+164	292
+429	783
+628	990
+254	166
+19	594
+303	944
+29	957
+788	706
+494	404
+263	690
+137	765
+789	695
+52	978
+542	271
+461	349
+122	853
+141	948
+757	382
+235	691
+553	159
+272	546
+85	972
+723	453
+394	354
+313	727
+158	71
+386	296
+215	536
+194	298
+350	352
+712	624
+182	290
+234	696
+355	944
+281	737
+776	516
+439	355
+347	724
+518	352
+291	133
+286	311
+194	692
+253	544
+282	275
+64	352
+663	68
+68	664
+248	671
+835	564
+780	202
+821	684
+94	530
+323	316
+686	752
+68	88
+624	934
+232	106
+262	227
+283	553
+733	385
+673	9
+462	696
+301	513
+821	974
+775	128
+154	182
+138	340
+694	607
+258	410
+707	720
+469	115
+306	720
+215	164
+568	899
+458	75
+726	306
+407	497
+212	238
+411	283
+158	586
+421	152
+459	339
+667	691
+728	970
+120	725
+146	165
+403	278
+487	214
+689	980
+84	28
+798	183
+91	537
+766	248
+613	861
+216	891
+90	502
+682	337
+92	582
+376	784
+831	519
+293	196
+159	429
+108	254
+362	920
+43	368
+604	804
+191	996
+740	308
+554	908
+762	51
+592	890
+418	569
+699	567
+523	676
+461	959
+826	652
+140	674
+176	149
+619	803
+121	990
+432	921
+665	635
+517	777
+810	947
+431	52
+402	118
+568	973
+515	665
+356	963
+209	478
+805	461
+804	170
+416	868
+141	314
+523	213
+154	188
+95	698
+742	674
+728	846
+795	168
+173	263
+307	587
+89	207
+227	711
+470	67
+804	291
+11	26
+695	131
+459	580
+202	900
+521	961
+263	475
+783	375
+597	478
+28	227
+247	37
+355	666
+198	331
+361	992
+245	384
+308	172
+105	589
+136	563
+462	17
+133	128
+503	917
+612	511
+350	751
+259	697
+631	449
+504	527
+387	677
+796	319
+73	882
+206	717
+502	246
+289	508
+537	131
+200	765
+462	28
+692	419
+177	284
+244	329
+467	697
+519	493
+803	241
+762	669
+8	664
+319	476
+227	69
+320	614
+749	776
+279	337
+691	306
+188	475
+149	82
+284	203
+161	326
+777	913
+434	281
+473	207
+614	542
+392	182
+812	440
+214	203
+95	164
+398	334
+457	171
+346	953
+485	510
+665	841
+408	777
+371	633
+809	916
+816	331
+387	69
+315	662
+817	402
+313	181
+446	100
+293	658
+310	224
+697	763
+172	605
+713	14
+469	349
+558	959
+694	477
+287	600
+157	481
+303	432
+737	226
+545	788
+713	463
+193	126
+34	536
+833	690
+502	739
+206	491
+310	308
+498	846
+550	160
+72	437
+203	367
+155	548
+82	894
+372	73
+253	653
+166	626
+453	691
+752	800
+251	387
+241	741
+672	609
+537	253
+670	290
+467	744
+449	707
+401	813
+531	936
+385	262
+251	194
+734	934
+399	497
+597	847
+25	813
+470	939
+506	318
+577	346
+247	871
+559	389
+802	206
+528	997
+593	928
+268	602
+815	678
+279	326
+806	168
+702	859
+525	267
+693	608
+431	133
+474	230
+91	768
+733	457
+799	854
+97	625
+162	901
+154	131
+255	343
+615	966
+100	919
+271	528
+121	149
+535	649
+608	48
+42	894
+194	610
+390	709
+354	101
+351	697
+452	744
+200	116
+359	695
+519	251
+88	469
+144	400
+40	41
+174	745
+754	188
+33	328
+144	63
+690	495
+697	649
+485	493
+479	109
+789	769
+584	901
+598	467
+192	503
+216	255
+235	187
+209	345
+717	18
+537	523
+292	966
+277	565
+91	197
+273	190
+483	339
+320	938
+25	705
+792	782
+96	234
+510	736
+570	641
+378	226
+165	226
+781	520
+349	442
+503	591
+642	405
+279	749
+641	586
+278	936
+266	53
+437	226
+156	974
+435	89
+591	219
+492	624
+483	536
+502	985
+312	587
+627	759
+662	655
+639	52
+10	745
+177	226
+758	313
+606	365
+569	251
+804	343
+365	687
+89	573
+142	378
+613	165
+699	762
+404	351
+267	988
+627	565
+780	741
+256	63
+573	237
+39	4
+562	605
+304	279
+129	473
+295	466
+42	657
+412	99
+741	15
+232	863
+108	440
+67	251
+730	870
+287	694
+706	701
+561	8
+48	223
+562	53
+449	673
+51	304
+586	691
+181	650
+188	538
+25	290
+45	983
+112	49
+131	348
+686	931
+574	917
+172	524
+120	225
+381	634
+433	203
+689	414
+284	743
+297	39
+252	954
+8	174
+197	227
+209	287
+40	529
+705	685
+75	211
+651	975
+761	943
+275	624
+619	286
+216	791
+643	157
+156	856
+256	152
+819	379
+676	248
+74	622
+474	469
+669	676
+494	415
+646	534
+370	682
+296	799
+178	738
+206	640
+82	604
+750	723
+591	766
+751	851
+551	851
+684	908
+628	490
+522	904
+429	661
+4	492
+167	387
+694	327
+414	64
+126	832
+797	770
+716	855
+160	621
+330	35
+409	749
+591	566
+629	999
+515	921
+458	94
+429	705
+40	159
+250	81
+54	22
+580	44
+733	25
+345	635
+81	388
+191	855
+194	930
+389	381
+717	499
+495	489
+788	270
+648	398
+246	943
+510	825
+204	917
+420	345
+171	928
+799	408
+193	802
+533	356
+312	816
+825	842
+664	305
+576	715
+785	14
+303	742
+348	982
+92	416
+398	478
+274	485
+780	200
+156	599
+70	49
+594	330
+783	825
+394	434
+263	693
+518	262
+56	96
+524	811
+420	509
+8	469
+526	794
+549	997
+830	357
+728	583
+763	70
+771	642
+565	576
+702	168
+792	131
+708	671
+387	790
+27	608
+5	493
+805	978
+370	340
+229	39
+39	236
+99	578
+81	994
+133	441
+662	935
+83	779
+827	704
+499	302
+135	616
+502	370
+406	915
+237	876
+5	651
+597	334
+158	599
+62	320
+122	109
+58	835
+7	139
+818	291
+696	856
+391	629
+606	901
+434	298
+453	784
+98	639
+635	614
+469	820
+402	608
+798	772
+51	366
+659	230
+592	894
+393	670
+632	659
+42	478
+383	295
+827	491
+580	256
+533	368
+285	464
+423	733
+588	524
+437	333
+721	829
+686	153
+829	515
+267	109
+427	782
+687	230
+448	240
+823	107
+638	849
+821	512
+263	299
+1	135
+130	628
+87	568
+791	557
+376	988
+759	696
+760	824
+413	680
+829	976
+573	21
+774	433
+667	420
+34	91
+155	781
+280	33
+640	982
+27	657
+760	959
+174	16
+474	882
+101	837
+336	767
+568	674
+223	339
+311	588
+817	911
+531	63
+388	467
+412	27
+813	680
+772	809
+713	691
+520	961
+173	658
+401	518
+389	826
+351	71
+708	584
+744	945
+221	984
+814	360
+666	849
+255	432
+43	563
+508	256
+835	28
+765	429
+5	709
+731	385
+429	862
+23	8
+710	681
+68	750
+410	187
+308	376
+796	212
+237	421
+342	46
+177	267
+456	90
+390	968
+452	681
+468	936
+330	876
+487	339
+103	138
+450	339
+226	307
+706	534
+89	835
+647	752
+827	921
+344	765
+156	49
+77	509
+578	430
+633	223
+363	538
+628	402
+622	702
+246	588
+172	866
+114	164
+547	211
+832	43
+458	751
+423	164
+183	151
+588	780
+471	923
+668	303
+429	426
+475	597
+823	240
+298	465
+684	126
+154	114
+647	768
+19	92
+203	76
+662	459
+574	598
+562	543
+156	59
+326	959
+760	616
+81	779
+221	595
+180	594
+453	609
+378	105
+577	4
+667	610
+444	461
+268	539
+426	2
+468	433
+761	567
+801	532
+192	253
+799	252
+595	144
+630	866
+650	219
+97	608
+362	565
+612	962
+624	189
+697	701
+296	171
+471	201
+807	490
+118	73
+812	581
+328	689
+64	13
+575	877
+478	629
+442	411
+578	800
+408	67
+335	829
+162	863
+61	747
+71	372
+201	703
+242	246
+66	938
+704	649
+589	293
+768	276
+134	266
+196	986
+93	453
+201	394
+198	289
+695	281
+383	765
+344	101
+34	552
+499	860
+543	498
+685	14
+529	659
+731	60
+85	852
+302	115
+333	652
+383	508
+137	862
+670	616
+495	853
+402	455
+336	362
+600	45
+459	643
+221	527
+282	81
+335	278
+746	735
+818	363
+258	886
+497	50
+548	434
+331	911
+215	335
+782	345
+269	71
+357	101
+269	649
+734	848
+255	424
+17	931
+725	912
 72	45
-203	147
-742	443
-116	76
-99	296
-10	72
-804	29
-700	40
-593	87
-554	425
-558	7
-857	386
-582	274
-527	203
-311	167
-96	441
-508	71
-505	348
-856	143
-877	261
-455	238
-710	419
-638	252
-147	294
-838	466
-281	230
-819	176
-151	434
-181	133
-424	94
-198	152
-415	373
-740	401
-77	347
-826	465
-478	116
-769	263
-299	266
-247	426
-841	9
-703	326
-281	250
-46	420
-754	45
-882	308
-194	11
-176	464
-478	63
-364	321
-492	458
-544	422
-283	465
-465	175
-68	443
-673	341
-244	305
-285	322
-789	116
-440	360
-384	204
-492	20
-531	38
-719	130
-684	425
-99	30
-311	59
-597	418
-516	229
-868	136
-683	331
-235	111
-75	498
-53	361
-118	265
-226	63
-475	256
-151	205
-211	333
-358	170
-582	76
-171	440
-723	60
-462	480
-839	474
-373	440
-362	284
-218	171
-540	333
-864	157
-114	382
-599	153
-810	22
-194	387
-237	138
-416	308
-772	348
-559	385
-711	461
-187	17
-80	310
-702	17
-466	490
-241	276
-342	457
-795	206
-702	434
-63	448
-327	50
-166	397
-260	297
-849	217
-748	230
-518	87
-277	159
-11	407
-677	112
-459	20
-159	95
-589	285
-293	101
-398	349
-722	107
-634	260
-473	217
-825	355
-633	296
-57	79
-339	114
-65	284
-289	151
-551	457
-217	429
-285	193
-829	158
-688	310
-498	386
-554	289
-50	129
-322	222
-373	175
-661	242
-734	178
-760	494
-615	464
-772	79
-377	193
-475	302
-56	396
-306	207
-162	491
-257	275
-566	378
-330	448
-73	56
-746	409
-660	420
-844	234
-430	330
-475	297
-629	220
-819	152
-671	400
+253	619
+663	454
+797	91
+60	681
+627	281
+645	201
+239	154
+356	943
+346	328
+235	704
+177	795
+401	537
+403	42
+461	29
+88	126
+445	182
+734	980
+657	17
+175	218
+236	955
+796	681
+227	344
+250	788
+112	366
+785	387
+444	76
+325	42
+106	755
+721	428
+441	745
+711	498
+199	967
+644	967
+122	802
+48	987
+410	250
+241	697
+698	227
+361	8
+733	314
+155	257
+218	296
+206	696
+186	225
+709	47
+170	697
+180	182
+672	310
+765	656
+291	398
+80	483
+730	742
+134	35
+615	995
+429	162
+268	730
+716	594
+393	451
+44	699
+804	763
+141	592
+638	794
+712	74
+315	465
+209	642
+787	80
+735	833
+810	810
+272	642
+44	606
+101	253
+752	941
+833	167
+818	729
+609	486
+534	739
+551	966
+419	180
+475	354
+723	235
+723	311
+295	69
+112	961
+765	121
+615	27
+788	869
+503	703
+470	844
+486	489
+479	395
+648	837
+162	165
+618	487
+234	808
+615	210
+539	294
+270	588
+507	383
+797	697
+582	119
+825	85
+562	814
+340	563
+679	251
+632	105
+722	305
+663	553
+473	426
+474	109
+256	535
+144	570
+684	531
+161	69
+713	175
+407	133
+236	980
+37	458
+275	205
+808	920
+128	617
+565	260
+503	787
+88	575
+412	757
+404	806
+823	371
+370	646
+550	106
+456	873
+569	55
+597	126
+519	725
+731	139
+179	481
+306	879
+191	984
+125	859
+255	770
+587	475
+462	436
+771	534
+779	412
+555	135
+235	467
+421	603
+429	959
+220	456
+610	885
+568	611
+564	829
+709	451
+800	176
+16	790
+720	720
+621	134
+246	800
+24	24
+357	307
+437	787
+115	398
+369	592
+188	460
+102	956
+697	149
+512	336
+483	36
+452	911
+82	946
+253	596
+588	329
+366	815
+175	384
+664	539
+645	572
+517	664
+638	724
+211	629
+265	150
+750	986
+436	153
+138	509
+363	683
+46	56
+495	369
+273	754
+495	871
+434	147
+704	17
+375	11
+637	445
+742	25
+584	330
+330	68
+374	475
+590	869
+28	814
+494	125
+494	164
+609	647
+140	563
+716	575
+535	15
+693	265
+602	433
+739	971
+143	103
+724	476
+697	643
+544	870
+374	47
+676	69
+627	53
+199	866
+317	541
+499	637
+639	660
+307	811
+347	583
+607	75
+581	232
+778	675
+226	211
+136	152
+674	987
+222	673
+488	287
+579	592
+158	120
+728	17
+797	97
+187	329
+702	952
+84	431
+704	698
+617	40
+466	717
+172	850
+825	212
+184	44
+399	176
+607	494
+618	115
+599	635
+611	281
+325	628
+535	585
+749	465
+501	733
+668	161
+791	671
+223	310
+560	255
+14	896
+633	613
+500	447
+677	443
+4	752
+126	504
+714	979
+746	991
+20	999
+340	144
+482	407
+131	881
+630	530
+688	210
+568	744
+528	636
+458	343
+123	397
+125	984
+468	406
+725	233
+748	552
+403	315
+299	864
+162	217
+132	774
+21	8
+649	581
+261	92
+136	555
+756	916
+266	614
+78	391
+376	321
+788	815
+697	141
+591	782
+335	203
+628	402
+734	373
+378	214
+367	329
+654	511
+462	654
+185	436
+403	241
+288	607
+300	783
+198	981
+220	92
+347	481
+696	741
+343	903
+231	790
+756	886
+312	136
+684	989
+286	504
+596	266
+204	604
+308	868
+90	152
+713	798
+109	821
+615	193
+767	927
+60	404
+650	829
+555	831
+113	399
+659	393
+647	21
+215	255
+662	396
+208	943
+602	618
+317	482
+739	94
+730	815
+407	318
+585	980
+708	310
+54	48
+795	196
+264	965
+63	841
+322	28
+798	454
+239	418
+820	778
+421	428
+230	109
+725	485
+587	260
+602	459
+208	615
+397	961
+501	240
+460	493
+284	788
+596	895
+191	354
+393	556
+259	56
+9	446
+65	342
+91	517
+56	457
+469	512
+258	557
+565	11
+573	133
+303	941
+507	825
+617	532
+695	807
+223	908
+418	391
+143	214
+448	338
+88	521
+639	503
+31	71
+741	840
+369	772
+34	262
+508	799
+358	873
+720	619
+309	605
+138	84
+335	254
+504	107
+15	52
+797	215
+323	367
+161	813
+635	12
+264	711
+419	305
+60	110
+389	353
+414	965
+507	203
+703	745
+585	903
+693	311
+95	878
+491	717
+539	285
+195	640
+347	432
+404	204
+418	653
+120	213
+677	437
+326	743
+497	990
+44	660
+394	577
+830	56
+425	421
+788	789
+62	741
+833	440
+396	989
+549	460
+251	789
+744	792
+627	33
+525	247
+536	670
+317	897
+48	571
+548	600
+480	795
+561	830
+805	90
+253	74
+246	736
+254	72
+15	874
+76	839
+752	182
+630	782
+601	316
+204	68
+432	713
+756	141
+816	760
+188	438
+699	285
+182	847
+777	322
+761	365
+105	436
+747	906
+562	533
+682	82
+601	449
+300	402
+675	701
+155	729
+826	401
+306	745
+309	151
+57	805
+552	735
+403	693
+159	630
+797	508
+103	151
+310	941
+834	536
+737	961
+509	93
+23	336
+557	134
+269	320
+308	717
+163	601
+531	906
+554	357
+383	732
+320	426
+818	401
+1	5
+594	476
+175	614
+459	44
+515	652
+608	985
+250	139
+240	859
+689	546
+450	983
+765	56
+129	651
+688	356
+370	441
+188	400
+368	945
+566	149
+406	794
+778	909
+534	868
+202	846
+362	196
+489	542
+89	776
+632	169
+304	940
+13	502
+585	539
+266	148
+246	930
+545	477
+62	221
+375	287
+606	403
+106	47
+431	50
+296	189
+825	266
+282	494
+398	200
+621	303
+296	162
+406	141
+201	829
+807	756
+71	213
+431	729
+1	18
+626	190
+629	566
+65	827
+558	851
+734	345
+753	154
+321	819
+177	962
+95	900
+404	971
+631	750
+726	834
+601	14
+462	623
+794	990
+735	941
+359	618
+575	664
+282	713
+362	334
+96	872
+758	917
+704	332
+645	588
+147	810
+468	207
+711	295
+568	101
+150	208
+156	631
+167	192
+54	68
+692	61
+442	929
+81	902
+419	408
+718	305
+95	278
+121	434
+503	248
+692	787
+135	360
+465	101
+407	570
+95	518
+127	789
+251	438
+84	74
+20	689
+358	359
+562	476
+251	517
+617	324
+619	825
+427	726
+389	278
+97	337
+345	866
+526	503
+428	733
+18	336
+657	603
+590	280
+407	676
+472	605
+80	486
+558	166
+513	844
+375	122
+753	712
+274	939
+313	181
+573	637
+315	182
+151	150
+493	388
+731	723
+728	851
+774	149
+611	494
+357	836
+176	128
+510	675
+791	635
+115	257
+608	390
+598	801
+514	162
+137	663
+55	549
+270	751
+186	964
+512	173
+162	917
+438	810
+659	453
+802	676
+697	399
+111	325
+424	917
+365	354
+713	229
+675	724
+467	633
+581	305
+386	947
+754	132
+612	189
+512	177
+658	484
+466	835
+216	331
+35	296
+737	771
+394	595
+751	990
+799	705
+376	125
+21	829
+239	845
+670	730
+206	168
+102	993
+301	350
+482	445
+465	773
+488	525
+451	82
+698	266
+645	142
+266	542
+493	953
+384	835
+377	185
+667	523
+789	935
+817	90
+137	475
+125	542
+226	276
+819	371
+335	203
+472	443
+261	778
+24	679
+471	546
+605	150
+38	829
+538	193
+827	512
+655	884
+666	660
+357	965
+669	318
+511	944
+233	684
+379	20
+815	679
+635	430
+320	451
+824	634
+77	469
+85	788
+425	621
+706	100
+340	694
+73	684
+479	434
+440	404
+46	494
+164	64
+469	461
+638	245
+502	150
+64	262
+416	911
+432	513
+526	675
+26	169
+585	834
+274	929
+136	157
+421	12
+213	719
+66	425
+210	585
+280	146
+659	372
+731	350
+449	539
+75	881
+828	543
+435	56
+691	732
+296	98
+431	855
+308	561
+251	205
+593	380
+757	763
+41	740
+608	96
+168	186
+9	979
+503	343
+468	218
+302	127
+603	628
+472	909
+443	460
+63	702
+288	152
+487	86
+798	172
+408	961
+192	16
+452	780
+172	442
+674	395
+502	38
+129	520
+505	327
+394	306
+201	122
+554	465
+283	436
+718	664
+313	94
+784	437
+99	841
+102	99
+486	370
+826	304
+399	527
+714	832
+562	677
+790	946
+733	448
+99	344
+499	283
+240	387
+776	461
+27	93
+60	645
+686	297
+228	453
+527	804
+688	763
+375	644
+27	656
+495	324
+316	533
+304	618
+143	383
+678	247
+223	470
+785	63
+18	963
+624	277
+99	100
+487	194
+199	818
+380	463
+28	651
+545	565
+131	723
+106	863
+215	306
+164	581
+665	353
+456	119
+831	101
+833	145
+626	873
+215	948
+340	125
+439	633
+51	629
+388	30
+493	69
+650	64
+342	421
+375	653
+522	887
+198	57
+748	421
+564	836
+269	47
+358	575
+280	810
+747	805
+385	246
+401	37
+691	306
+285	760
+630	984
+36	65
+407	665
+265	985
+391	73
+511	252
+537	930
+546	131
+81	799
+642	617
+755	967
+201	255
+97	549
+384	415
+238	149
+449	365
+617	947
+305	841
+28	433
+233	590
+431	184
+558	743
+352	943
+174	976
+240	798
+641	158
+696	569
+294	312
+654	959
+3	333
+637	402
+166	439
+822	192
+647	89
+624	114
+431	633
+403	487
+489	235
+601	707
+14	531
+57	831
+333	811
+408	156
+658	364
+362	908
+198	323
+199	855
+76	19
+26	416
+231	915
+626	784
+284	65
+21	122
+699	324
+493	567
+501	819
+550	475
+552	576
+220	583
+219	741
+101	950
+528	658
+76	600
+509	111
+94	263
+15	476
+347	693
+337	665
+346	675
+44	60
+617	392
+185	782
+793	39
+425	318
+342	540
+745	196
+389	88
+177	703
+386	438
+597	650
+821	274
+366	384
+768	778
+405	984
+596	191
+218	790
+468	306
+477	127
+559	788
+219	206
+146	595
+722	370
+619	328
+79	176
+702	810
+449	846
+571	653
+692	409
+124	583
+37	424
+772	875
+216	695
+622	531
+387	721
+371	45
+84	343
+263	357
+179	77
+767	40
+226	270
+101	246
+161	128
+518	143
+222	998
+84	208
+600	594
+311	297
+713	516
+234	900
+762	606
+143	133
+394	400
+28	138
+520	860
+805	545
+535	751
+323	625
+580	832
+286	786
+272	388
+114	503
+402	394
+526	649
+447	143
+470	199
+142	258
+115	281
+5	93
+268	310
+158	968
+782	578
+13	480
+364	348
+389	886
+29	443
+546	120
+130	136
+171	916
+45	627
+584	774
+279	663
+315	598
+274	381
+814	122
+359	607
+289	574
+416	839
+327	314
+746	672
+615	851
+785	544
+364	793
+563	229
+506	904
+232	639
+387	795
+57	306
+562	335
+229	623
+538	327
+381	807
+77	458
+773	310
+274	530
+747	864
+654	595
+366	707
+375	655
+227	50
+832	744
+52	8
+242	256
+350	544
+315	88
+302	702
+585	73
+514	590
+469	740
+359	702
+761	457
+538	78
+214	607
+513	882
+603	551
+670	608
+358	553
+656	16
+141	167
+178	762
+249	443
+223	747
+328	841
+526	99
+264	950
+695	94
+257	969
+607	202
+278	61
+339	198
+486	21
+375	426
+407	704
+801	765
+471	698
+88	861
+118	198
+833	385
+85	908
+732	966
+92	166
+339	458
+102	154
+558	678
+16	662
+833	493
+230	66
+33	551
+118	236
+533	227
+492	553
+332	795
+493	495
+139	761
+597	590
+529	61
+27	623
+499	84
+426	747
+204	942
+32	603
+285	589
+435	942
+369	720
+345	972
+38	465
+220	935
+445	654
+449	360
+152	254
+601	156
+661	618
+787	664
+147	69
+262	610
+510	476
+221	398
+70	610
+673	629
+89	386
+809	354
+230	744
+556	926
+730	245
+597	172
+197	62
+193	358
+727	193
+641	992
+434	894
+542	971
+221	719
+767	510
+157	37
+444	194
+818	613
+589	853
+28	404
+755	599
+363	889
+482	145
+607	157
+144	101
+385	917
+784	179
+75	958
+329	746
+609	19
+810	111
+487	559
+381	175
+558	834
+275	55
+429	220
+392	192
+439	541
+603	565
+630	628
+91	601
+209	169
+147	482
+685	759
+693	734
+489	470
+50	623
+573	503
+640	269
+302	204
+334	326
+411	178
+71	113
+591	329
+640	926
+710	506
+254	550
+282	604
+764	533
+166	918
+349	581
+805	679
+483	307
+118	595
+124	486
+373	649
+834	4
+708	560
+816	864
+424	495
+215	979
+690	704
+399	761
+792	614
+382	998
+444	808
+57	448
+542	127
+511	205
+312	384
+42	498
+607	404
+400	50
+75	137
+510	487
+429	82
+598	242
+387	240
+560	380
+805	998
+396	518
+588	512
+494	859
+515	445
+581	383
+440	449
+560	164
+252	960
+79	968
+138	984
+456	635
+259	783
+270	271
+343	589
+795	386
+317	873
+570	457
+2	835
+380	322
+86	839
+36	591
+382	934
+140	580
+646	851
+542	862
+491	44
+641	66
+363	340
+231	663
+786	565
+358	564
+652	481
+51	488
+87	663
+818	926
+635	691
+681	756
+483	176
+609	935
+706	392
+715	443
+235	350
+765	654
+111	11
+732	671
+513	45
+431	495
+146	531
+521	389
+827	875
+277	717
+265	84
+333	63
+114	474
+829	717
+581	590
+802	113
+174	840
+173	485
+755	995
+624	266
+113	559
+406	54
+691	143
+586	371
+216	46
+85	796
+698	492
+639	321
+9	331
+306	696
+435	741
+751	387
+36	785
+278	438
+777	223
+157	445
+652	238
+716	952
+685	503
+454	549
+415	682
+805	818
+475	432
+147	279
+790	356
+413	286
+17	882
+771	335
+22	309
+252	541
+99	298
+205	632
+702	46
+265	582
+648	606
+246	967
+563	733
+590	346
+340	694
+742	270
+77	564
+824	189
+230	40
+10	170
+365	387
+588	876
+192	5
+265	58
+381	937
+269	675
+156	480
+387	641
+102	804
+387	433
+484	214
+533	149
+601	626
+2	859
+225	111
+514	282
+826	816
+606	894
+312	733
+252	641
+804	260
+296	371
+68	331
+672	715
+346	539
+692	57
+614	700
+299	990
+311	371
+275	628
+15	695
+461	693
+814	717
+526	163
+1	700
+595	311
+696	909
+547	623
+387	122
+301	71
+212	277
+367	653
+116	751
+622	113
+196	575
+493	149
+609	910
+599	461
+752	672
+86	990
+643	57
+143	974
+389	217
+103	73
+681	419
+162	173
+434	277
+695	764
+682	73
+374	63
+791	334
+794	428
+472	191
+656	238
+451	688
+403	981
+733	840
+71	833
+540	24
+16	109
+123	134
+487	864
+765	397
+198	970
+791	959
+826	429
+127	519
+252	837
+264	662
+431	711
+300	158
+102	682
+690	417
+102	204
+588	362
+144	421
+32	72
+369	301
+552	937
+70	520
+215	739
+823	749
+261	887
+285	537
+827	256
+650	434
+822	296
+425	566
+477	725
+231	410
+791	195
+666	935
+466	336
+835	870
+725	949
+596	68
+327	84
+169	831
+727	423
+728	152
+226	893
+610	325
+221	869
+519	336
+597	672
+433	556
+143	608
+51	75
+160	704
+100	845
+191	884
+553	755
+417	652
+37	239
+448	38
+161	89
+482	826
+601	444
+780	455
+408	616
+567	146
+571	759
+793	197
+213	614
+715	681
+332	271
+645	908
+462	948
+332	152
+426	118
+592	245
+264	723
+753	235
+251	742
+146	323
+502	649
+173	462
+221	228
+498	813
+251	502
+328	784
+389	160
+197	75
+80	571
+175	462
+375	470
+170	221
+161	811
+108	763
+237	613
+218	666
+230	46
+805	282
+679	906
+503	633
+586	166
+575	209
+677	65
+824	899
+690	483
+442	921
+92	545
+341	508
+440	732
+577	200
+336	554
+808	78
+104	196
+510	793
+805	348
+82	236
+389	236
+240	462
+173	31
+72	572
+301	127
+148	318
+461	814
+140	700
+610	198
+313	553
+728	413
+106	526
+832	303
+221	228
+110	202
+426	184
+742	66
+343	515
+609	690
+641	905
+324	630
+460	262
+489	964
+660	468
+277	285
+781	45
+821	892
+34	42
+233	771
+703	28
+261	943
+212	597
+36	9
+435	556
+327	848
+79	51
+104	102
+383	479
+535	110
+11	677
+240	334
+626	936
+638	10
+448	214
+104	634
+405	300
+192	164
+218	462
+15	7
+231	314
+252	568
+72	715
+81	971
+389	156
+352	400
+80	529
+174	535
+782	513
+303	402
+669	39
+76	457
+384	416
+113	101
+612	717
+783	14
+562	139
+433	88
+800	147
+114	839
+448	56
+121	626
+106	426
+202	503
+757	136
+468	43
+742	394
+305	20
+541	550
+803	520
+232	835
+176	972
+561	914
+95	684
+356	659
+58	339
+791	768
+340	937
+778	944
+492	933
+778	945
+45	108
+787	894
+531	602
+120	228
+341	490
+582	563
+327	758
+81	673
+114	452
+111	926
+316	566
+258	676
+785	138
+226	205
+726	535
+759	983
+56	380
+796	460
+109	653
+497	544
+22	768
+490	826
+710	292
+232	28
+123	756
+800	557
+578	995
+494	624
+419	401
+140	243
+625	83
+771	791
+550	120
+835	601
+447	243
+355	802
+447	510
+328	30
+147	509
+68	240
+522	219
+779	301
+350	485
+723	1
+526	270
+244	971
+95	363
+71	636
+177	326
+577	330
+798	526
+122	430
+278	23
+743	82
+70	2
+633	944
+406	138
+77	286
+794	958
+101	122
+121	762
+72	310
+687	863
+473	740
+777	695
+34	676
+567	802
+524	894
+260	744
+672	653
+107	234
+246	19
+519	531
+805	327
+19	719
+581	136
+178	579
+773	279
+383	675
+488	852
+136	941
+82	511
+651	982
+389	662
+629	785
+716	527
+430	1000
+511	210
+252	628
+104	599
+441	422
+193	676
+833	570
+338	54
+391	807
+757	592
+362	984
+557	969
+261	433
+542	195
+543	789
+253	801
+568	609
+735	313
+564	53
+193	527
+246	834
+736	48
+156	681
+373	100
+101	217
+268	931
+536	296
+24	182
+657	197
+230	823
+298	420
+804	192
+271	724
+672	494
+187	980
+267	677
+173	233
+231	407
+785	494
+284	526
+174	488
+91	660
+574	56
+689	123
+773	677
+391	504
+215	373
+643	675
+324	507
+709	494
+179	381
+592	547
+162	370
+583	349
+666	602
+710	493
+677	819
+666	831
+297	675
+720	837
+270	980
+51	562
+545	646
+317	795
+339	68
+421	915
+315	200
+304	175
+535	267
+646	565
+90	292
+406	785
+302	546
+765	921
+516	290
+65	351
+96	634
+368	588
+570	153
+343	426
+600	755
+675	289
+62	903
+720	421
+693	444
+360	1000
+742	413
+170	289
+709	28
+436	871
+753	465
+559	91
+759	689
+467	763
+243	418
+371	68
+83	425
+363	137
+705	498
+571	800
+63	109
+58	254
+649	940
+421	472
+49	737
+495	139
+555	43
+817	770
+595	125
+167	425
+379	107
+5	102
+627	820
+91	849
+632	879
+513	456
+63	940
+107	980
+198	278
+465	407
+695	203
+128	921
+312	721
+830	496
+134	422
+141	847
+276	572
+148	893
+172	121
+718	657
+165	93
+631	671
+396	722
+552	4
+648	983
+146	748
+100	669
+217	365
+415	245
+20	947
+298	538
+61	658
+429	170
+494	97
+229	207
+9	620
+82	639
+45	426
+620	95
+421	857
+183	459
+359	192
+109	890
 311	373
-767	263
-261	441
-186	438
-755	115
-400	316
-666	371
-387	160
-197	242
-578	307
-775	449
-317	399
-472	99
-493	424
-42	246
-853	178
-759	416
-775	343
-332	258
-277	16
-625	39
-865	228
-683	126
-449	175
-378	314
-166	86
-542	401
-412	470
-206	97
-453	425
-823	166
-617	108
-105	89
-659	317
-191	404
-280	463
-853	6
-287	83
-63	119
-520	146
-219	15
-380	214
-250	264
-294	408
-224	49
-80	113
-747	457
-284	101
-400	17
-381	48
-459	301
-188	205
-523	464
-631	310
-201	21
-503	111
-174	481
-749	386
-611	452
-358	294
-387	266
-616	188
-654	74
-438	275
-161	37
-438	3
-619	54
-548	294
-707	85
-631	486
-165	471
-463	320
-206	280
-410	97
-862	65
-116	358
-591	66
-84	322
-634	180
-450	275
-592	71
-259	116
-580	499
-492	217
-465	224
-538	311
-447	58
-863	448
-129	98
-334	448
-460	184
-165	367
-456	491
-404	137
-168	404
-215	418
-487	350
-639	46
-438	78
-300	453
-815	301
-16	342
-852	428
-650	287
-39	356
-318	244
-500	76
+677	244
+696	732
+10	329
+439	247
+565	887
+540	45
+348	337
+608	711
+529	478
+319	308
+495	98
+129	207
+605	578
+116	43
+97	954
+54	435
+295	394
+785	22
+304	288
+470	365
+539	151
+181	343
+236	713
+62	115
+62	549
+133	575
+667	211
+360	512
+737	456
+85	594
+414	290
+705	44
+154	434
+820	584
+40	786
+505	784
+3	316
+734	686
+458	902
+456	977
+420	558
+74	566
+754	593
+541	994
+450	100
+738	283
+653	696
+482	375
+254	321
+21	21
+65	369
+443	971
+450	219
+628	103
+559	585
+8	645
+544	2
+546	756
+384	726
+748	157
+309	71
+656	471
+154	282
+149	552
+135	145
+368	605
+416	166
+31	842
+205	757
+585	889
+483	138
+506	642
+555	703
+826	309
+117	278
+163	53
+7	742
+641	248
+229	139
+605	891
+472	832
+576	188
+722	498
+308	183
+481	482
+266	782
+674	522
+492	241
+780	262
+171	440
+369	987
+540	263
+636	483
+316	1
+236	694
+538	192
+317	744
+572	246
+654	855
+733	568
+112	235
+438	424
+471	588
+600	767
+171	157
+271	63
+140	633
+198	350
+389	371
+37	101
+451	739
+781	283
+330	662
+67	918
+645	282
+787	31
+791	664
+712	416
+651	305
+637	976
+348	149
+216	871
+16	634
+744	157
+282	326
+291	158
+513	884
+7	763
+225	694
+781	329
+43	220
+554	237
+43	493
+24	135
+672	505
+707	222
+567	157
+366	319
+73	812
+283	589
+256	440
+810	850
+600	478
+379	742
+592	890
+339	430
+365	515
+664	578
+833	207
+412	650
+654	614
+788	820
+684	590
+359	368
+786	270
+335	29
+758	121
+254	837
+21	198
+327	234
+441	892
+368	102
+176	902
+268	1000
+708	990
+740	768
+723	302
+215	352
+512	817
+208	192
+151	325
+782	193
+582	215
+212	272
+182	891
+301	806
+521	721
+736	746
+691	950
+125	133
+77	744
+832	483
+462	757
+303	932
+631	424
+583	10
+608	619
+59	207
+2	150
+56	350
+364	133
+437	44
+501	579
+270	676
+565	78
+592	938
+723	607
+57	922
+471	924
+646	47
+46	895
+688	804
+25	738
+86	115
+534	546
+696	871
+666	600
+169	777
+157	585
+369	926
+717	860
+811	285
+78	486
+657	268
+795	992
+751	169
+421	568
+462	472
+16	391
+323	843
+762	735
+666	949
+105	718
+217	816
+140	263
+666	631
+59	869
+596	767
+641	90
+692	2
+38	527
+66	792
+731	817
+145	912
+264	380
+340	770
+833	539
+545	610
+143	342
+404	713
+476	647
+394	991
+340	790
+817	677
+819	150
+545	104
+507	619
+819	561
+185	696
+747	201
+726	841
+197	797
+630	768
+465	631
+148	220
+426	591
+811	724
+451	450
+323	314
+379	841
+114	875
+776	650
+222	70
+622	370
+124	620
+161	415
+413	171
+697	613
+687	679
+794	857
+288	133
+503	53
+707	81
+510	398
+593	500
+335	147
+158	165
+104	179
+617	480
+389	977
+276	188
+772	818
+67	230
+486	410
+567	125
+729	570
+195	117
+734	130
+20	830
+310	385
+731	928
+429	695
+209	49
+385	22
+280	299
+590	958
+187	56
+574	421
+791	5
+116	383
+294	671
+827	936
+411	61
+51	952
+597	578
+682	469
+393	486
+558	988
+692	753
+500	379
+96	863
+127	743
+567	840
+678	944
+137	785
+152	956
+220	10
+539	48
+156	896
+66	518
+159	12
+289	569
+833	12
+754	708
+457	414
+152	780
+208	646
+266	832
+216	878
+172	862
+754	217
+556	731
+625	79
+61	791
+454	356
+256	608
+583	175
+695	553
+408	775
+111	860
+44	139
+26	162
+299	338
+636	631
+448	714
+239	928
+388	886
+835	923
+505	680
+608	328
+618	237
+712	818
+238	704
+291	64
+577	230
+245	656
+99	448
+349	319
+432	666
+230	884
+809	380
+130	902
+90	718
+568	803
+254	849
+368	252
+412	433
+653	63
+735	86
+451	330
+382	147
+224	587
+118	572
+177	760
+613	745
+441	618
+51	367
+625	689
+698	920
+71	742
+436	455
+360	992
+486	408
+132	604
+550	694
+699	139
+399	39
+28	965
+208	296
+817	710
+27	293
+23	349
+244	651
+477	138
+59	975
+257	966
+401	466
+244	470
+227	669
+435	24
+430	508
+463	998
+62	915
+82	997
+714	340
+734	673
+821	201
+461	103
+765	170
+544	393
+747	587
+390	870
+761	890
+196	59
+757	904
+422	828
+606	393
+763	834
+130	267
+338	152
+264	575
+665	530
+297	549
+486	800
+357	750
+55	430
+175	8
+604	736
+244	736
+47	823
+317	428
+554	253
+292	368
+585	796
+389	719
+734	55
+29	113
+236	714
+278	559
+132	360
+256	477
+834	605
+637	487
+827	505
+414	197
+25	221
+719	994
+44	507
+76	342
+707	314
+446	980
+538	93
+476	272
+351	849
+108	801
+162	138
+464	724
+202	395
+722	30
+185	961
+665	565
+418	669
+208	262
+601	233
+521	953
+343	746
+829	482
+682	44
+175	571
+825	314
+439	106
+345	848
+770	250
+211	472
+646	261
+102	938
+25	450
+666	817
+27	38
+714	865
+419	578
+684	861
+743	603
+510	562
+185	560
+524	747
+757	390
+440	879
+567	330
+811	470
+178	276
+374	2
+568	430
+355	996
+717	713
+482	80
+579	187
+4	357
+143	221
+302	248
+138	869
+370	587
+69	374
+804	699
+233	311
+643	862
+472	874
+372	105
+338	14
+377	349
+131	994
+193	949
+329	742
+482	339
+475	723
+439	171
+610	563
+170	607
+470	366
+11	969
+508	824
+160	836
+393	580
+535	734
+371	519
+94	809
+203	220
+276	534
+686	30
+811	250
+631	500
+338	639
+41	215
+509	876
+85	107
+117	372
+517	109
+157	966
+737	153
+746	511
+474	510
+582	993
+304	280
+567	836
+473	536
+206	714
+436	382
+208	46
+277	67
+803	943
+500	757
+830	832
+323	343
+335	728
+336	501
+605	393
+656	193
+731	86
+53	671
+828	640
+658	811
+482	684
+461	929
+145	467
+566	775
+343	366
+795	34
+739	244
+500	416
+638	305
+633	676
+209	853
+695	134
+499	75
+240	19
+29	13
+577	885
+230	637
+494	548
+133	456
+495	826
+501	278
+101	476
+398	464
+320	701
+384	433
+361	878
+192	958
+821	673
+417	483
+14	289
+740	477
+6	157
+73	146
+642	707
+212	931
+390	232
+27	54
+7	411
+95	585
+59	816
+686	699
+802	189
+603	452
+784	728
+499	764
+717	16
+761	866
+707	823
+718	767
+209	665
+620	873
+697	825
+75	401
+134	812
+257	668
+97	194
+68	878
+737	14
+596	926
+731	965
+714	685
+248	701
+481	610
+16	867
+130	695
+38	314
+696	617
+222	9
+141	567
+10	960
+706	962
+79	858
+776	433
+138	778
+18	771
+750	624
+613	950
+530	225
+719	178
+648	490
+684	587
+795	113
+423	651
+513	84
+49	514
+777	570
+213	391
+491	652
+640	111
+393	972
+115	194
+212	200
+589	930
+118	368
+484	674
+107	504
+718	241
+711	632
+420	684
+396	996
+401	495
+732	152
+446	309
+684	589
+334	759
+279	174
+11	839
+532	102
+447	191
+34	299
+224	666
+796	799
+320	60
+167	384
+668	204
+616	900
+672	495
+111	950
+269	20
+626	938
+642	153
+550	26
+458	949
+73	326
+792	112
+733	329
+765	475
+310	998
+65	399
+302	352
+155	335
+755	173
+168	817
+64	83
+426	802
+435	931
+348	612
+256	188
+149	796
+429	831
+706	503
+825	181
+611	491
+400	36
+416	894
+370	904
+273	684
+202	90
+324	190
+789	866
+128	636
+413	820
+86	169
+372	868
+98	171
+127	701
+772	853
+33	353
+584	410
+670	660
+805	856
+375	449
+251	866
+239	163
+214	657
+325	484
+187	23
+639	230
+748	974
+342	614
+657	39
+278	831
+652	517
+744	334
+526	545
+486	778
+270	17
+338	344
+475	86
+73	636
+622	718
+155	394
+185	254
+726	57
+408	128
+217	916
+604	217
+197	205
+450	280
+679	653
+360	634
+186	978
+611	553
+164	157
+772	356
+582	851
+256	253
+792	234
+590	774
+481	147
+335	886
+784	651
+397	648
+453	435
+24	280
+402	437
+632	143
+769	567
+428	24
+10	392
+656	243
+221	510
+526	815
+234	493
+88	817
+86	407
+486	432
+552	416
+753	261
+477	132
+374	130
+487	384
+675	893
+230	25
+128	278
+783	821
+10	114
+635	964
+24	868
+373	705
+594	168
+463	962
+565	369
+58	429
+81	745
+13	86
+92	152
+381	555
+136	378
+351	97
+474	134
+720	998
+61	92
+301	874
+311	228
+505	258
+473	539
+148	466
+1	231
+70	641
+42	461
+227	900
+782	202
+797	310
+595	624
+293	611
+512	780
+759	106
+460	827
+422	180
+816	396
+374	300
+593	566
+484	7
+547	284
+257	991
+82	100
+303	694
+361	301
+499	246
+504	841
+523	318
+820	572
+403	438
+739	798
+473	195
+374	583
+63	452
+353	616
+669	942
+679	39
+474	479
+595	234
+762	279
+448	220
+204	907
+260	183
+80	584
+463	818
+605	945
+603	94
+103	54
+342	230
+532	510
+68	318
+30	392
+233	938
+466	557
+575	567
+365	798
+388	662
+317	445
+445	132
+217	166
+707	756
+91	557
+37	992
+590	802
+394	841
+465	839
+48	750
+589	983
+393	839
+725	941
+296	832
+708	852
+538	122
+434	532
+176	601
+722	54
+342	62
+503	265
+487	535
+501	694
+276	424
+200	832
+309	25
+519	492
+166	341
+584	244
+668	971
+583	898
+608	869
+416	587
+785	355
+676	613
+788	979
+434	6
+178	832
+552	203
+561	65
+56	106
+502	498
+605	283
+576	389
+617	812
+627	622
+86	910
+503	314
+461	520
+369	577
+657	713
+327	502
+595	286
+430	847
+52	853
+140	979
+43	988
+588	634
+453	597
+99	307
+288	367
+135	681
+653	749
+570	129
+712	879
+344	553
+690	309
+483	475
+206	495
+613	490
+325	59
+791	100
+521	626
+694	804
+576	330
+423	253
+819	416
+259	131
+605	276
+29	215
+474	56
+139	234
+803	756
+512	788
+483	77
+432	289
+583	359
+140	217
+415	925
+257	111
+486	796
+599	55
+666	272
+766	710
+39	562
+379	509
+179	307
+640	818
+196	279
+263	129
+594	258
+793	986
+477	171
+358	178
+249	173
+157	975
+302	665
+317	240
+282	664
+663	980
+167	619
+160	943
+692	410
+541	766
+243	795
+245	368
+291	655
+761	981
+38	755
+616	47
+398	817
+353	698
+521	987
+473	505
+53	599
+660	578
+465	718
+662	988
+814	659
+290	267
+630	202
+717	272
+307	854
+679	88
+47	246
+675	110
+682	921
+144	25
+508	253
+635	892
+507	760
+679	280
+96	711
+548	598
+345	540
+198	218
+544	193
+142	151
+306	169
+745	561
+107	526
+73	821
+712	674
+61	184
+223	395
+522	293
+539	334
+59	518
+750	339
+481	467
+573	737
+413	701
+463	364
+738	407
+705	15
+401	19
+302	74
+18	88
+623	252
+304	614
+44	471
+32	494
+444	490
+478	689
+520	534
+708	954
+247	907
+645	318
+730	618
+220	547
+279	463
+374	120
+457	255
+92	764
+541	755
+203	839
+537	455
+147	347
+165	807
+736	475
+41	525
+704	483
+197	186
+187	632
+619	438
+259	229
+314	584
+514	726
+500	603
+235	229
+130	759
+636	355
+461	978
+673	265
+284	773
+41	495
+667	11
+195	934
+535	953
+356	473
+278	819
+627	369
+659	627
+768	962
+167	326
+70	291
+444	597
+100	96
+623	876
+149	113
+775	529
+477	452
+246	404
+338	958
+596	140
+610	369
+226	283
+480	478
+137	142
+438	366
+105	223
+704	32
+831	887
+549	554
+788	326
+715	82
+178	121
+531	976
+591	834
+705	881
+431	477
+235	797
+621	609
+414	33
+19	52
+677	843
+65	816
+191	194
+603	85
+368	595
+595	299
+683	725
+254	760
+331	55
+30	402
+756	964
+452	852
+772	220
+414	857
+382	38
+616	461
+454	308
+54	382
+709	909
+437	38
+157	279
+513	832
+77	970
+324	187
+44	321
+450	305
+324	884
+391	162
+370	282
+449	455
+768	57
+77	657
+516	405
+678	995
+234	501
+195	258
+431	606
+188	119
+311	982
+322	157
+667	5
+513	630
+238	180
+352	501
+788	974
+154	763
+352	780
+354	2
+109	96
+203	973
+398	143
+797	271
+71	938
+438	751
+1	542
+251	986
+726	741
+781	984
+608	282
+320	715
+800	891
+341	270
+262	889
+690	679
+226	238
+422	435
+591	488
+158	501
+651	834
+656	692
+616	532
+802	594
+651	455
+72	101
+561	257
+133	78
+673	888
+225	860
+725	643
+647	418
+789	841
+776	532
+89	136
+598	10
+50	185
+16	433
+509	629
+527	325
+265	372
+510	274
+433	965
+301	845
+725	353
+139	674
+282	12
+483	967
+615	126
+725	871
+117	177
+509	1000
+547	348
+380	65
+395	94
+406	468
+538	766
+308	795
+227	490
+777	786
+475	699
+334	98
+310	270
+140	821
+310	186
+647	562
+460	854
+127	965
+296	635
+449	352
+107	291
+185	700
+493	147
+316	79
+803	490
+468	640
+708	353
+496	936
+123	865
+696	959
+726	995
+138	293
+774	202
+781	482
+727	568
+732	129
+170	765
+605	34
+790	191
+345	910
+92	53
+23	742
+152	221
+767	588
+269	721
+737	887
+828	688
+281	524
+470	43
+656	826
+164	513
+100	695
+42	795
+49	773
+600	838
+343	736
+223	259
+750	11
+132	677
+63	553
+220	235
+35	137
+628	994
+573	540
+768	608
+174	267
+288	623
+99	956
+661	953
+723	498
+353	24
+165	251
+770	247
+760	839
+225	283
+690	224
+624	732
+788	500
+624	473
+278	857
+54	378
+763	710
+350	992
+591	180
+166	768
+432	671
+666	254
+560	214
+271	601
+24	993
+459	407
+399	573
+484	733
+446	892
+100	225
+820	669
+543	81
+38	909
+685	996
+533	920
+785	885
+17	204
+333	85
+605	963
+217	916
+200	329
+20	258
+824	802
+793	87
+587	707
+786	995
+223	408
+474	534
+194	353
+690	194
+91	328
+693	614
+709	308
+137	80
+542	511
+745	788
+81	689
+6	15
+20	951
+252	897
+547	771
+30	762
+43	483
+114	237
+269	382
+484	778
+154	799
+536	493
+31	81
+550	629
+174	330
+657	34
+63	210
+269	114
+185	815
+184	405
+443	74
+778	344
+49	955
+118	231
+722	448
+256	564
+328	190
+506	868
+214	193
+147	697
+647	697
+603	131
+395	931
+327	193
+798	287
+529	905
+44	202
+611	883
+96	767
+159	900
+691	183
+495	19
+450	306
+480	645
+799	92
+259	643
+733	364
+423	616
+470	378
+407	775
+2	804
+759	340
+425	600
+591	204
+105	339
+323	403
+679	358
+579	414
+124	960
+292	280
+780	803
+440	342
+160	26
+72	545
+243	468
+723	881
+395	718
+495	6
+801	571
+476	197
+635	350
+4	238
+207	885
+648	659
+594	318
+194	434
+648	45
+680	291
+16	197
+270	947
+462	933
+118	293
+447	888
+606	606
+15	102
+411	348
+233	878
+413	105
+292	718
+743	201
+353	290
+173	187
+261	267
+79	658
+174	438
+634	771
+264	178
+123	290
+596	27
+584	804
+595	347
+727	941
+585	452
+815	169
+299	955
+263	1
+269	371
+331	567
+575	536
+22	972
+276	36
+72	763
+385	917
+617	920
+86	917
+274	67
+507	984
+34	986
+181	39
+304	954
+532	139
+327	495
+780	900
+137	80
+139	760
+301	3
+492	560
+395	111
+769	640
+429	823
+220	464
+19	143
+794	565
+420	360
+582	553
+807	671
+270	455
+351	505
+582	967
+390	997
+384	23
+653	489
+742	613
+343	543
+43	504
+552	914
+26	577
+735	254
+232	761
+696	336
+147	449
+20	905
+327	178
+349	12
+376	359
+476	784
+713	906
+360	645
+747	14
+18	266
+484	644
+73	425
+365	567
+528	59
+111	479
+790	380
+189	230
+58	828
+313	779
+628	513
+703	592
+116	546
+742	1
+663	260
+341	161
+70	579
+597	506
+581	913
+696	123
+826	253
+687	276
+154	684
+534	495
+201	314
+535	416
+78	276
+261	710
+241	361
+228	310
+440	401
+119	887
+135	306
+593	476
+784	744
+36	15
+404	846
+743	515
+781	954
+695	319
+245	216
+219	883
+9	289
+728	361
+178	262
+568	391
+506	533
+111	840
+721	536
+35	987
+578	884
+377	667
+63	319
+102	771
+307	751
+25	343
+143	221
+182	802
+318	535
 830	202
-201	100
-883	371
-318	141
-508	496
-672	8
-420	112
-118	107
-623	132
-758	486
-94	493
-492	426
-149	192
-722	6
-51	211
-518	473
-552	211
-696	230
-746	41
+119	77
+362	434
+624	71
+696	348
+252	523
+57	885
+690	564
+240	475
+537	334
+399	178
+319	796
+644	570
+566	839
+254	380
+145	341
+150	501
+109	687
+243	235
+296	790
+392	627
+554	972
+32	710
+209	755
+728	184
+51	10
+779	111
+530	760
+277	858
+802	513
+720	817
+151	353
+259	204
+166	653
+230	302
+810	642
+676	876
+556	380
+680	667
+236	386
+721	356
+484	981
+29	78
+398	132
+270	474
+754	840
+781	50
+678	416
+332	164
+683	394
+570	499
+257	172
+621	576
+311	623
+83	720
+614	244
+251	646
+548	865
+456	383
+467	771
+550	39
+45	164
+418	134
+147	960
+212	710
+517	962
+60	346
+375	223
+710	343
+521	910
+161	7
+392	87
+574	526
+118	149
+360	606
+662	768
+639	976
+752	912
+124	593
+195	701
+546	879
+173	868
+404	710
+95	123
+794	9
+361	618
+590	340
+98	919
+538	373
+597	201
+501	379
+272	442
+478	972
+554	321
+188	779
+478	217
+784	118
+642	737
+374	557
+86	136
+39	535
+505	745
+597	57
+620	160
+181	641
+675	739
+525	527
+366	420
+802	718
+540	581
+782	275
+681	54
+810	237
+799	314
+546	11
+26	372
+101	93
+42	775
+206	164
+724	792
+356	362
+669	900
+360	914
+386	901
+145	524
+311	699
+346	48
+598	622
+239	247
+156	146
+735	553
+528	726
+616	321
+51	873
+137	534
+151	460
+530	145
+756	979
+305	456
+289	522
+652	882
+338	718
+91	936
+803	137
+636	976
+280	989
+71	135
+631	545
+686	517
+590	954
+202	620
+143	781
+745	684
+715	460
+560	260
+595	973
+367	281
+564	464
+593	897
+145	334
+804	908
+566	842
+585	707
+657	349
+458	985
+690	643
+110	936
+110	677
+244	554
+751	970
+448	580
+79	91
+426	945
+107	865
+409	67
+596	291
+274	387
+533	409
+238	113
+606	453
+158	196
+740	756
+456	639
+592	434
+804	367
+149	176
+631	471
+322	839
+41	443
+695	327
+548	99
+153	371
+79	618
+166	238
+654	511
+319	321
+774	151
+168	69
+68	402
+157	415
+225	656
+817	555
+486	80
+812	405
+670	825
+426	20
+740	628
+812	255
+774	818
+413	496
+109	804
+463	937
+776	625
+521	981
+619	951
+696	118
+499	135
+762	151
+460	292
+228	794
+798	466
+98	30
+508	874
+38	834
+752	403
+236	299
+511	129
+195	987
+420	290
+57	332
+20	206
+237	485
+388	18
+308	967
+606	781
+388	324
+70	417
+323	169
+583	729
+518	739
+713	617
+736	110
+580	31
+513	115
+665	853
+309	452
+783	373
+570	837
+124	63
+377	910
+165	582
+466	925
+747	6
+208	229
+315	618
+707	344
+155	668
+458	74
+95	458
+424	69
+645	236
+669	163
+535	494
+337	579
+442	124
+481	595
+319	757
+200	8
+68	240
+262	798
+185	22
+620	779
+459	518
+828	279
+626	867
+448	771
+241	795
+46	112
+801	808
+494	399
+806	909
+52	656
+148	731
+489	173
+709	520
+194	519
+510	881
+75	263
+139	335
+309	352
+357	932
+304	484
+428	742
+3	61
+29	251
+704	894
+359	256
+147	982
+526	856
+70	996
+619	719
+435	911
+291	80
+815	934
+62	820
+45	439
+543	308
+701	297
+469	903
+266	22
+342	516
+482	792
+521	282
+342	606
+462	305
+698	772
+465	793
+379	76
+697	30
+522	885
+334	452
+91	854
+93	155
+413	949
+123	492
+609	941
+112	13
+658	157
+228	990
+461	809
+188	637
+71	273
+350	495
+610	114
+136	79
+822	60
+164	572
+262	159
+835	667
+308	443
+502	933
+80	88
+425	936
+623	33
+292	198
+509	495
+758	470
+356	346
+593	392
+46	690
+156	247
+216	580
+173	382
+155	840
+233	196
+575	916
+285	368
+476	33
+434	223
+99	86
+817	503
+242	41
+631	2
+307	441
+464	363
+463	877
+508	785
+419	883
+796	774
+93	543
+677	172
+149	811
+817	901
+348	683
+644	948
+731	786
+602	908
+572	454
+370	441
+792	83
+184	425
+728	559
+600	736
+507	608
+649	951
+503	286
+633	244
+442	873
+220	561
+421	7
+825	598
+176	553
+774	141
+726	452
+252	817
+197	854
+58	93
+820	565
+759	814
+649	678
+666	196
+431	826
+467	111
+332	488
+227	830
+551	717
+694	740
+33	318
+394	435
+478	253
+270	397
+715	707
+790	204
+50	266
+303	560
+527	946
+362	920
+287	474
+789	937
+669	827
+633	774
+29	80
+33	844
+464	481
+253	42
+2	121
+94	508
+80	94
+571	667
+21	945
+519	215
+503	858
+257	170
+441	16
+22	664
+193	801
+414	276
+401	50
+609	711
+744	669
+819	49
+182	545
+749	853
+27	517
+633	736
+281	198
+316	32
+507	442
+608	464
+98	299
+502	547
+475	827
+329	903
+719	818
+27	461
+300	336
+799	259
+329	806
+293	466
+437	773
+134	865
+748	210
+726	452
+342	153
+302	620
+294	607
+35	909
+259	622
+155	732
+88	579
+243	651
+120	523
+85	480
+20	500
+212	567
+535	516
+423	603
+249	234
+510	469
+374	258
+141	433
+142	677
+424	382
+299	846
+713	608
+704	540
+464	106
+708	114
+247	927
+451	312
+298	673
+104	840
+388	386
+484	468
+445	713
+562	58
+676	530
+461	226
+756	947
+582	603
+48	635
+544	651
+557	84
+591	880
+549	675
+125	561
+128	543
+428	710
+172	432
+835	544
+150	619
+615	261
+2	608
+622	706
+81	603
+214	984
+6	786
+418	933
+1	263
+695	82
+742	281
+811	919
+714	920
+765	207
+682	252
+510	362
+218	106
+832	260
+426	329
+602	813
+598	3
+261	625
+187	451
+596	250
+727	77
+465	357
+248	844
+60	113
+785	745
+22	69
+388	105
+559	956
+455	371
+783	266
+10	994
+54	875
+718	39
+760	811
+274	516
+60	905
+657	390
+598	169
+274	362
+19	490
+108	395
+44	469
+506	249
+660	126
+719	847
+442	424
+737	502
+370	420
+681	374
+221	227
+451	518
+835	784
+443	936
+632	922
+628	254
+374	711
+27	845
+632	294
+389	234
+25	265
+794	680
+772	78
+641	633
+820	69
+480	78
+149	895
+33	212
+756	659
+697	263
+446	420
+312	668
+654	68
+282	500
+464	471
+166	794
+798	614
+294	400
+41	50
+143	88
+178	235
+171	266
+197	549
+95	974
+410	644
+719	358
+764	166
+698	889
+765	543
+758	902
+66	894
+658	651
+221	903
+578	280
+661	556
+644	815
+725	75
+764	165
+386	198
+331	721
+802	261
+267	35
+216	55
+623	65
+278	136
+383	194
+650	261
+339	266
+629	52
+562	335
+437	681
+122	711
+444	844
+588	7
+384	118
+762	69
+773	187
+329	184
+793	556
+354	170
+304	701
+377	237
+207	273
+293	623
+576	335
+8	469
+4	899
+292	287
+389	619
+186	370
+360	474
+724	923
+128	763
+756	93
+721	959
+717	332
+142	509
+365	743
+188	807
+54	642
+745	625
+420	751
+582	63
+467	766
+601	482
+399	134
+257	854
+360	168
+494	943
+590	305
+169	654
+192	778
+518	272
+684	208
+145	133
+181	8
+643	200
+483	524
+419	881
+262	452
+316	765
+404	689
+604	496
+721	841
+371	852
+217	900
+161	122
+519	619
+678	807
+95	786
+469	414
+252	593
+699	257
+561	87
+70	384
+200	187
+422	157
+613	499
+341	446
+660	952
+668	461
+687	404
+89	296
+526	970
+453	982
+354	434
+390	204
+39	362
+724	741
+53	963
+435	756
+570	91
+127	720
+575	791
+741	868
+408	72
+818	224
+537	257
+64	15
+271	874
+756	880
+736	865
+453	925
+664	681
+699	558
+769	833
+42	724
+56	426
+669	354
+273	401
+528	348
+286	666
+112	977
+385	24
+611	76
+327	798
+754	989
+663	751
+778	337
+266	819
+33	129
+626	627
+40	843
+203	509
+458	457
+252	768
+822	684
+518	822
+303	94
+17	328
+441	771
+410	655
+44	755
+789	575
+199	683
+419	204
+233	750
+433	590
+731	979
+227	527
+642	680
+35	90
+568	268
+116	647
+707	468
+665	569
+765	382
+825	98
+622	901
+512	697
+457	310
+689	627
+439	699
+417	923
+50	937
+132	899
+210	440
+28	248
+133	619
+194	528
+237	785
+275	262
+35	820
+76	287
+511	127
+700	412
+565	423
+718	890
+626	543
+40	858
+698	247
+355	892
+828	669
+713	532
+91	47
+403	686
+241	59
+629	49
+526	663
+144	729
+181	960
+817	215
+600	809
+430	336
+589	374
+241	500
+608	821
+392	230
+39	469
+155	290
+227	738
+374	433
+666	801
+798	452
+634	293
+504	555
+176	295
+72	375
+380	15
+792	182
+484	945
+289	22
+313	836
+222	268
+235	135
+290	778
+654	567
+452	789
+376	325
+681	983
+384	926
+168	71
+817	969
+830	192
+268	379
+336	383
+105	990
+90	956
+283	481
+238	993
+398	366
+304	982
+92	468
+770	409
+524	184
+490	842
+424	72
+298	584
+410	674
+753	32
+682	103
+586	451
+659	136
+716	45
+567	407
+753	598
+609	697
+604	279
+788	866
+181	97
+5	181
+630	442
+506	844
+785	62
+787	739
+482	207
+200	807
+190	616
+554	875
+606	617
+77	377
+110	599
+514	150
+805	258
+321	443
+527	902
+478	290
+366	912
+75	870
+40	910
+765	643
+502	359
+5	334
+632	993
+200	252
+342	697
+365	842
+278	77
+409	577
+702	222
+177	286
+88	450
+772	232
+38	814
+808	965
+620	150
+237	562
+561	966
+698	984
+372	770
+292	324
+344	315
+554	471
+358	400
+588	301
+389	749
+556	925
+251	227
+231	612
+502	16
+60	497
+698	683
+55	242
+790	510
+466	316
+499	539
+639	106
+110	83
+231	983
+294	720
+46	383
+743	305
+588	809
+792	816
+139	779
+756	581
+833	151
+163	619
+51	320
+621	326
+227	528
+368	844
+12	592
+58	763
+795	674
+825	158
+281	52
+246	48
+355	257
+332	974
+293	363
+243	517
+446	309
+463	536
+782	279
+769	958
+157	89
+263	669
+419	250
+641	580
+752	533
+308	865
+532	275
+409	410
+586	109
+774	797
+138	561
+21	308
+499	994
+361	939
+212	33
+615	172
+156	132
+228	57
+189	398
+682	503
+701	883
+503	719
+179	893
+52	145
+170	216
+733	707
+397	880
+527	997
+483	722
+68	676
+176	443
+210	638
+218	113
+66	253
+465	967
+695	349
+10	237
+515	623
+130	219
+418	147
+442	897
+573	618
+54	918
+509	559
+785	646
+33	998
+750	566
+680	295
+811	661
+144	229
+464	3
+413	775
+763	273
+155	88
+463	953
+573	376
+577	888
+543	786
+816	460
+658	175
+320	861
+638	886
+414	647
+789	469
+821	723
+458	543
+407	888
+629	946
+560	290
+328	169
+493	909
+712	908
+372	560
+539	969
+503	925
+402	413
+161	827
+254	725
+457	425
+64	443
+100	870
+754	536
+801	867
+422	496
+538	925
+491	41
+746	299
+474	214
+427	907
+691	326
+419	580
+307	300
+639	685
+127	19
+313	548
+704	389
+81	967
+374	46
+178	149
+476	886
+368	344
+536	165
+729	97
+104	735
+514	344
+231	202
+123	906
+549	284
+508	353
+307	376
+339	732
+156	261
+88	927
+660	178
+653	652
+782	339
+469	407
+746	85
+663	902
+341	739
+572	734
+827	317
+729	961
+574	686
+595	703
+656	479
+513	605
+22	398
+664	411
+399	728
+752	946
+485	238
+797	521
+324	263
+476	592
+51	894
+719	904
+185	866
+519	178
+738	960
+379	438
+833	538
+484	124
+155	34
+420	443
+420	578
+21	483
+321	150
+551	571
+280	258
+57	258
+514	147
+67	128
+726	810
+421	437
+563	850
+39	630
+264	830
+446	246
+321	943
+295	737
+110	848
+134	977
+712	660
+732	150
+97	145
+537	942
+390	5
+661	951
+771	163
+113	234
+439	250
+266	755
+386	696
+110	338
+495	643
+460	506
+84	202
+610	671
+440	586
+499	461
+236	551
+94	675
+116	540
+384	412
+686	585
+26	580
+411	89
+339	564
+283	592
+727	113
+57	434
+311	256
+40	160
+302	491
+195	442
+548	816
+150	105
+149	876
+389	796
+620	701
+491	948
+85	285
+124	909
+507	813
+89	461
+361	508
+720	772
+300	708
+38	991
+87	307
+661	344
+369	665
+652	617
+1	232
+156	910
+330	751
+56	81
+798	602
+257	787
+350	951
+696	521
+576	960
+230	272
+303	575
+396	799
+476	476
+516	425
+801	586
+432	342
+637	149
+118	276
+114	444
+106	559
+575	264
+549	119
+378	949
+522	788
+615	984
+309	148
+674	586
+549	719
+120	323
+698	337
+39	867
+807	143
+107	300
+111	476
+263	725
+306	373
+676	453
+695	454
+594	749
+160	498
+54	618
+778	164
+125	785
+664	21
+706	476
+467	723
+731	481
+779	654
+814	15
+333	299
+565	690
+7	837
+294	535
+595	797
+769	574
+320	978
+102	421
+683	135
+141	540
+82	868
+817	237
+135	415
+488	562
+654	522
+233	518
+109	909
+261	734
+492	200
+86	897
+724	686
+741	221
+621	110
+16	115
+283	761
+399	160
+742	313
+357	322
+201	188
+352	714
+313	86
+26	332
+189	380
+313	301
+221	578
+146	702
+470	849
+93	604
+357	562
+81	28
+176	96
+531	122
+314	476
+624	792
+701	984
+236	628
+58	229
+307	897
+81	364
+716	337
+136	547
+365	520
+728	326
+199	511
+350	924
+346	200
+58	324
+386	106
+766	175
+32	49
+308	447
+523	737
+191	257
+642	181
+238	597
+426	335
+251	938
+400	391
+626	482
+665	259
+759	706
+68	886
+217	239
+286	161
+628	193
+330	17
+744	938
+669	273
+212	282
+758	309
+448	204
+461	224
+422	320
+790	117
+762	940
+124	704
+129	728
+827	355
+381	775
+795	263
+605	896
+105	858
+465	618
+68	92
+291	5
+490	60
+152	296
+8	411
+1	105
+809	313
+11	911
+487	913
+401	599
+820	352
+605	403
+602	241
+38	284
+566	820
+714	707
+117	907
+35	347
+500	231
+172	576
+493	33
+163	671
+263	33
+509	96
+659	790
+211	815
+419	657
+669	721
+787	210
+512	480
+705	258
+131	346
+643	334
+219	225
+65	535
+703	472
+823	926
+160	835
+291	847
+809	621
+195	408
+140	240
+413	996
+412	183
+561	717
+40	859
+128	232
+541	793
+256	992
+34	79
+32	265
+95	794
+580	231
+599	693
+388	63
+115	571
+374	49
+55	527
+144	869
+287	599
+353	278
+298	62
+422	89
+515	296
+231	3
+651	867
+312	179
+62	192
+469	759
+745	576
+577	827
+554	133
+276	526
+68	610
+299	670
+337	587
+437	394
+212	676
+415	621
+162	482
+715	275
+18	146
+192	502
+376	558
+30	662
+112	153
+720	955
+205	907
+773	72
+401	492
+626	929
+97	608
+289	968
+819	198
+734	697
+761	11
+412	278
+262	592
+355	304
+725	805
+427	835
+226	644
+399	597
+667	142
+409	303
+155	18
+427	715
+30	930
+610	995
+681	232
+739	133
+79	342
+605	481
+583	116
+18	10
+321	818
+671	432
+135	389
+353	865
+541	423
+583	866
+643	917
+364	573
+108	37
+686	74
+795	684
+540	497
+520	229
+473	602
+282	746
+832	21
+350	903
+495	448
+127	806
+106	198
+779	406
+826	568
+546	846
+426	892
+552	248
+418	731
+16	412
+352	442
+69	217
+520	487
+713	332
+229	346
+39	786
+205	117
+273	257
+330	942
+21	227
+407	315
+485	297
+664	345
+641	925
+689	877
+200	60
+720	684
+550	568
+218	713
+431	13
+303	312
+572	657
+49	869
+490	279
+445	84
+241	763
+313	947
+534	255
+95	639
+323	544
+531	152
+399	333
+788	539
+406	544
+445	327
+601	744
+673	717
+682	212
+718	914
+90	772
+343	726
+778	949
+545	579
+475	528
+305	312
+308	804
+579	643
+720	939
+101	251
+623	555
+594	425
+373	606
+429	167
+482	950
+265	293
+655	934
+20	396
+402	809
+361	966
+333	768
+425	964
+447	485
+190	734
+70	716
+735	859
+667	231
+179	375
+273	717
+345	390
+470	371
+795	575
+302	1000
+660	317
+699	544
+585	521
+40	725
+268	856
+339	209
+771	641
+728	894
+322	673
+538	57
+107	942
+231	284
+584	343
+318	59
+704	480
+34	884
+130	435
+386	607
+757	966
+620	910
+83	879
+428	424
+668	399
+823	170
+363	863
+79	564
+38	732
+598	151
+789	896
+188	68
+500	12
+373	633
+569	36
+527	275
+374	380
+809	320
+422	441
+507	891
+617	961
+785	813
+108	634
+442	440
+17	767
+434	753
+543	219
+327	984
+807	796
+686	419
+834	500
+492	179
+599	400
+191	379
+202	916
+117	56
+421	192
+107	561
+364	359
+479	460
+520	531
+169	799
+690	669
+488	222
+121	497
+402	639
+510	580
+815	914
+630	282
+418	562
+344	408
+175	338
+78	299
+116	485
+668	184
+49	925
+199	11
+493	831
+696	822
+253	308
+828	792
+244	303
+140	245
+405	977
+664	728
+104	854
+273	889
+607	85
+456	983
+164	830
+771	795
+416	774
+165	429
+618	500
+341	406
+516	404
+556	956
+224	996
+703	683
+170	200
+320	748
+132	569
+606	685
+228	319
+769	897
+468	816
+469	757
+560	842
+444	808
+355	416
+668	745
+166	90
+705	103
+23	25
+627	612
+147	406
+16	466
+50	517
+283	144
+300	529
+27	10
+205	972
+292	337
+753	739
+809	114
+390	758
+792	574
+11	44
+692	523
+833	356
+261	133
+674	960
+321	304
+700	105
+749	608
+451	174
+729	550
+711	285
+610	788
+822	875
+476	178
+401	669
+165	655
+59	465
+27	161
+283	534
+764	860
+294	84
+8	170
+811	467
+143	996
+378	10
+49	796
+60	550
+394	22
+258	492
+74	773
+820	631
+523	188
+83	952
+271	946
+2	9
+180	188
+89	323
+201	481
+204	331
+23	367
+630	836
+768	319
+96	370
+771	771
+198	820
+18	926
+712	377
+511	515
+365	300
+570	120
+599	969
+94	87
+548	274
+670	334
+237	810
+549	910
+9	120
+657	759
+756	367
+211	15
+156	659
+441	282
+469	574
+371	286
+564	130
+608	45
+810	567
+533	74
+384	550
+803	454
+201	501
+196	527
+520	41
+111	715
+495	438
+484	769
+777	482
+587	267
+429	732
+643	536
+569	265
+167	381
+100	636
+112	528
+581	184
+555	937
+431	919
+212	522
+59	355
+117	337
+257	529
+487	39
+764	492
+642	230
+107	106
+541	217
+340	723
+373	125
+543	756
+129	330
+71	794
+380	483
+177	371
+5	888
+654	647
+783	310
+451	902
+661	267
+194	475
+446	416
+348	117
+337	692
+398	532
+159	871
+502	80
+513	429
+628	701
+808	742
+591	962
+826	854
+410	342
+737	634
+313	883
+668	953
+127	632
+351	929
+397	603
+759	28
+60	730
+712	269
+213	917
+615	408
+16	180
+56	899
+264	260
+590	781
+606	409
+243	108
+642	46
+268	355
+546	639
+597	915
+140	45
+189	580
+774	403
+509	466
+115	224
+724	959
+507	249
+268	103
+37	344
+685	923
+141	768
+411	834
+36	645
+725	967
+692	590
+7	187
+548	305
+338	532
+164	328
+745	781
+319	970
+443	540
+630	734
+778	538
+282	179
+221	417
+283	728
+825	83
+746	575
+294	140
+599	20
+2	637
+244	108
+402	108
+347	706
+777	887
+414	115
+377	161
+605	947
+299	711
+638	677
+528	328
+540	406
+160	984
+523	168
+273	272
+641	526
+537	669
+802	467
+48	601
+627	801
+694	778
+115	540
+661	750
+188	601
+416	541
+670	297
+540	586
+52	675
+294	947
+792	741
+399	346
+776	262
+97	349
+30	583
+688	81
+648	490
+156	993
+242	491
+522	188
+370	510
+538	865
+349	345
+782	886
+541	11
+514	159
+105	492
+679	426
+193	193
+423	528
+517	142
+397	641
+150	956
+774	245
+422	842
+194	383
+458	811
+338	947
+73	361
+389	818
+441	508
+80	321
+323	522
+82	41
+48	978
+817	171
+767	73
+242	144
+167	539
+230	797
+278	404
+629	379
+297	315
+748	568
+788	895
+98	330
+522	791
+811	530
+790	487
+224	467
+778	983
+655	147
+256	762
+715	91
+152	774
+434	168
+488	473
+118	736
+680	743
+311	102
+676	231
+317	791
+346	884
+834	376
+88	510
+515	763
+248	638
+427	688
+273	883
+646	629
+189	878
+421	595
+610	369
+135	257
+739	704
+795	888
+724	730
+30	88
+223	359
+65	512
+59	282
+354	695
+810	71
+368	409
+170	204
+296	712
+517	858
+249	468
+791	451
+131	441
+219	8
+800	34
+90	14
+524	830
+560	149
+707	947
+21	305
+169	658
+13	57
+204	504
+665	821
+278	710
+275	718
+272	792
+819	3
+294	933
+325	101
+265	740
+308	944
+536	178
+103	922
+124	290
+731	878
+712	886
+694	364
+270	782
+133	952
+451	497
+41	824
+486	256
+82	75
+741	402
+721	400
+379	681
+688	145
+739	783
+478	890
+178	136
+163	157
+518	589
+659	458
+564	869
+488	752
+340	417
+51	316
+224	229
+232	392
+715	827
+387	599
+682	159
+81	775
+120	656
+425	970
+505	485
+382	980
+468	843
+150	177
+741	383
+131	196
+276	866
+420	853
+503	952
+692	285
+432	604
+28	177
+647	728
+559	132
+89	949
+60	794
+662	422
+753	157
+605	313
+499	79
+821	827
+828	682
+753	575
+158	40
+491	499
+100	303
+476	437
+630	549
+557	295
+250	149
+610	664
+567	471
+670	726
+486	261
+614	308
+825	184
+100	933
+594	753
+325	189
+592	510
+119	621
+145	25
+200	88
+609	645
+31	195
+214	88
+195	130
+410	858
+549	170
+156	654
+612	471
+500	384
+240	764
+605	240
+456	636
+698	116
+408	699
+811	846
+382	348
+340	236
+128	427
+160	34
+374	845
+121	764
+126	601
+68	576
+582	154
+298	361
+47	753
+560	776
+25	389
+774	125
+322	935
+465	187
+343	417
+686	656
+311	314
+655	987
+444	338
+119	687
+451	500
+223	670
+825	351
+752	955
+474	168
+751	424
+561	22
+388	996
+534	857
+163	69
+816	646
+635	96
+406	242
+348	240
+605	978
+475	313
+336	704
+44	316
+667	505
+38	496
+138	832
+586	967
+811	547
+200	903
+728	871
+311	348
+488	857
+571	703
+406	800
+341	315
+653	656
+411	747
+127	775
+800	476
+289	247
+567	923
+671	689
+439	337
+350	788
+164	898
+504	398
+304	552
+413	85
+570	810
+310	969
+47	973
+96	519
+695	198
+36	818
+776	331
+31	290
+92	804
+52	489
+247	970
+578	84
+670	187
+725	220
+43	646
+454	679
+577	628
+637	990
+40	207
+135	152
+14	348
+152	994
+2	318
+142	526
+652	765
+245	324
+360	78
+381	423
+64	773
+620	957
+468	450
+422	215
+371	831
+402	261
+1	738
+354	741
+222	819
+356	653
+550	410
+526	770
+83	190
+650	241
+734	153
+390	18
+345	364
+624	450
+142	265
+701	754
+602	721
+772	696
+807	436
+323	864
+555	512
+262	313
+754	902
+487	398
+658	584
+496	846
+611	717
+75	652
+546	802
+95	18
+754	308
+188	705
+10	335
+534	873
+320	14
+440	326
+178	791
+9	127
+800	149
+394	189
+784	775
+778	874
+201	974
+498	295
+806	501
+141	976
+208	301
+811	433
+66	415
+207	962
+633	647
+455	511
+742	687
+88	440
+224	784
+112	464
+310	544
+536	228
+601	70
+563	449
+429	3
+743	148
+733	991
+174	190
+657	142
+334	501
+739	936
+733	347
+666	414
+677	661
+48	831
+26	809
+689	592
+140	997
+670	979
+374	476
+414	368
+63	488
+687	541
+512	156
+78	79
+683	124
+582	127
+709	309
+535	507
+64	347
+451	487
+368	720
+739	734
+165	523
+619	298
+113	552
+352	502
+500	371
+53	73
+214	727
+179	932
+407	159
+37	848
+97	552
+295	51
+317	276
+139	281
+583	287
+598	737
+760	770
+409	596
+561	668
+627	351
+624	765
+195	51
+748	914
+660	241
+644	786
+37	218
+642	91
+72	669
+43	606
+712	698
+817	529
+51	804
+812	544
+291	469
+223	241
+74	902
+253	395
+688	737
+577	532
+386	450
+568	427
+100	983
+249	154
+61	705
+47	297
+235	69
+377	7
+829	817
+364	245
+182	204
+435	57
+205	525
+565	390
+580	758
+687	209
+667	313
+429	418
+164	669
+255	127
+66	455
+126	642
+262	8
+380	650
+376	211
+797	530
+605	274
+224	941
+334	693
+165	24
+170	728
+736	573
+242	722
+396	30
+132	156
+54	809
+486	641
+68	130
+329	613
+442	708
+97	230
+89	945
+442	878
+324	754
+829	245
+766	592
+123	148
+685	692
+660	91
+648	303
+341	202
+131	493
+332	363
+752	669
+640	607
+685	896
+61	724
+526	963
+612	606
+305	46
+255	996
+560	75
+374	654
+219	803
+361	897
+597	818
+439	441
+554	940
+242	488
+243	225
+70	437
+307	810
+523	943
+687	886
+549	118
+820	643
+300	785
+434	354
+312	994
+356	572
+480	475
+336	989
+652	368
+111	936
+411	289
+453	623
+480	588
+262	379
+732	907
+48	457
+153	975
+404	825
+649	37
+140	590
+398	720
+107	885
+457	240
+147	27
+594	554
+98	761
+437	647
+591	935
+398	243
+204	244
+685	257
+194	453
+416	826
+480	148
+44	703
+798	363
+814	226
+143	927
+683	773
+372	918
+317	860
+410	130
+181	361
+297	65
+258	423
+487	503
+829	192
+181	424
+808	986
+790	885
+511	857
+263	449
+437	300
+324	563
+12	731
+352	414
+534	254
+118	667
+278	995
+622	748
+274	483
+197	52
+294	776
+23	571
+358	503
+377	355
+529	535
+634	760
+584	935
+51	311
+46	419
+389	442
+254	130
+290	424
+401	741
+807	480
+679	164
+47	131
+262	85
+150	51
+204	873
+355	709
+520	81
+103	685
+789	611
+203	91
+804	686
+376	954
+562	549
+471	207
+191	116
+347	672
+138	33
+404	328
+257	579
+720	963
+800	101
+793	155
+487	905
+107	841
+381	385
+265	340
+616	954
+634	860
+126	727
+429	413
+629	903
+409	198
+440	586
+74	613
+790	344
+782	230
+262	974
+557	207
+223	404
+19	256
+753	645
+223	180
+101	549
+812	830
+3	148
+96	667
+461	286
+193	650
+625	80
+106	970
+64	227
+55	37
+317	96
+433	17
+773	792
+209	690
+400	71
+754	411
+691	98
+444	829
+471	422
+737	952
+507	355
+661	129
+615	58
+484	669
+790	15
+98	601
+506	670
+495	722
+678	10
+596	963
+177	293
+414	940
+811	764
+372	597
+118	805
+232	100
+91	632
+202	847
+494	676
+207	376
+390	57
+723	149
+527	754
+730	125
+161	722
+425	438
+761	364
+427	260
+31	200
+622	157
+211	537
+154	959
+481	916
+592	191
+657	726
+52	635
+10	240
+398	891
+372	767
+811	715
+130	368
+785	626
+735	182
+517	247
+376	938
+91	482
+524	775
+436	688
+132	452
+562	228
+425	650
+57	96
+89	945
+355	983
+475	588
+442	288
+674	689
+476	548
+795	542
+491	674
+149	125
+50	362
+145	114
+424	489
+687	387
+19	775
+548	119
+196	398
+591	759
+361	114
+508	983
+283	676
+687	388
+165	222
+635	858
+689	934
+155	850
+67	223
+75	585
+35	231
+273	895
+515	130
+309	206
+402	838
+598	662
+640	507
+436	643
+662	374
+450	930
+304	462
+579	322
+676	945
+356	88
+186	568
+783	577
+372	637
+148	503
+55	769
+635	513
+595	91
+237	463
+280	364
+193	907
+823	422
+338	819
+292	6
+493	839
+740	627
+126	410
+393	738
+317	643
+786	114
+66	430
+233	76
+255	549
+410	17
+452	846
+160	641
+213	241
+202	361
+500	839
+783	530
+461	185
+771	542
+410	974
+808	82
+238	754
+676	789
+438	462
+612	993
+290	334
+539	664
+525	125
+819	515
+227	345
+817	36
+631	148
+197	934
+178	252
+326	806
+290	170
+495	639
+620	345
+453	465
+610	974
+798	181
+266	182
+187	87
+417	471
+699	761
+106	673
+153	146
+595	986
+575	108
+16	362
+292	693
+378	668
+828	419
+310	735
+363	289
+314	325
+194	834
+199	475
+631	307
+310	467
+756	9
+184	477
+397	53
+219	181
+325	731
+693	234
+616	700
+461	601
+631	232
+823	308
+496	671
+50	475
+614	135
+244	519
+361	843
+808	190
+138	534
+506	848
+663	909
+325	533
+19	539
+471	833
+346	151
+541	184
+193	288
+174	920
+134	157
+241	985
+304	755
+127	595
+81	116
+537	602
+267	384
+322	74
+257	196
+242	992
+434	77
+359	91
+632	990
+777	2
+411	170
+453	685
+721	929
+543	97
+66	29
+68	243
+741	537
+525	778
+411	659
+110	96
+299	887
+452	751
+404	807
+667	440
+569	231
+763	411
+254	48
+511	342
+829	72
+89	997
+605	676
+53	600
+180	995
+311	537
+494	864
+660	373
+808	427
+241	978
+739	532
+400	248
+525	536
+267	199
+656	677
+47	304
+246	190
+228	599
+491	893
+410	400
+371	36
+659	927
+693	926
+280	324
+302	985
+265	828
+664	930
+66	298
+170	602
+446	640
+706	793
+97	733
+269	202
+808	579
+440	786
+765	17
+274	99
+637	651
+515	120
+192	692
+359	679
+620	285
+70	660
+37	187
+477	506
+93	144
+759	51
+255	514
+345	255
+42	138
+439	239
+643	348
+623	574
+3	287
+713	593
+825	239
+774	610
+640	230
+830	746
+216	888
+3	101
+586	647
+709	163
+125	973
+566	744
+410	997
+376	51
+109	561
+375	908
+753	567
+421	744
+378	514
+44	997
+393	850
+800	103
+310	571
+802	790
+432	615
+4	373
+679	53
+399	410
+358	932
+720	405
+248	391
+247	667
+324	704
+788	347
+550	583
+306	861
+824	73
+573	392
+633	572
+783	40
+251	948
+624	568
+823	99
+830	788
+754	12
+406	204
+1	572
+339	904
+752	106
+128	904
+129	945
+633	339
+114	639
+188	843
+45	850
+389	785
+632	174
+585	562
+449	76
+470	101
+464	594
+129	985
+611	928
+524	285
+601	922
+430	303
+680	876
+128	698
+146	692
+307	993
+385	706
+728	618
+620	446
+124	194
+509	160
+355	175
+583	69
+636	308
+678	674
+613	303
+410	92
+224	377
+501	703
+400	932
+194	630
+404	614
+54	810
+539	676
+119	106
+584	586
+792	426
+284	979
+76	400
+76	94
+165	938
+316	867
+118	134
+461	983
+761	51
+349	344
+396	799
+238	402
+431	996
+172	787
+508	358
+700	781
+245	577
+747	197
+63	147
+818	601
+535	114
+370	44
+427	808
+255	100
+6	922
+130	314
+110	947
+71	683
+722	67
+636	465
+708	255
+149	759
+823	221
+67	212
+59	371
+775	429
+636	337
+553	619
+108	645
+698	770
+676	170
+520	183
+586	525
+665	10
+537	734
+483	619
+152	492
+784	875
+505	100
+443	3
+590	911
+288	862
+374	409
+340	776
+317	974
+826	748
+93	549
+815	820
+81	889
+161	409
+34	52
+696	70
+87	937
+750	631
+40	519
+590	233
+82	710
+752	810
+40	814
+310	691
+247	891
+102	291
+814	355
+564	323
+84	845
+195	82
+33	41
+210	26
+426	845
+620	629
+734	417
+703	656
+101	960
+595	412
+638	427
+164	78
+276	954
+552	354
+130	680
+492	397
+832	622
+318	864
+413	644
+833	526
+178	889
+184	251
+653	967
+609	517
+124	962
+260	562
+559	87
+562	323
+222	545
+508	269
+530	152
+133	312
+202	260
+119	543
+519	419
+627	533
+70	233
+297	981
+19	630
+736	104
+657	977
+289	491
+401	194
+212	818
+408	785
+446	910
+756	38
+490	525
+328	871
+153	439
+355	720
+675	668
+476	575
+263	406
+335	158
+636	360
+224	525
+698	260
+214	840
+182	843
+171	85
+671	828
+332	735
+114	552
+284	36
+58	155
+150	666
+256	521
+367	681
+299	479
+784	23
+122	210
+588	877
+791	113
+689	760
+14	704
+392	672
+258	768
+781	377
+70	912
+202	106
+479	843
+223	965
+31	549
+539	319
+335	862
+158	385
+647	369
+449	193
+644	368
+434	893
+475	749
+786	121
+72	944
+376	774
+311	256
+217	939
+92	482
+764	762
+62	386
+61	62
+104	928
+87	606
+746	598
+529	964
+403	255
+304	207
+316	370
+390	504
+769	605
+290	533
+16	734
+5	741
+797	120
+485	952
+432	328
+496	583
+176	85
+52	516
+35	908
+587	711
+638	468
+213	923
+493	759
+113	873
+132	10
+504	180
+268	801
+2	510
+192	621
+413	982
+557	238
+818	230
+752	253
+638	181
+191	974
+354	104
+323	346
+671	968
+559	529
+768	661
+717	705
+15	656
+778	557
+645	329
+132	643
+395	333
+682	603
+237	741
+547	262
+757	161
+279	563
+779	259
+716	512
+692	582
+608	282
+416	509
+757	94
+123	611
+256	551
+756	623
+511	554
+227	67
+608	131
+718	238
+434	120
+513	862
+250	569
+474	394
+160	359
+371	132
+120	405
+776	871
+456	935
+264	596
+664	840
+347	650
+213	450
+741	701
+160	473
+435	510
+31	276
+174	663
+674	879
+738	970
+91	354
+656	709
+14	242
+303	896
+762	749
+625	436
+463	650
+553	411
+237	601
+337	246
+580	319
+568	899
+662	633
+355	961
+228	495
+403	330
+271	193
+814	212
+718	142
+264	725
+189	693
+173	496
+299	44
+19	335
+426	552
+791	302
+52	552
+495	161
+40	134
+279	269
+757	810
+188	37
+136	291
+558	427
+347	197
+362	282
+293	390
+687	425
+195	550
+571	97
+220	107
+203	332
+164	17
+540	327
+324	265
+282	725
+622	415
+255	398
+278	503
+521	609
+24	527
+180	517
+723	144
+217	792
+596	423
+357	794
+175	508
+57	177
+222	620
+228	143
+230	686
+680	594
+398	576
+454	921
+765	420
+678	880
+682	874
+662	248
+469	92
+274	869
+829	425
+430	757
+377	993
+15	332
+383	397
+383	575
+108	605
+115	514
+750	161
+468	987
+204	268
+20	518
+681	573
+773	104
+190	569
+634	53
+331	259
+20	13
+201	77
+753	312
+509	522
+579	731
+721	563
+326	721
+39	515
+528	624
+56	49
+425	425
+389	816
+101	268
+376	849
+25	559
+574	627
+792	603
+651	561
+461	756
+552	635
+649	352
+581	856
+421	543
+16	423
+118	948
+215	957
+578	771
+672	257
+491	511
+265	91
+755	140
+377	164
+562	443
+531	148
+420	394
+34	377
+155	583
+460	111
+335	693
+715	813
+341	852
+748	651
+543	110
+170	54
+360	346
+124	445
+424	315
+646	925
+601	459
+119	513
+218	792
+388	421
+253	389
+241	70
+770	866
+482	433
+222	816
+678	192
+681	97
+748	327
+372	248
+348	559
+680	452
+636	330
+691	265
+740	906
+196	673
+732	556
+235	969
+591	483
+290	2
+599	755
+796	968
+281	640
+539	757
+171	377
+153	882
+325	632
+39	122
+153	685
+278	350
+352	485
+537	337
+495	249
+626	551
+345	701
+737	510
+213	422
+372	956
+577	80
+494	346
+231	499
+683	814
+713	176
+87	786
+374	278
+686	889
+591	401
+573	448
+157	31
+163	906
+685	132
+246	559
+569	526
+660	887
+478	20
+70	264
+412	814
+195	434
+735	425
+272	240
+455	20
+340	430
+666	221
+554	683
+506	797
+710	866
+513	442
+597	99
+174	456
+185	925
+157	907
+32	855
+833	626
+122	784
+220	337
+429	302
+182	454
+411	290
+580	39
+624	540
+521	578
+692	750
+22	409
+397	920
+74	830
+530	335
+48	9
+638	546
+597	928
+423	363
+123	343
+416	520
+230	415
+811	298
+646	615
+170	7
+206	61
+630	473
+54	686
+201	948
+566	688
+318	545
+280	771
+30	480
+826	286
+194	888
+134	1
+570	601
+479	249
+167	507
+244	931
+9	125
+499	370
+519	854
+433	707
+778	266
+97	267
+146	234
+171	229
+266	707
+669	408
+618	353
+112	468
+14	917
+413	359
+372	217
+536	767
+570	954
+463	760
+242	575
+273	817
+100	23
+827	707
+94	371
+346	906
+466	870
+766	849
+696	36
+166	190
+704	972
+549	662
+603	499
+496	531
+314	226
+145	749
+120	20
+566	222
+38	285
+198	648
+781	784
+270	477
+631	473
+764	72
+443	830
+72	896
+249	576
+675	304
+274	935
+335	483
+715	690
+565	240
+720	962
+794	716
+377	230
+587	763
+294	74
+68	205
+61	768
+799	505
+564	553
+36	823
+346	357
+332	614
+519	389
+475	25
+706	36
+362	466
+765	102
+636	555
+518	279
+678	372
+373	947
+407	887
+174	469
+592	910
+48	784
+230	22
+131	924
+439	622
+830	606
+202	906
+138	175
+552	768
+675	364
+12	890
+567	697
+468	419
+426	598
+663	49
+808	947
+436	416
+612	574
+16	282
+166	349
+540	396
+328	405
+814	595
+86	11
+177	14
+533	659
+31	882
+368	598
+418	405
+511	710
+250	447
+620	892
+130	548
+437	134
+478	508
+711	65
+801	164
+103	39
+81	847
+679	643
+4	726
+450	843
+552	49
+89	75
+100	629
+131	438
+46	523
+655	103
+228	742
+829	572
+27	131
+33	637
+281	956
+661	122
+530	112
+571	734
+517	614
+387	418
+453	50
+611	616
+639	612
+61	495
+480	208
+447	408
+517	698
+356	971
+663	984
+486	210
+116	504
+26	517
+418	20
+246	805
+190	487
+212	752
+524	20
+71	23
+333	653
+3	228
+256	213
+42	658
+326	403
+694	843
+179	994
+439	400
+124	179
+793	849
+304	177
+325	313
+717	324
+76	896
+489	860
+659	996
+683	555
+834	893
+642	598
+500	612
+293	968
+320	438
+567	758
+807	3
+455	316
+199	587
+630	284
+575	744
 359	208
-147	432
-643	66
-787	248
-768	256
-885	74
-578	36
-354	422
-291	81
-672	69
-426	469
-767	345
-706	417
-616	258
-78	352
-615	434
-280	446
-183	156
-367	377
-301	412
-146	294
-558	242
-118	113
-629	257
-542	443
-752	71
-826	149
-794	51
-42	414
-51	25
-757	134
-733	459
-213	175
-182	83
-185	241
-131	439
-514	303
-597	398
-536	21
-72	304
-156	458
-532	237
-28	345
-18	137
-434	494
-814	400
-522	412
-750	229
-439	318
-488	395
-171	383
-83	356
-54	429
-522	113
-51	389
-518	486
-747	282
-98	95
-862	458
-639	322
-714	262
-341	362
-877	78
-39	78
-299	356
-439	457
-541	275
-512	399
-670	388
-148	17
-685	154
-731	185
-817	304
-187	167
-730	443
-276	108
-873	89
-563	66
-707	166
-735	315
-382	137
-622	26
-334	100
-369	374
-298	218
-407	379
-673	6
-182	34
-748	117
-371	379
-277	76
-496	253
-441	294
-108	156
-805	464
-98	415
-597	96
-611	360
-466	61
-334	427
-56	191
-535	136
-43	180
-312	342
-238	143
-370	406
-338	369
-526	175
-231	212
-151	316
-318	102
-409	420
-655	50
-777	165
-559	355
-31	352
-424	216
-860	498
-240	473
-468	130
-554	393
-802	185
-806	389
-391	12
-316	40
-139	223
-512	473
-566	410
-563	328
-133	382
-201	125
-792	71
-645	151
-663	393
-277	101
-25	470
-273	387
-135	178
-792	72
-451	436
-641	145
-257	41
-696	207
-284	3
-76	21
-434	384
-580	58
-368	332
-338	496
-479	157
-715	383
-477	83
-119	363
-340	215
-800	152
-324	325
-409	141
-477	45
-475	299
-722	55
-193	399
-212	30
-18	286
-476	494
-513	492
+643	313
+641	452
+345	916
+748	815
+779	654
+814	377
+491	751
+403	950
+595	834
+773	6
+772	126
+29	97
+713	324
+50	141
+834	16
+746	350
+647	845
+407	885
+254	339
+784	801
+476	82
+299	75
+159	139
+159	371
+316	901
+280	3
+569	369
+615	605
+280	819
+371	565
+176	953
+680	840
+45	924
+286	441
+107	259
+222	68
+92	583
+658	47
+699	646
+289	732
+624	887
+126	456
+38	342
+497	869
+264	307
+234	193
+403	270
+653	353
+37	254
+457	42
+86	824
+448	738
+561	528
+44	468
+504	721
+150	740
+219	879
+117	408
+152	424
+624	629
+76	595
+560	410
+316	757
+15	63
+150	904
+422	412
+558	855
+810	834
+764	853
+648	162
+721	354
+776	496
+81	561
+142	145
+816	380
+291	96
+570	808
+401	719
+490	335
+441	218
+469	7
+6	84
+707	681
+655	653
+434	808
+136	372
+816	137
+423	129
+690	523
+155	241
+127	646
+159	628
+552	125
+252	984
+20	704
+580	164
+314	599
+31	420
+117	309
+716	160
+456	312
+278	780
+675	682
+689	880
+745	33
+3	881
+171	399
+71	911
+135	932
+304	877
+584	652
+344	237
+511	650
+377	418
+606	616
+441	864
+487	632
+620	307
+778	938
+461	895
+482	631
+59	104
+170	478
+591	542
+642	175
+297	491
+408	125
+16	961
+263	394
+267	283
+539	689
+29	42
+790	304
+500	890
+337	480
+447	900
+423	538
+237	526
+702	991
+12	861
+375	164
+650	651
+370	190
+832	50
+693	502
+526	294
+104	603
+257	513
+352	522
+27	58
+786	539
+739	910
+722	806
+143	22
+745	306
+485	544
+571	732
+462	9
+586	322
+800	699
+657	110
+209	180
+660	477
+75	943
+724	847
+700	316
+544	905
+358	861
+736	154
+343	145
+234	905
+673	237
+732	577
+7	753
+802	411
+725	30
+358	884
+442	111
+833	261
+603	297
+800	338
+202	341
+746	326
+672	244
+775	455
+210	727
+177	396
+201	25
+649	122
+652	69
+143	726
+698	125
+257	173
+762	801
+118	369
+169	449
+59	304
+85	616
+708	551
+731	516
+68	557
+27	192
+281	783
+653	51
+693	974
+618	491
+260	264
+287	523
+329	599
+521	604
+29	718
+331	417
+776	123
+754	500
+252	577
+128	3
+642	545
+407	747
+598	565
+407	501
+84	207
+210	570
+406	44
+593	978
+55	444
+794	843
+316	500
+824	520
+774	605
+778	573
+318	828
+820	865
+579	169
+39	551
+325	393
+698	285
+450	663
+577	170
+397	112
+139	798
+229	554
+631	468
+630	717
+402	459
+35	79
+638	483
+409	904
+279	815
+707	215
+2	223
+4	301
+730	52
+691	682
+832	351
+570	569
+63	706
+468	403
+476	503
+289	877
+333	886
+170	366
+690	637
+100	766
+408	691
+348	395
+202	643
+515	338
+549	277
+751	386
+404	321
+590	436
+710	587
+545	957
+500	117
+664	553
+795	391
+766	968
+177	485
+294	891
+174	414
+292	565
+227	986
+422	442
+107	387
+816	701
+215	578
+393	925
+204	442
+338	792
+18	952
+714	454
+106	465
+205	335
+301	129
+604	230
+171	333
+103	274
+415	134
+121	342
+791	836
+450	458
+351	86
+41	758
+98	346
+418	505
+412	102
+725	954
+599	316
+335	50
+463	324
+165	976
+611	234
+438	951
+834	58
+727	717
+76	97
+812	22
+116	987
+639	200
+160	829
+41	212
+205	859
+31	744
+168	117
+352	166
+385	141
+788	737
+374	910
+588	677
+118	851
+458	103
+272	265
+135	372
+505	142
+459	608
+83	528
+201	194
+377	824
+439	904
+384	44
+717	56
+49	832
+375	601
+453	285
+335	254
+49	628
+335	143
+197	752
+386	60
+225	915
+129	453
+747	593
+69	547
+287	61
+684	897
+234	514
+237	714
+81	631
+289	942
+570	260
+618	191
+511	526
+306	837
+308	354
+413	889
+474	26
+663	564
+494	205
+384	728
+632	128
+306	566
+589	294
+1	689
+374	132
+140	386
+295	525
+562	105
+746	784
+239	741
+135	923
+336	295
+231	778
+626	586
+812	651
+816	638
+651	999
+558	345
+696	625
+782	806
+755	41
+235	693
+511	678
+195	726
+137	25
+762	205
+718	239
+747	856
+649	846
+283	294
+720	783
+381	826
+627	548
+545	420
+96	702
+524	700
+277	811
+661	720
+528	337
+97	617
+350	503
+74	272
+805	304
+519	429
+410	49
+289	648
+238	488
+267	192
+768	813
+569	380
+81	430
+62	851
+294	481
+43	777
+824	503
+416	329
+336	455
+110	297
+181	70
+476	335
+478	536
+201	792
+252	629
+600	749
+453	562
+65	110
+196	280
+722	154
+228	672
+641	297
+652	935
+46	460
+693	654
+751	770
+767	420
+512	374
+830	786
+249	638
+242	702
+239	125
+77	768
+50	426
+228	88
+187	365
+465	679
+414	135
+359	827
+830	717
+517	262
+480	98
+178	749
+703	238
+127	160
+512	584
+469	371
+497	665
+179	145
+399	48
+784	907
+418	660
+499	613
+715	683
+2	28
+294	433
+337	354
+803	266
+517	46
+676	397
+345	534
+240	70
+431	50
+301	494
+93	432
+147	234
+286	395
+577	503
+113	199
+254	894
+803	770
+212	188
+628	8
+271	924
+51	925
+469	148
+799	312
+693	854
+1	31
+520	315
+324	381
+76	130
+11	42
+306	27
+205	864
+319	925
+18	552
+723	387
+362	955
+802	269
+235	942
+90	745
+694	954
+534	714
+127	506
+372	280
+255	181
+454	601
+626	729
+219	165
+592	254
+70	730
+154	334
+439	947
+535	350
+804	79
+754	670
+816	218
+793	246
+414	454
+281	544
+237	725
+649	202
+126	719
+568	849
+536	349
+652	599
+597	379
+362	785
+736	637
+657	843
+245	232
+714	698
+202	224
+754	994
+738	279
+379	387
+391	796
+543	607
+630	837
+727	100
+525	395
+212	311
+711	703
+472	355
+217	232
+98	289
+446	58
+236	450
+742	662
+163	98
+780	712
+653	550
+679	122
+403	47
+821	637
+119	128
+327	792
+805	445
+794	332
+731	704
+459	800
+644	183
+378	405
+422	123
+705	514
+504	583
+497	394
+538	719
+276	156
+94	695
+651	618
+689	471
+792	48
+463	981
+257	248
+730	972
+789	251
+429	711
+734	977
+240	864
+614	125
+355	633
+647	906
+730	802
+115	774
+61	155
+318	212
+388	277
+485	579
+302	120
+99	434
+585	831
+433	779
+51	475
+717	1000
+736	167
+536	298
+50	841
+745	413
+378	503
+691	967
+808	601
+478	444
+402	864
+356	786
+432	964
+466	861
+578	422
+229	915
+79	523
+88	99
+66	762
+319	841
+286	922
+230	36
+797	995
+540	571
+730	437
+315	570
+3	631
+508	147
+581	432
+371	231
+288	701
+587	642
+252	596
+719	951
+697	290
+688	130
+173	789
+279	131
+702	60
+490	77
+91	240
+315	912
+387	400
+605	828
+708	760
+489	772
+238	230
+769	967
+312	533
+174	199
+91	897
+191	659
+753	218
+573	73
+317	249
+410	597
+38	421
+328	628
+650	306
+419	983
+509	177
+763	403
+489	441
+754	228
+617	585
+508	627
+534	686
+718	626
+22	99
+142	412
+655	386
+230	736
+175	470
+136	188
+107	305
+359	298
+511	301
+538	808
+21	929
+85	890
+35	807
+479	494
+63	298
+798	231
+632	446
+278	802
+324	691
+440	516
+777	59
+443	845
+562	195
+165	104
+75	927
+771	414
+10	903
+389	256
+770	477
+43	248
+202	636
+288	245
+323	72
+427	252
+209	948
+393	800
+531	270
+775	620
+487	278
+804	799
+296	591
+448	693
+277	894
+755	408
+56	879
+516	866
+728	734
+598	42
+496	426
+350	790
+347	294
+502	327
+424	165
+416	347
+715	832
+79	844
+175	487
+242	90
+460	765
+114	384
+160	607
+591	606
+126	148
+515	134
+712	272
+463	181
+682	487
+471	317
+113	852
+534	245
+473	414
+771	323
+543	929
+113	351
+485	672
+704	1000
+64	908
+723	614
+117	647
+497	210
+654	739
+501	776
+97	471
+801	186
+467	988
+328	84
+717	414
+123	812
+195	61
+405	531
+744	369
+355	108
+170	15
+242	630
+552	138
+589	665
+797	674
+516	740
+380	639
+278	825
+592	64
+158	171
+607	384
+620	162
+396	477
+641	891
+515	778
+534	818
+714	628
+748	691
+494	909
+167	887
+313	380
+277	990
+321	585
+59	89
+733	252
+385	211
+590	211
+493	507
+352	301
+125	399
+369	126
+517	521
+97	2
+592	556
+264	899
+714	474
+391	316
+175	363
+472	950
+413	737
+185	557
+215	777
+750	580
+49	260
+58	277
+273	608
+481	512
+175	445
+643	41
+370	418
+726	924
+512	684
+406	691
+562	363
+199	709
+664	538
+178	113
+476	570
+499	162
+359	744
+341	336
+144	336
+694	853
+764	888
+222	18
+663	674
+311	61
+615	657
+235	338
+723	512
+461	433
+93	570
+750	284
+242	636
+807	230
+205	461
+386	302
+226	932
+29	441
+721	749
+818	749
+651	551
+604	924
+80	392
+366	540
+727	108
+475	869
+214	489
+657	96
+189	509
+76	43
+528	137
+20	862
+677	198
+537	217
+730	528
+472	532
+181	309
+222	180
+790	281
+761	536
+417	861
+259	60
+345	775
+754	737
+403	799
+620	951
+539	605
+235	798
+31	486
+761	350
+399	943
+317	121
+635	275
+652	985
+356	389
+304	700
+615	211
+471	395
+76	418
+205	128
+573	301
+287	625
+494	767
+167	447
+663	444
+477	656
+829	953
+554	309
+495	773
+229	581
+795	155
+71	747
+93	292
+66	676
+612	925
+444	942
+692	923
+420	916
+678	240
+801	740
+251	756
+389	742
+468	927
+789	733
+543	856
+501	768
+239	272
+359	424
+104	835
+247	269
+190	259
+68	39
+640	184
+329	952
+206	546
+47	663
+740	402
+208	782
+295	551
+458	905
+357	506
+553	615
+714	770
+177	233
+95	673
+273	904
+749	514
+376	301
+329	786
+371	513
+816	919
+201	15
+561	571
+710	565
+111	432
+160	98
+300	681
+689	221
+70	949
+260	199
+194	71
+477	383
+261	240
+224	577
+187	682
+823	736
+193	534
+280	988
+422	360
+516	598
+342	136
+497	643
+396	819
+58	936
+161	757
+591	10
+259	872
+183	468
+36	607
+722	819
+206	626
+346	519
+484	490
+678	908
+82	901
+28	716
+158	820
+496	554
+554	669
+433	178
+659	575
+77	5
+776	543
+235	703
+514	222
+517	314
+756	685
+105	827
+75	968
+54	557
+580	493
+281	172
+288	786
+246	978
+431	17
+180	503
+402	87
+833	225
+134	438
+670	658
+174	888
+676	623
+510	413
+76	406
+813	845
+738	98
+765	926
+87	377
+187	85
+171	685
+809	376
+188	121
+786	980
+558	722
+197	910
+537	37
+585	510
+641	757
+270	201
+786	871
+721	297
+118	794
+53	351
+441	21
+103	527
+734	659
+163	929
+335	462
+624	736
+584	148
+714	289
+730	904
+112	801
+311	455
+755	888
+530	205
+799	109
+509	867
+313	486
+597	737
+470	268
+452	871
+592	304
+401	815
+431	721
+355	791
+221	472
+486	591
+339	165
+422	313
+492	814
+87	102
+417	785
+388	803
+309	220
+748	770
+657	650
+831	505
+522	10
+307	875
+96	182
+787	405
+514	239
+383	77
+828	522
+52	783
+363	712
+609	351
+691	816
+745	16
+783	648
+357	414
+818	980
+798	247
+490	839
+319	645
+409	611
+661	182
+780	629
+648	412
+472	377
+263	124
+517	787
+567	924
+602	215
+263	565
+730	591
+660	805
+116	658
+18	219
+180	834
+53	123
+483	662
+369	418
+546	660
+543	395
+525	720
+266	593
+280	270
+743	265
+547	476
+215	582
+801	839
+336	286
+348	168
+321	975
+715	272
+210	932
+588	480
+237	606
+67	986
+380	52
+216	604
+630	191
+730	546
+232	775
+832	380
+125	954
+350	732
+615	284
+125	387
+179	13
+157	90
+315	743
+100	600
+489	704
+387	383
+446	440
+230	751
+43	768
+516	480
+526	342
+144	606
+378	833
+464	314
+444	100
+383	464
+481	596
+626	81
+810	891
+669	592
+232	490
+582	241
+576	702
+542	547
+295	633
+268	267
+698	418
+473	340
+296	323
+669	646
+718	248
+802	204
+758	277
+750	814
+689	62
+799	124
+93	653
+385	530
+810	561
+671	684
+414	782
+80	429
+693	717
+99	364
+710	625
+2	19
+684	270
+475	896
+17	730
+811	946
+401	72
+173	870
+451	985
+834	259
+578	421
+330	499
+340	761
+751	769
+91	165
+495	526
+248	677
+499	981
+196	276
+526	650
+85	396
+759	542
+95	519
+491	28
+508	971
+468	797
+394	575
+824	334
+240	953
+636	253
+245	819
+725	547
+671	96
+21	879
+266	639
+255	951
+351	660
+241	569
+149	846
+3	102
+249	748
+106	516
+108	239
+610	111
+131	339
+62	600
+717	610
+617	397
+526	422
+363	856
+747	550
+134	408
+12	704
+342	616
+556	278
+414	862
+432	411
+223	256
+451	914
+789	16
+516	10
+402	409
+98	299
+227	171
+331	661
+26	758
+555	746
+783	991
+297	983
+102	88
+469	494
+141	752
+270	415
+573	247
+722	463
+512	966
+766	992
+537	531
+221	598
+537	41
+398	404
+742	118
+463	945
+471	250
+245	627
+398	806
+793	705
+757	899
+274	67
+34	949
+410	775
+103	626
+452	443
+476	104
+500	174
+786	322
+745	662
+491	633
+149	215
+680	471
+669	383
+780	97
+823	272
+79	45
+676	501
+480	640
+763	694
+686	873
+727	205
+113	983
+748	114
+170	311
+742	530
+435	790
+757	722
+388	175
+158	381
+473	779
+446	514
+126	780
+649	55
+384	445
+157	318
+74	191
+548	644
+35	123
+550	292
+295	690
+701	258
+174	60
+340	755
+747	596
+389	45
+233	210
+831	110
+626	278
+327	378
+579	345
+320	263
+22	925
+73	88
+464	281
+314	298
+296	894
+416	74
+519	2
+246	914
+600	220
+266	257
+28	91
+195	602
+790	1000
+327	900
+744	401
+150	269
+516	792
+807	344
+391	99
+581	464
+20	644
+704	302
+390	317
+459	621
+694	151
+395	102
+304	78
+90	88
+240	923
+531	987
+805	346
+654	922
+332	506
+774	224
+412	30
+783	220
+726	110
+689	734
+370	705
+723	737
+663	867
+462	231
+706	81
+720	668
+104	452
+750	544
+747	883
+803	106
+99	925
+158	123
+245	137
+659	30
+493	488
+228	855
+735	388
+118	39
+332	507
+430	900
+354	344
+505	514
+156	607
+775	330
+414	402
+739	339
+830	815
+110	287
+738	29
+771	697
+102	512
+75	195
+365	355
+760	14
+754	194
+238	254
+541	231
+337	356
+123	667
+222	283
+569	606
+561	921
+401	403
+204	456
+378	94
+665	793
+674	818
+115	715
+472	630
+488	280
+703	863
 \.
 
 
@@ -20406,1506 +24805,1006 @@ COPY public."Link_Product-Order" (product_id, order_id) FROM stdin;
 --
 
 COPY public."Order" (id, transaction_date, taxes_sum, client_id) FROM stdin;
-1	2013-11-06	450	67
-2	2011-07-25	4	30
-3	2004-08-29	164	4
-4	2011-08-26	319	84
-5	2017-06-10	404	29
-6	2006-02-05	71	88
-7	2001-03-02	126	19
-8	2004-07-12	497	5
-9	2013-07-08	184	11
-10	2000-01-14	5	98
-11	2006-05-31	127	85
-12	2013-05-10	12	19
-13	2016-10-31	399	77
-14	2000-04-20	165	25
-15	2003-08-01	360	48
-16	2001-10-19	377	36
-17	2012-03-15	181	87
-18	2009-01-25	360	54
-19	2009-05-07	121	1
-20	2016-03-07	38	29
-21	2000-12-28	45	64
-22	2006-10-08	218	55
-23	2010-06-14	180	7
-24	2019-10-19	388	4
-25	2010-06-01	252	64
-26	2019-09-11	457	58
-27	2007-10-16	34	67
-28	2003-05-10	359	73
-29	2011-08-21	56	23
-30	2007-07-04	345	31
-31	2019-10-14	29	87
-32	2008-05-10	4	87
-33	2002-12-24	406	56
-34	2008-01-05	15	78
-35	2020-08-06	22	65
-36	2008-05-01	238	26
-37	2015-10-22	2	40
-38	2013-08-15	45	73
-39	2016-09-11	410	74
-40	2010-02-02	199	38
-41	2004-07-28	149	24
-42	2016-12-31	233	35
-43	2020-07-09	367	2
-44	2004-05-18	69	30
-45	2006-07-08	48	22
-46	2003-09-16	309	12
-47	2011-11-04	130	52
-48	2010-12-14	81	7
-49	2004-02-22	10	84
-50	2011-12-24	439	15
-51	2014-04-01	38	74
-52	2012-04-29	399	73
-53	2018-02-23	144	43
-54	2002-02-27	299	29
-55	2009-08-28	367	40
-56	2006-04-20	47	70
-57	2004-12-30	272	26
-58	2007-11-19	176	32
-59	2016-06-14	219	10
-60	2007-11-02	107	82
-61	2016-06-12	193	5
-62	2000-09-26	101	8
-63	2019-11-03	384	41
-64	2002-11-29	4	47
-65	2018-07-09	5	59
-66	2016-09-26	275	95
-67	2002-06-04	191	45
-68	2012-07-18	323	29
-69	2006-04-22	378	9
-70	2019-11-30	170	39
-71	2020-10-27	324	5
-72	2018-06-29	290	42
-73	2010-10-27	125	99
-74	2020-01-21	99	36
-75	2013-01-26	57	63
-76	2002-11-23	294	52
-77	2012-08-31	420	87
-78	2002-10-09	190	42
-79	2020-02-14	152	3
-80	2019-07-23	70	97
-81	2016-10-31	332	27
-82	2008-01-10	248	9
-83	2003-06-08	459	99
-84	2010-08-09	35	53
-85	2015-03-20	186	61
-86	2016-07-13	232	2
-87	2004-10-18	456	92
-88	2016-10-16	99	30
-89	2011-07-31	398	42
-90	2006-09-07	164	25
-91	2017-12-20	29	71
-92	2017-01-03	215	51
-93	2006-10-03	179	98
-94	2002-12-24	196	97
-95	2000-06-27	399	92
-96	2017-04-01	387	30
-97	2015-08-26	403	53
-98	2019-06-27	184	86
-99	2000-03-24	462	62
-100	2004-10-02	377	34
-101	2014-05-11	86	16
-102	2004-05-03	148	42
-103	2000-08-30	287	28
-104	2020-12-19	395	58
-105	2014-03-04	154	71
-106	2003-12-12	219	99
-107	2019-09-14	216	69
-108	2010-07-25	184	79
-109	2011-09-28	147	57
-110	2011-05-25	286	34
-111	2016-02-07	311	33
-112	2002-11-24	42	36
-113	2008-09-20	121	89
-114	2009-03-27	364	88
-115	2002-12-22	470	64
-116	2007-02-01	39	66
-117	2013-06-12	281	21
-118	2013-11-26	427	11
-119	2016-10-14	154	39
-120	2015-03-16	425	30
-121	2001-12-29	378	64
-122	2017-12-20	360	27
-123	2014-06-11	91	100
-124	2014-01-11	28	91
-125	2016-09-29	489	84
-126	2019-07-26	464	20
-127	2005-08-08	295	73
-128	2004-05-13	263	28
-129	2014-03-28	143	93
-130	2006-07-13	476	62
-131	2016-03-22	1	3
-132	2004-01-23	280	15
-133	2008-05-25	211	1
-134	2002-02-19	453	31
-135	2006-08-23	434	74
-136	2013-07-26	212	12
-137	2004-09-07	139	76
-138	2008-08-22	465	99
-139	2016-01-12	436	66
-140	2014-03-24	437	94
-141	2006-08-26	409	74
-142	2017-06-09	29	26
-143	2007-12-18	125	93
-144	2018-05-16	339	20
-145	2017-07-07	130	28
-146	2014-02-05	419	91
-147	2005-02-28	242	66
-148	2017-11-06	90	18
-149	2009-02-03	297	90
-150	2017-05-08	49	69
-151	2009-01-27	295	90
-152	2013-08-30	124	78
-153	2016-02-06	111	71
-154	2001-10-21	443	80
-155	2017-10-30	458	81
-156	2020-02-19	120	25
-157	2016-04-25	258	91
-158	2010-01-05	436	37
-159	2013-07-22	482	3
-160	2009-04-15	40	76
-161	2008-07-23	231	26
-162	2012-07-28	193	79
-163	2018-06-30	57	50
-164	2005-12-29	38	40
-165	2012-05-31	98	67
-166	2001-11-12	330	86
-167	2001-07-15	215	79
-168	2016-12-23	332	13
-169	2001-11-15	207	46
-170	2004-04-26	465	57
-171	2000-12-18	372	67
-172	2003-10-09	34	66
-173	2019-10-29	438	6
-174	2002-03-27	320	71
-175	2005-12-15	132	74
-176	2011-05-26	289	60
-177	2020-01-24	48	13
-178	2014-07-30	142	65
-179	2016-05-20	316	42
-180	2008-11-20	63	85
-181	2015-01-25	146	14
-182	2019-08-01	79	74
-183	2001-10-29	7	22
-184	2000-06-09	387	77
-185	2007-03-18	75	77
-186	2005-07-12	404	60
-187	2020-05-20	171	93
-188	2020-08-20	428	96
-189	2001-04-11	351	13
-190	2004-08-26	426	87
-191	2015-12-14	6	46
-192	2009-02-07	336	6
-193	2008-04-23	349	46
-194	2010-12-01	289	61
-195	2002-01-07	310	29
-196	2009-07-25	454	88
-197	2013-09-16	201	77
-198	2016-02-03	414	23
-199	2008-10-05	131	18
-200	2017-08-12	175	83
-201	2018-04-09	203	26
-202	2012-07-29	249	62
-203	2001-04-12	371	42
-204	2016-03-27	443	100
-205	2007-07-30	152	89
-206	2007-05-01	191	74
-207	2009-04-13	406	54
-208	2004-07-20	182	89
-209	2007-06-23	259	86
-210	2008-05-31	21	18
-211	2005-04-07	500	68
-212	2020-04-20	266	98
-213	2002-10-30	190	22
-214	2003-10-04	488	8
-215	2002-05-07	3	47
-216	2020-03-01	1	70
-217	2007-10-11	384	85
-218	2004-02-12	245	23
-219	2012-05-09	443	35
-220	2001-02-23	31	74
-221	2004-10-26	50	22
-222	2016-07-02	246	19
-223	2017-08-09	125	43
-224	2010-03-21	8	57
-225	2000-11-07	188	83
-226	2001-11-13	363	60
-227	2012-12-02	334	93
-228	2007-07-24	429	36
-229	2001-12-10	56	69
-230	2010-04-30	468	68
-231	2013-12-01	90	62
-232	2018-12-09	52	80
-233	2007-03-26	299	55
-234	2001-11-26	497	80
-235	2018-06-10	216	68
-236	2017-03-07	445	75
-237	2010-08-29	406	35
-238	2017-06-29	67	85
-239	2019-03-08	191	8
-240	2018-12-12	357	86
-241	2002-06-24	249	76
-242	2016-08-24	100	51
-243	2003-01-22	406	18
-244	2001-09-17	297	45
-245	2017-07-19	288	48
-246	2011-07-17	50	12
-247	2003-09-25	7	57
-248	2007-04-15	476	53
-249	2006-04-28	456	73
-250	2018-10-04	299	88
-251	2004-12-10	472	38
-252	2010-01-30	32	68
-253	2009-03-27	379	70
-254	2000-05-24	40	28
-255	2020-10-11	12	51
-256	2003-11-20	311	38
-257	2002-09-10	406	21
-258	2001-05-25	3	97
-259	2009-12-25	189	3
-260	2003-02-07	383	29
-261	2013-05-23	379	48
-262	2005-03-24	256	54
-263	2018-07-30	391	11
-264	2014-01-20	356	27
-265	2004-12-26	240	11
-266	2019-05-31	431	38
-267	2001-09-04	2	71
-268	2018-04-21	95	52
-269	2016-02-18	376	9
-270	2016-12-21	177	10
-271	2015-04-21	166	36
-272	2000-11-27	430	78
-273	2019-01-20	119	97
-274	2001-05-25	386	94
-275	2020-04-08	98	17
-276	2009-12-07	37	83
-277	2004-07-01	449	76
-278	2006-06-07	268	41
-279	2009-10-18	292	28
-280	2002-10-09	294	93
-281	2018-08-15	326	80
-282	2009-09-23	179	19
-283	2016-06-28	370	99
-284	2016-05-17	78	73
-285	2009-11-15	44	90
-286	2006-05-12	250	72
-287	2014-08-26	76	100
-288	2010-12-16	182	47
-289	2011-03-30	211	20
-290	2014-01-15	273	33
-291	2004-05-30	137	79
-292	2010-06-11	307	7
-293	2012-06-29	295	27
-294	2016-01-08	37	75
-295	2015-05-02	327	91
-296	2005-07-12	379	29
-297	2004-12-19	203	20
-298	2012-10-21	321	7
-299	2015-04-21	128	11
-300	2011-04-16	297	45
-301	2013-06-10	63	12
-302	2008-12-26	72	61
-303	2000-04-15	335	22
-304	2005-11-02	134	8
-305	2006-04-18	235	58
-306	2019-12-01	397	43
-307	2010-07-21	371	91
-308	2012-11-29	252	73
-309	2018-09-19	120	74
-310	2015-04-24	434	77
-311	2002-03-25	355	19
-312	2019-01-20	286	18
-313	2017-02-20	62	64
-314	2005-06-17	344	52
-315	2000-12-06	232	40
-316	2003-06-29	5	33
-317	2000-05-08	496	47
-318	2002-04-04	199	9
-319	2012-01-19	418	6
-320	2005-12-05	143	3
-321	2003-10-24	69	91
-322	2011-01-27	309	73
-323	2015-11-02	484	96
-324	2019-01-02	431	61
-325	2009-08-11	179	58
-326	2018-03-15	180	64
-327	2010-02-01	419	99
-328	2009-06-21	245	13
-329	2005-05-03	290	53
-330	2014-08-03	120	57
-331	2012-04-20	424	1
-332	2011-12-04	8	44
-333	2013-09-30	423	28
-334	2019-06-30	277	62
-335	2007-08-26	39	76
-336	2009-05-16	293	70
-337	2007-07-15	499	11
-338	2005-11-08	322	30
-339	2007-11-03	158	69
-340	2013-11-21	338	14
-341	2019-11-25	102	92
-342	2002-04-13	308	94
-343	2018-01-10	205	25
-344	2015-04-05	137	51
-345	2012-09-13	329	2
-346	2005-11-26	305	12
-347	2012-06-28	311	68
-348	2005-08-23	103	7
-349	2005-01-11	134	50
-350	2016-08-20	308	89
-351	2007-06-09	402	81
-352	2014-03-06	341	7
-353	2004-11-07	40	91
-354	2018-11-28	54	6
-355	2012-08-04	46	38
-356	2004-09-13	28	43
-357	2016-01-21	139	57
-358	2002-06-26	412	1
-359	2007-08-05	272	46
-360	2001-11-18	476	79
-361	2019-10-28	143	28
-362	2016-07-22	221	23
-363	2012-02-17	399	61
-364	2004-06-23	73	60
-365	2011-07-14	121	39
-366	2001-03-06	66	87
-367	2009-11-08	92	57
-368	2017-10-09	413	80
-369	2009-09-17	242	89
-370	2017-10-19	317	20
-371	2016-09-23	57	92
-372	2012-10-28	175	71
-373	2008-07-20	83	20
-374	2020-09-15	425	88
-375	2001-02-24	291	60
-376	2003-08-23	7	23
-377	2015-06-10	55	81
-378	2017-02-15	438	6
-379	2018-08-19	336	98
-380	2002-04-16	6	86
-381	2011-09-21	114	81
-382	2013-11-17	430	50
-383	2003-02-18	359	30
-384	2004-07-04	200	70
-385	2011-06-12	234	48
-386	2002-10-05	103	15
-387	2004-03-15	240	87
-388	2009-06-21	331	8
-389	2004-05-19	110	36
-390	2013-12-21	184	86
-391	2002-03-31	62	56
-392	2017-03-15	185	1
-393	2009-10-05	182	89
-394	2017-07-03	347	78
-395	2010-10-20	109	57
-396	2017-04-14	172	62
-397	2014-06-06	416	15
-398	2015-09-18	363	39
-399	2020-09-10	48	89
-400	2015-07-28	406	30
-401	2007-12-30	249	54
-402	2010-01-25	413	14
-403	2013-02-13	483	5
-404	2015-02-01	114	77
-405	2020-05-23	299	74
-406	2013-07-20	25	12
-407	2016-06-10	39	95
-408	2014-04-23	286	87
-409	2000-12-21	243	38
-410	2007-02-22	436	81
-411	2012-04-04	443	81
-412	2006-11-16	213	54
-413	2014-08-24	294	91
-414	2005-07-31	314	32
-415	2019-10-17	413	58
-416	2017-11-24	205	99
-417	2008-01-22	395	42
-418	2007-07-21	187	89
-419	2013-02-28	302	96
-420	2016-01-29	89	20
-421	2020-11-20	76	86
-422	2007-08-15	165	38
-423	2016-02-16	133	28
-424	2000-03-08	385	80
-425	2010-05-27	471	20
-426	2013-03-14	54	31
-427	2001-03-22	160	80
-428	2014-08-19	406	17
-429	2015-04-23	160	23
-430	2001-04-07	264	74
-431	2013-11-15	85	22
-432	2002-06-17	435	89
-433	2012-08-23	402	68
-434	2007-09-24	67	48
-435	2013-02-07	451	39
-436	2003-05-09	90	43
-437	2000-01-04	325	61
-438	2017-12-02	112	6
-439	2006-10-18	23	4
-440	2002-02-27	470	79
-441	2007-10-30	391	39
-442	2014-01-13	379	82
-443	2003-02-26	237	69
-444	2013-10-19	228	67
-445	2020-08-28	306	68
-446	2020-02-29	193	68
-447	2007-02-22	426	47
-448	2007-07-17	311	58
-449	2007-07-14	111	75
-450	2010-01-27	274	64
-451	2009-12-08	124	19
-452	2017-03-02	233	71
-453	2009-06-01	427	59
-454	2002-11-27	362	39
-455	2016-04-18	239	18
-456	2019-12-08	428	14
-457	2010-06-23	206	77
-458	2012-08-13	369	76
-459	2019-09-26	326	92
-460	2003-11-11	498	69
-461	2011-08-14	435	54
-462	2007-03-28	191	20
-463	2014-11-18	24	8
-464	2014-06-07	380	65
-465	2019-02-22	452	71
-466	2013-11-24	316	30
-467	2000-02-02	476	2
-468	2019-10-22	359	38
-469	2015-10-01	479	43
-470	2017-11-25	131	99
-471	2017-07-26	262	5
-472	2011-02-05	162	13
-473	2009-02-20	48	100
-474	2007-04-13	429	31
-475	2014-09-10	474	39
-476	2013-09-06	326	15
-477	2018-09-14	244	86
-478	2014-10-05	494	89
-479	2011-12-17	83	80
-480	2020-02-02	476	58
-481	2013-05-01	147	4
-482	2007-05-24	298	45
-483	2000-03-25	227	77
-484	2005-07-25	179	61
-485	2018-05-13	424	52
-486	2012-10-11	362	12
-487	2005-04-30	394	60
-488	2006-04-09	75	47
-489	2004-12-31	333	7
-490	2017-05-22	48	15
-491	2008-12-21	300	44
-492	2000-09-22	125	77
-493	2008-12-23	303	16
-494	2014-04-13	162	31
-495	2009-02-02	460	14
-496	2003-03-11	438	31
-497	2004-07-24	415	24
-498	2006-04-06	76	85
-499	2004-03-12	103	16
-500	2001-07-21	352	4
-501	2003-02-02	447	135
-502	2017-01-24	468	151
-503	2010-06-16	174	59
-504	2005-04-26	66	127
-505	2009-07-18	162	154
-506	2006-12-21	234	96
-507	2014-09-19	210	111
-508	2018-02-20	128	107
-509	2000-01-28	11	31
-510	2001-06-06	191	113
-511	2003-05-24	438	182
-512	2002-01-26	345	92
-513	2004-03-15	243	48
-514	2001-04-23	386	183
-515	2005-10-24	479	144
-516	2018-06-16	140	173
-517	2005-01-03	448	72
-518	2005-12-01	246	149
-519	2020-02-03	52	122
-520	2002-11-25	67	199
-521	2015-12-15	187	57
-522	2013-10-22	84	60
-523	2014-05-19	282	21
-524	2011-10-29	59	121
-525	2004-06-28	66	64
-526	2016-11-23	240	164
-527	2007-06-17	443	72
-528	2005-08-21	383	151
-529	2016-01-12	317	78
-530	2007-07-13	455	89
-531	2006-04-09	45	146
-532	2009-01-06	24	115
-533	2008-07-26	281	66
-534	2006-06-30	305	160
-535	2016-01-24	324	61
-536	2010-04-06	8	32
-537	2002-10-14	246	196
-538	2014-05-08	40	47
-539	2016-02-15	268	40
-540	2003-06-05	60	79
-541	2005-12-16	306	78
-542	2009-02-16	69	17
-543	2012-12-15	324	190
-544	2002-07-07	12	117
-545	2001-05-07	377	182
-546	2009-02-21	21	162
-547	2013-12-03	455	155
-548	2018-04-29	364	129
-549	2000-01-07	147	172
-550	2000-08-05	341	188
-551	2015-12-08	108	10
-552	2003-04-07	85	8
-553	2010-04-02	91	13
-554	2014-10-08	234	111
-555	2014-12-13	86	11
-556	2016-02-05	417	8
-557	2000-11-03	228	116
-558	2001-09-30	461	172
-559	2011-03-14	131	145
-560	2013-09-10	244	54
-561	2014-06-09	68	141
-562	2012-01-19	490	120
-563	2013-03-18	337	67
-564	2016-09-20	441	74
-565	2001-03-04	152	49
-566	2015-02-05	366	7
-567	2003-08-16	271	46
-568	2006-09-11	76	145
-569	2000-07-02	254	71
-570	2011-02-06	305	13
-571	2016-09-01	354	193
-572	2000-12-23	344	63
-573	2010-12-16	177	43
-574	2016-10-29	49	42
-575	2008-02-08	242	101
-576	2015-01-27	215	39
-577	2020-02-19	161	113
-578	2015-09-28	295	82
-579	2005-11-16	48	91
-580	2019-02-12	452	122
-581	2020-10-01	161	18
-582	2001-01-31	227	169
-583	2005-09-05	284	88
-584	2015-06-06	414	166
-585	2017-01-26	285	106
-586	2016-12-04	93	77
-587	2020-10-20	471	188
-588	2006-12-25	395	121
-589	2000-04-29	301	168
-590	2015-07-23	137	20
-591	2019-05-09	271	150
-592	2004-10-30	143	124
-593	2020-01-10	50	69
-594	2009-04-24	294	76
-595	2018-12-30	472	138
-596	2013-10-31	207	52
-597	2002-02-26	171	150
-598	2006-09-02	34	11
-599	2007-11-25	497	79
-600	2000-08-20	336	121
-601	2007-06-08	330	92
-602	2009-06-09	44	11
-603	2014-05-14	454	109
-604	2018-04-24	261	84
-605	2003-08-20	147	122
-606	2011-11-28	49	81
-607	2016-01-14	20	142
-608	2014-02-03	470	75
-609	2014-12-21	210	175
-610	2017-03-03	9	145
-611	2003-03-06	186	119
-612	2005-05-20	331	18
-613	2009-03-27	450	193
-614	2003-02-13	243	26
-615	2016-09-11	83	37
-616	2011-07-24	337	89
-617	2012-02-25	278	41
-618	2014-05-10	102	28
-619	2008-02-06	239	48
-620	2016-02-16	185	73
-621	2014-12-03	162	120
-622	2012-10-19	259	112
-623	2020-05-19	234	122
-624	2008-06-17	450	116
-625	2003-07-04	359	148
-626	2015-10-31	462	164
-627	2009-05-25	233	138
-628	2013-09-13	212	26
-629	2009-07-14	196	200
-630	2004-09-13	151	161
-631	2002-10-02	416	176
-632	2005-05-16	195	51
-633	2017-02-13	244	64
-634	2004-04-02	300	31
-635	2020-07-28	238	26
-636	2001-12-08	262	92
-637	2003-12-30	319	23
-638	2005-04-11	58	26
-639	2004-12-23	405	192
-640	2005-10-21	420	54
-641	2005-07-25	69	81
-642	2005-05-16	357	59
-643	2004-01-19	257	186
-644	2019-04-15	455	193
-645	2000-07-01	459	183
-646	2009-10-20	43	82
-647	2010-06-22	113	132
-648	2003-08-01	309	140
-649	2004-06-04	136	167
-650	2019-09-29	344	154
-651	2020-09-27	372	96
-652	2014-03-01	363	137
-653	2008-01-27	150	5
-654	2001-03-08	6	154
-655	2005-01-22	377	123
-656	2000-11-28	11	70
-657	2017-01-23	95	169
-658	2014-12-26	359	195
-659	2004-08-02	252	200
-660	2011-10-30	93	9
-661	2006-02-27	88	192
-662	2004-10-16	257	175
-663	2002-09-16	10	60
-664	2018-07-07	95	153
-665	2002-04-05	38	56
-666	2020-01-19	400	73
-667	2007-05-14	339	18
-668	2001-05-31	429	76
-669	2015-02-12	414	190
-670	2002-11-05	408	33
-671	2013-04-26	490	119
-672	2001-06-07	56	118
-673	2010-11-01	143	119
-674	2011-03-08	216	167
-675	2000-05-19	168	11
-676	2005-09-25	287	56
-677	2017-10-11	437	30
-678	2020-02-23	398	13
-679	2018-04-13	297	159
-680	2012-05-12	209	116
-681	2018-06-28	192	150
-682	2019-06-17	365	39
-683	2004-11-15	378	178
-684	2003-12-04	407	71
-685	2006-06-12	162	196
-686	2005-04-01	86	113
-687	2003-09-29	35	50
-688	2017-08-26	428	68
-689	2015-05-24	356	30
-690	2013-02-16	479	126
-691	2005-03-14	134	54
-692	2012-02-16	292	188
-693	2015-01-01	95	158
-694	2018-04-25	464	83
-695	2001-10-14	96	96
-696	2004-04-19	323	200
-697	2015-04-11	295	155
-698	2016-02-22	347	47
-699	2007-02-18	257	174
-700	2002-09-17	49	46
-701	2001-01-03	437	70
-702	2003-03-30	174	59
-703	2011-01-02	252	158
-704	2016-07-28	69	113
-705	2009-01-24	247	181
-706	2005-08-01	65	118
-707	2020-11-15	34	106
-708	2019-10-10	413	49
-709	2014-12-08	381	200
-710	2001-11-09	132	109
-711	2009-02-28	193	144
-712	2000-02-23	219	137
-713	2019-04-26	382	2
-714	2017-11-15	124	88
-715	2005-08-08	257	5
-716	2013-11-26	343	53
-717	2006-12-05	379	176
-718	2014-03-20	200	164
-719	2002-11-16	124	193
-720	2018-10-20	467	92
-721	2017-12-18	346	68
-722	2016-12-28	420	137
-723	2006-08-13	205	106
-724	2016-06-13	224	20
-725	2012-09-27	356	129
-726	2016-04-26	448	104
-727	2001-07-30	211	121
-728	2007-02-18	453	70
-729	2000-03-05	40	182
-730	2007-02-05	322	176
-731	2007-06-11	387	89
-732	2018-10-11	324	14
-733	2016-09-28	460	89
-734	2000-10-19	203	150
-735	2018-03-03	228	69
-736	2012-10-16	313	29
-737	2008-04-21	289	71
-738	2016-03-15	23	8
-739	2011-06-24	487	100
-740	2019-04-03	279	41
-741	2013-02-27	104	4
-742	2016-05-15	179	138
-743	2015-02-02	446	31
-744	2018-03-17	324	186
-745	2010-03-22	200	6
-746	2002-11-29	62	25
-747	2011-12-25	90	178
-748	2012-12-17	8	24
-749	2014-11-16	119	33
-750	2019-01-29	129	96
-751	2013-10-01	375	2
-752	2011-11-08	97	30
-753	2003-07-26	124	35
-754	2016-04-18	490	190
-755	2018-07-06	388	174
-756	2019-05-11	81	100
-757	2016-07-20	32	85
-758	2004-09-11	70	133
-759	2002-07-27	131	141
-760	2018-05-30	413	71
-761	2008-08-21	260	178
-762	2020-05-29	327	175
-763	2019-02-21	178	65
-764	2017-05-15	201	95
-765	2007-10-31	38	109
-766	2014-10-09	264	109
-767	2019-01-10	308	72
-768	2012-07-03	406	76
-769	2017-01-05	68	44
-770	2018-01-27	20	152
-771	2015-01-17	112	96
-772	2019-09-14	52	103
-773	2011-11-18	431	160
-774	2013-02-20	262	75
-775	2009-06-13	371	173
-776	2002-10-24	440	138
-777	2010-01-28	286	77
-778	2000-11-21	303	187
-779	2017-03-29	262	46
-780	2019-04-13	444	164
-781	2003-08-09	309	190
-782	2012-12-18	447	67
-783	2020-07-12	192	198
-784	2011-08-29	142	192
-785	2020-01-25	465	187
-786	2013-08-21	437	148
-787	2005-08-25	197	75
-788	2008-02-19	253	121
-789	2008-03-05	64	91
-790	2020-08-05	118	139
-791	2000-09-19	6	118
-792	2016-07-16	173	130
-793	2001-05-09	50	25
-794	2017-06-22	440	50
-795	2002-09-20	410	62
-796	2001-02-23	324	188
-797	2013-10-29	244	105
-798	2018-10-20	320	21
-799	2006-12-31	156	39
-800	2009-01-29	451	105
-801	2019-12-27	206	162
-802	2018-08-21	82	132
-803	2020-04-04	12	121
-804	2002-06-25	107	194
-805	2009-12-22	15	129
-806	2007-03-03	204	94
-807	2000-09-23	145	169
-808	2017-05-10	168	44
-809	2014-10-14	136	84
-810	2010-07-28	478	154
-811	2000-04-10	299	144
-812	2004-07-29	420	52
-813	2005-02-18	83	120
-814	2017-09-20	359	194
-815	2017-07-04	134	44
-816	2005-09-11	69	161
-817	2005-06-17	350	155
-818	2017-08-13	297	116
-819	2001-12-05	367	41
-820	2010-01-24	377	138
-821	2010-03-25	55	89
-822	2008-01-27	181	138
-823	2010-04-11	126	112
-824	2012-04-12	59	51
-825	2011-08-09	389	88
-826	2008-10-02	203	124
-827	2009-11-26	99	200
-828	2008-12-31	120	104
-829	2020-03-23	334	1
-830	2001-08-27	437	59
-831	2014-02-13	253	85
-832	2008-03-15	380	176
-833	2001-06-27	200	131
-834	2001-01-01	255	7
-835	2004-10-18	487	58
-836	2017-03-06	139	74
-837	2011-03-11	283	117
-838	2009-10-19	357	40
-839	2005-06-18	144	52
-840	2016-10-27	172	145
-841	2005-12-24	433	60
-842	2005-06-25	166	13
-843	2017-05-12	341	24
-844	2013-07-21	72	184
-845	2017-03-14	14	1
-846	2010-10-09	169	38
-847	2009-08-10	24	119
-848	2008-07-08	395	190
-849	2013-02-18	86	165
-850	2020-03-22	383	135
-851	2019-09-01	94	5
-852	2018-12-16	15	95
-853	2020-10-04	274	6
-854	2014-01-06	140	96
-855	2007-11-11	311	55
-856	2015-04-03	195	49
-857	2020-02-16	31	91
-858	2006-03-27	129	156
-859	2015-07-11	28	55
-860	2017-08-16	1	86
-861	2004-07-24	32	26
-862	2012-03-09	300	189
-863	2019-08-30	74	8
-864	2011-07-02	429	50
-865	2015-08-27	101	39
-866	2019-06-12	141	185
-867	2004-10-05	351	73
-868	2016-04-03	401	66
-869	2013-10-28	4	97
-870	2006-10-01	161	84
-871	2005-06-10	385	69
-872	2016-06-10	176	80
-873	2007-01-05	10	142
-874	2004-06-27	475	199
-875	2005-02-27	227	169
-876	2015-08-13	170	54
-877	2020-06-27	458	109
-878	2004-03-18	361	186
-879	2018-03-03	184	152
-880	2016-07-13	220	45
-881	2001-05-27	43	23
-882	2000-06-16	381	38
-883	2006-02-25	418	160
-884	2010-11-26	451	11
-885	2016-01-20	287	83
-886	2011-04-18	290	144
-887	2007-10-17	423	122
-888	2005-10-11	67	60
-889	2003-03-08	32	138
-890	2002-02-10	344	102
-891	2006-08-14	399	96
-892	2016-05-15	196	89
-893	2008-10-17	445	56
-894	2020-07-28	372	21
-895	2011-01-08	375	133
-896	2005-05-23	230	81
-897	2010-03-01	314	47
-898	2006-03-01	67	171
-899	2000-05-01	366	197
-900	2009-12-11	63	18
-901	2005-09-01	482	199
-902	2004-05-26	326	34
-903	2015-02-24	110	199
-904	2013-08-18	100	39
-905	2018-02-23	433	123
-906	2000-08-09	235	8
-907	2008-12-04	217	1
-908	2013-10-27	14	153
-909	2001-02-19	32	105
-910	2003-03-01	318	169
-911	2007-12-10	288	134
-912	2009-12-16	389	158
-913	2006-04-10	21	130
-914	2017-03-21	80	49
-915	2015-06-11	212	45
-916	2007-04-21	114	5
-917	2000-09-12	217	93
-918	2000-03-07	82	110
-919	2016-08-30	8	133
-920	2016-11-26	213	13
-921	2006-11-28	396	188
-922	2015-09-27	338	63
-923	2013-10-15	117	141
-924	2003-04-24	204	114
-925	2006-12-05	99	83
-926	2015-10-11	166	13
-927	2007-11-12	119	43
-928	2018-03-19	33	18
-929	2012-02-16	32	194
-930	2003-04-15	375	170
-931	2016-09-10	302	152
-932	2016-05-21	201	46
-933	2006-03-12	378	117
-934	2018-04-28	138	168
-935	2007-06-28	484	108
-936	2020-02-24	304	195
-937	2020-01-16	208	104
-938	2000-01-25	322	33
-939	2017-01-02	337	111
-940	2012-02-07	450	84
-941	2020-06-24	212	76
-942	2011-05-12	159	47
-943	2008-05-07	347	31
-944	2002-02-01	273	136
-945	2004-06-30	241	100
-946	2013-06-06	229	155
-947	2007-05-26	314	177
-948	2017-02-21	130	142
-949	2020-11-27	122	161
-950	2010-01-01	496	5
-951	2014-02-24	56	63
-952	2011-09-23	37	136
-953	2016-11-27	343	139
-954	2019-10-23	357	157
-955	2000-10-21	192	95
-956	2007-08-03	378	58
-957	2008-11-15	104	123
-958	2003-04-08	147	115
-959	2007-07-07	19	106
-960	2014-07-31	57	113
-961	2004-03-29	283	152
-962	2001-02-15	341	14
-963	2020-03-16	123	88
-964	2017-01-15	409	196
-965	2008-12-21	150	64
-966	2004-01-30	394	178
-967	2012-09-11	421	140
-968	2015-07-21	471	63
-969	2003-06-14	123	177
-970	2003-08-22	103	66
-971	2010-07-24	338	111
-972	2008-09-11	15	92
-973	2017-01-17	61	2
-974	2000-01-04	201	97
-975	2009-01-06	321	120
-976	2009-10-03	176	3
-977	2012-10-28	460	33
-978	2003-06-01	16	153
-979	2008-12-23	271	8
-980	2005-07-05	494	99
-981	2015-01-16	3	24
-982	2001-01-20	32	197
-983	2002-02-11	395	167
-984	2017-12-01	251	118
-985	2001-02-01	213	195
-986	2018-10-23	413	87
-987	2011-06-19	268	43
-988	2011-12-24	131	35
-989	2001-08-04	438	61
-990	2008-01-05	256	187
-991	2019-07-30	211	43
-992	2004-12-29	453	102
-993	2016-03-15	113	57
-994	2012-09-05	213	118
-995	2008-10-27	303	24
-996	2001-04-23	34	187
-997	2013-05-20	124	28
-998	2003-04-01	453	116
-999	2012-07-28	40	104
-1000	2010-11-06	109	73
-1001	2004-03-16	197	119
-1002	2014-03-15	16	39
-1003	2018-07-21	296	135
-1004	2015-11-20	203	21
-1005	2012-10-22	76	44
-1006	2007-11-19	47	124
-1007	2007-07-08	344	193
-1008	2008-02-07	374	78
-1009	2003-07-21	212	64
-1010	2013-07-16	169	55
-1011	2007-10-17	213	71
-1012	2014-05-09	371	96
-1013	2005-06-19	435	161
-1014	2002-10-07	332	128
-1015	2016-11-27	202	199
-1016	2015-07-21	438	106
-1017	2020-10-02	480	120
-1018	2006-09-17	415	185
-1019	2006-09-11	280	3
-1020	2006-09-30	261	189
-1021	2000-06-11	361	6
-1022	2019-09-06	64	165
-1023	2000-11-06	46	125
-1024	2013-09-19	407	115
-1025	2011-05-07	387	31
-1026	2006-05-23	381	171
-1027	2002-10-03	254	33
-1028	2016-06-14	39	132
-1029	2019-07-10	186	162
-1030	2000-09-14	426	39
-1031	2007-12-03	236	12
-1032	2012-06-06	174	63
-1033	2017-06-03	274	45
-1034	2007-07-19	259	183
-1035	2009-12-19	326	166
-1036	2000-12-07	358	82
-1037	2009-09-05	167	135
-1038	2015-09-04	304	123
-1039	2020-05-23	89	177
-1040	2016-07-17	267	191
-1041	2014-04-13	174	195
-1042	2007-01-28	185	132
-1043	2018-11-21	352	125
-1044	2015-07-11	19	87
-1045	2001-07-26	321	11
-1046	2005-02-09	426	89
-1047	2020-12-13	142	53
-1048	2019-02-22	244	158
-1049	2010-12-11	407	15
-1050	2013-11-24	433	126
-1051	2000-12-02	233	68
-1052	2006-09-19	413	85
-1053	2000-10-29	454	119
-1054	2006-02-17	46	92
-1055	2005-06-07	13	17
-1056	2009-11-18	359	143
-1057	2009-07-22	215	141
-1058	2012-02-27	167	89
-1059	2019-05-24	392	37
-1060	2012-09-22	491	162
-1061	2007-05-28	105	86
-1062	2018-03-07	477	159
-1063	2007-03-29	386	158
-1064	2012-04-04	329	53
-1065	2000-12-18	226	104
-1066	2013-06-17	119	98
-1067	2001-04-22	423	95
-1068	2000-04-21	193	140
-1069	2017-04-04	251	180
-1070	2014-08-01	415	45
-1071	2015-05-31	247	151
-1072	2001-01-05	170	121
-1073	2010-12-21	157	31
-1074	2003-05-07	188	68
-1075	2009-10-18	105	14
-1076	2000-01-14	341	109
-1077	2013-02-02	278	124
-1078	2002-04-04	97	86
-1079	2009-07-26	135	178
-1080	2017-12-13	191	111
-1081	2007-01-11	312	52
-1082	2012-05-18	81	21
-1083	2014-08-27	106	63
-1084	2010-08-07	156	165
-1085	2019-01-15	282	5
-1086	2016-02-15	480	141
-1087	2004-02-23	282	179
-1088	2011-11-08	348	43
-1089	2005-06-02	13	2
-1090	2001-07-25	239	44
-1091	2011-06-25	323	53
-1092	2008-10-10	170	20
-1093	2005-05-24	471	151
-1094	2003-01-09	258	95
-1095	2020-09-09	174	200
-1096	2004-04-12	315	110
-1097	2010-02-28	291	173
-1098	2013-01-11	416	48
-1099	2001-04-24	433	159
-1100	2008-02-11	435	88
-1101	2001-10-27	485	150
-1102	2017-03-06	128	195
-1103	2017-02-03	137	67
-1104	2012-06-17	216	106
-1105	2008-03-10	221	96
-1106	2013-02-05	404	75
-1107	2019-10-27	344	179
-1108	2009-07-29	55	140
-1109	2005-09-10	140	23
-1110	2020-07-01	379	80
-1111	2018-01-18	242	83
-1112	2005-07-13	116	178
-1113	2019-07-18	465	117
-1114	2015-03-21	30	71
-1115	2011-05-13	383	189
-1116	2007-08-05	190	120
-1117	2012-05-29	177	177
-1118	2014-04-22	479	112
-1119	2003-02-22	379	121
-1120	2007-11-04	484	12
-1121	2017-08-18	170	6
-1122	2004-06-03	158	83
-1123	2020-07-10	154	91
-1124	2010-04-13	308	136
-1125	2016-11-19	268	20
-1126	2016-04-02	466	44
-1127	2017-04-12	42	182
-1128	2006-02-10	459	31
-1129	2001-10-13	30	6
-1130	2009-03-21	80	164
-1131	2002-12-16	142	191
-1132	2016-11-01	90	196
-1133	2008-08-01	108	37
-1134	2010-06-28	79	25
-1135	2007-06-14	437	142
-1136	2015-08-01	391	128
-1137	2005-08-30	416	118
-1138	2000-02-17	269	128
-1139	2011-08-05	268	134
-1140	2005-04-18	496	85
-1141	2008-09-27	89	133
-1142	2004-05-25	176	173
-1143	2007-12-27	180	20
-1144	2014-07-15	241	38
-1145	2019-04-15	117	35
-1146	2013-03-26	141	122
-1147	2007-07-28	207	170
-1148	2010-03-13	174	143
-1149	2014-08-27	157	103
-1150	2015-06-06	134	38
-1151	2020-10-21	474	22
-1152	2007-10-12	45	179
-1153	2017-08-22	363	46
-1154	2020-06-29	40	181
-1155	2020-06-21	425	18
-1156	2017-11-11	451	29
-1157	2015-03-29	69	162
-1158	2005-10-29	24	154
-1159	2013-04-28	269	94
-1160	2001-12-16	297	186
-1161	2000-03-27	416	6
-1162	2018-09-07	342	118
-1163	2001-08-29	494	108
-1164	2000-04-10	336	125
-1165	2016-03-09	423	66
-1166	2019-05-09	11	198
-1167	2000-01-09	44	41
-1168	2016-10-24	195	97
-1169	2014-01-18	147	19
-1170	2016-03-03	152	168
-1171	2000-11-07	401	89
-1172	2014-10-23	41	77
-1173	2018-05-21	416	199
-1174	2002-03-16	9	172
-1175	2010-11-04	464	108
-1176	2009-10-09	356	169
-1177	2011-08-27	137	62
-1178	2000-12-05	224	51
-1179	2020-03-21	161	47
-1180	2008-04-23	186	89
-1181	2003-07-09	457	38
-1182	2013-10-25	296	59
-1183	2006-11-21	309	163
-1184	2016-06-02	198	112
-1185	2010-07-26	474	144
-1186	2020-07-05	348	68
-1187	2018-08-16	177	96
-1188	2019-03-18	442	83
-1189	2006-12-23	349	162
-1190	2005-03-16	390	181
-1191	2019-02-20	169	161
-1192	2016-10-18	329	74
-1193	2017-01-20	37	166
-1194	2005-10-31	65	27
-1195	2018-10-12	436	6
-1196	2006-10-03	43	81
-1197	2006-06-11	391	12
-1198	2007-01-06	108	165
-1199	2014-02-15	53	139
-1200	2008-07-28	422	187
-1201	2001-12-15	166	111
-1202	2005-01-07	215	13
-1203	2002-07-03	220	51
-1204	2011-06-28	157	140
-1205	2010-11-13	394	175
-1206	2020-07-08	379	141
-1207	2003-10-11	166	89
-1208	2017-07-01	141	20
-1209	2011-03-26	291	166
-1210	2007-09-15	428	109
-1211	2019-04-11	169	57
-1212	2012-07-20	299	63
-1213	2004-08-22	199	156
-1214	2002-02-06	474	149
-1215	2018-11-25	239	140
-1216	2011-09-17	343	139
-1217	2016-05-01	154	32
-1218	2015-06-07	311	19
-1219	2014-10-22	131	38
-1220	2007-06-29	40	78
-1221	2016-03-11	435	138
-1222	2001-02-07	485	181
-1223	2011-12-30	421	124
-1224	2006-10-21	396	32
-1225	2017-08-06	434	71
-1226	2011-02-25	184	19
-1227	2004-05-08	380	144
-1228	2005-08-03	416	82
-1229	2018-05-03	363	180
-1230	2011-12-27	460	94
-1231	2012-05-13	371	104
-1232	2002-09-28	72	162
-1233	2016-03-26	187	20
-1234	2010-12-02	388	146
-1235	2002-11-25	397	111
-1236	2008-12-16	74	139
-1237	2003-01-26	293	1
-1238	2010-03-12	268	99
-1239	2000-09-20	309	124
-1240	2007-12-21	98	82
-1241	2000-08-23	137	93
-1242	2008-04-11	247	93
-1243	2011-07-29	32	114
-1244	2018-11-09	292	123
-1245	2011-09-01	172	15
-1246	2016-03-10	361	132
-1247	2004-09-27	404	162
-1248	2012-05-26	87	103
-1249	2014-02-02	491	132
-1250	2004-12-09	463	16
-1251	2007-10-16	5	102
-1252	2004-12-27	149	134
-1253	2011-04-07	70	198
-1254	2016-07-22	256	171
-1255	2019-04-28	19	144
-1256	2007-01-10	183	157
-1257	2019-01-05	63	122
-1258	2011-10-10	286	99
-1259	2018-01-17	301	183
-1260	2011-10-15	262	36
-1261	2018-04-10	422	21
-1262	2017-02-16	152	76
-1263	2011-05-31	446	108
-1264	2006-05-27	385	63
-1265	2013-06-29	128	25
-1266	2014-03-09	477	157
-1267	2000-05-24	175	155
-1268	2013-11-20	89	185
-1269	2013-05-03	6	122
-1270	2004-07-05	258	25
-1271	2001-09-15	378	149
-1272	2014-04-05	125	9
-1273	2020-08-18	48	110
-1274	2006-05-23	156	36
-1275	2003-12-10	77	42
-1276	2020-04-18	473	191
-1277	2016-08-18	250	72
-1278	2017-06-26	488	25
-1279	2010-08-05	22	152
-1280	2003-11-30	340	85
-1281	2017-11-09	321	90
-1282	2015-03-14	310	83
-1283	2006-12-15	445	190
-1284	2008-01-03	186	70
-1285	2004-10-06	111	7
-1286	2010-03-10	353	164
-1287	2018-02-23	350	167
-1288	2011-04-24	345	119
-1289	2004-06-21	373	10
-1290	2018-04-14	301	131
-1291	2016-06-05	451	180
-1292	2006-01-03	383	40
-1293	2006-07-29	367	113
-1294	2013-01-03	476	26
-1295	2008-12-31	123	8
-1296	2002-11-04	493	124
-1297	2011-11-21	474	50
-1298	2003-01-31	387	134
-1299	2009-02-16	372	145
-1300	2004-12-29	484	46
-1301	2006-07-12	308	157
-1302	2010-07-29	272	120
-1303	2010-06-09	460	148
-1304	2004-04-14	198	146
-1305	2013-05-25	354	63
-1306	2018-09-30	373	86
-1307	2013-07-16	440	173
-1308	2003-03-04	141	121
-1309	2003-07-30	428	161
-1310	2011-05-15	493	83
-1311	2016-01-23	314	147
-1312	2016-06-15	33	31
-1313	2010-06-07	154	67
-1314	2015-11-12	124	26
-1315	2007-03-21	91	114
-1316	2000-01-01	63	8
-1317	2011-09-01	346	176
-1318	2011-10-05	442	71
-1319	2007-10-21	392	107
-1320	2004-06-25	259	157
-1321	2010-08-13	22	64
-1322	2008-10-22	328	184
-1323	2002-06-02	199	45
-1324	2006-10-10	94	171
-1325	2003-03-23	304	68
-1326	2003-06-30	271	188
-1327	2000-03-10	133	33
-1328	2000-10-14	215	152
-1329	2017-02-22	271	9
-1330	2008-12-18	482	13
-1331	2005-01-30	493	109
-1332	2001-04-29	80	155
-1333	2012-04-29	234	105
-1334	2010-12-27	445	160
-1335	2015-02-12	10	98
-1336	2010-02-18	190	102
-1337	2007-03-18	123	115
-1338	2001-03-19	241	196
-1339	2020-06-27	469	4
-1340	2011-05-04	165	195
-1341	2010-06-05	484	173
-1342	2002-11-30	30	29
-1343	2005-07-20	46	9
-1344	2019-05-20	470	183
-1345	2008-07-14	223	113
-1346	2010-04-30	356	80
-1347	2011-03-11	257	172
-1348	2011-12-28	303	148
-1349	2012-10-04	437	104
-1350	2010-12-08	128	21
-1351	2003-11-19	48	2
-1352	2020-10-08	405	30
-1353	2010-04-14	207	105
-1354	2015-04-20	85	118
-1355	2012-01-13	6	86
-1356	2000-12-02	368	31
-1357	2017-11-10	379	147
-1358	2016-08-10	384	148
-1359	2019-11-23	194	17
-1360	2004-11-14	455	143
-1361	2016-10-31	237	68
-1362	2020-08-24	62	62
-1363	2003-05-11	492	194
-1364	2009-10-11	409	184
-1365	2017-10-22	91	137
-1366	2012-10-02	121	184
-1367	2016-07-09	236	118
-1368	2010-08-06	311	89
-1369	2012-03-19	47	63
-1370	2011-03-28	243	64
-1371	2009-09-12	257	53
-1372	2005-10-17	188	63
-1373	2007-02-08	266	27
-1374	2020-11-12	288	110
-1375	2002-11-29	198	44
-1376	2009-10-24	292	17
-1377	2007-03-23	169	194
-1378	2005-03-28	178	180
-1379	2014-08-10	248	24
-1380	2020-03-10	274	111
-1381	2007-05-08	489	97
-1382	2019-05-08	21	125
-1383	2016-06-06	88	58
-1384	2018-06-25	363	23
-1385	2010-06-22	127	71
-1386	2005-02-20	478	60
-1387	2001-05-15	10	10
-1388	2005-04-26	101	175
-1389	2004-01-15	122	174
-1390	2015-08-18	261	129
-1391	2001-08-17	250	81
-1392	2012-05-29	242	19
-1393	2000-11-28	10	177
-1394	2009-01-14	465	156
-1395	2014-09-26	134	48
-1396	2019-11-11	17	189
-1397	2012-03-26	82	129
-1398	2017-06-10	472	97
-1399	2019-04-30	119	65
-1400	2007-12-25	172	21
-1401	2005-07-25	475	149
-1402	2018-07-28	133	84
-1403	2017-12-31	292	1
-1404	2002-07-06	459	138
-1405	2009-11-30	107	60
-1406	2020-11-11	148	136
-1407	2006-04-30	265	156
-1408	2001-06-29	78	19
-1409	2013-07-16	341	116
-1410	2006-03-27	152	81
-1411	2017-12-28	293	73
-1412	2016-11-28	51	88
-1413	2008-03-06	246	175
-1414	2011-11-10	415	200
-1415	2012-05-23	235	122
-1416	2011-12-09	446	122
-1417	2008-07-21	64	62
-1418	2019-12-06	298	14
-1419	2011-10-28	244	153
-1420	2007-10-24	9	46
-1421	2007-09-17	428	175
-1422	2004-06-03	160	8
-1423	2019-07-10	324	166
-1424	2015-05-12	387	44
-1425	2008-06-24	6	92
-1426	2020-01-07	298	114
-1427	2007-06-18	500	197
-1428	2003-09-23	381	149
-1429	2016-02-18	70	108
-1430	2017-08-05	239	1
-1431	2007-09-06	46	162
-1432	2005-02-26	475	149
-1433	2005-09-19	51	181
-1434	2015-03-13	198	153
-1435	2018-06-26	240	196
-1436	2005-07-09	287	98
-1437	2012-02-24	360	136
-1438	2003-11-30	453	21
-1439	2012-06-13	171	103
-1440	2018-11-27	67	147
-1441	2001-05-31	222	195
-1442	2018-12-20	19	135
-1443	2001-07-28	107	101
-1444	2002-09-16	405	196
-1445	2020-08-16	408	30
-1446	2020-02-09	93	73
-1447	2009-04-29	358	3
-1448	2019-08-19	449	6
-1449	2016-09-28	93	162
-1450	2004-07-28	50	96
-1451	2004-07-31	484	109
-1452	2018-06-12	140	30
-1453	2005-12-25	149	67
-1454	2012-01-25	486	130
-1455	2010-08-07	5	166
-1456	2007-07-30	265	132
-1457	2011-10-31	414	36
-1458	2020-07-27	291	1
-1459	2000-04-15	110	187
-1460	2005-06-07	467	199
-1461	2010-08-01	454	163
-1462	2019-05-24	105	8
-1463	2010-01-12	79	88
-1464	2008-11-09	326	129
-1465	2005-01-25	492	118
-1466	2004-07-05	145	133
-1467	2020-02-12	350	101
-1468	2008-03-28	123	52
-1469	2003-12-22	63	123
-1470	2014-02-11	414	83
-1471	2003-10-16	320	198
-1472	2012-08-23	500	92
-1473	2018-10-25	487	179
-1474	2013-05-09	117	80
-1475	2010-06-14	74	36
-1476	2004-10-10	413	135
-1477	2006-02-14	75	171
-1478	2000-04-18	262	117
-1479	2006-05-05	308	190
-1480	2017-09-05	27	38
-1481	2007-10-22	421	36
-1482	2019-08-02	394	116
-1483	2015-05-10	209	97
-1484	2020-11-29	25	181
-1485	2003-02-09	329	109
-1486	2019-09-04	260	29
-1487	2006-04-08	51	147
-1488	2018-04-17	227	179
-1489	2015-09-21	313	55
-1490	2002-03-02	276	167
-1491	2013-10-11	169	34
-1492	2004-06-19	397	189
-1493	2018-10-20	176	70
-1494	2007-07-28	191	40
-1495	2001-03-15	342	27
-1496	2017-03-29	180	196
-1497	2012-10-03	482	136
-1498	2016-10-14	105	95
-1499	2004-08-05	483	70
-1500	2000-01-23	268	96
+1	2002-06-30	236	129
+2	2016-12-02	459	47
+3	2010-01-19	224	180
+4	2020-03-16	7	25
+5	2003-09-02	152	10
+6	2001-04-07	452	171
+7	2013-11-17	131	146
+8	2016-11-04	40	121
+9	2020-01-28	373	80
+10	2002-08-23	404	143
+11	2020-10-19	136	176
+12	2002-06-09	392	44
+13	2019-04-17	226	34
+14	2013-10-29	331	112
+15	2016-11-04	90	93
+16	2009-01-16	454	151
+17	2019-11-21	213	98
+18	2010-05-13	216	197
+19	2004-12-05	60	178
+20	2013-07-06	324	50
+21	2006-10-06	411	82
+22	2013-10-10	334	179
+23	2011-10-11	367	86
+24	2015-12-14	367	54
+25	2017-07-22	408	18
+26	2018-08-31	124	73
+27	2008-02-06	372	110
+28	2000-12-17	496	70
+29	2012-12-10	481	194
+30	2002-04-26	379	58
+31	2005-10-14	205	46
+32	2014-01-20	275	82
+33	2006-07-12	423	125
+34	2009-04-25	356	139
+35	2016-08-15	448	21
+36	2001-07-16	473	36
+37	2006-02-24	297	71
+38	2017-08-26	222	175
+39	2015-07-25	449	140
+40	2003-09-12	297	167
+41	2009-05-25	142	142
+42	2018-03-04	321	45
+43	2014-06-22	264	185
+44	2020-06-10	347	119
+45	2019-03-28	62	80
+46	2018-11-11	371	70
+47	2008-09-21	468	98
+48	2005-10-19	237	110
+49	2018-10-28	387	191
+50	2018-04-29	42	102
+51	2001-01-23	369	18
+52	2002-06-04	397	137
+53	2004-08-05	58	109
+54	2014-01-11	264	32
+55	2001-09-07	481	68
+56	2017-02-22	253	75
+57	2020-01-20	156	13
+58	2009-04-30	265	117
+59	2005-07-16	432	132
+60	2017-12-05	366	5
+61	2015-10-04	495	68
+62	2011-01-24	461	175
+63	2016-06-13	291	64
+64	2007-12-19	37	96
+65	2019-04-29	9	96
+66	2019-07-11	326	39
+67	2012-10-13	209	133
+68	2015-08-19	63	81
+69	2012-07-06	188	147
+70	2004-11-20	219	158
+71	2003-02-10	81	164
+72	2008-11-03	52	19
+73	2007-09-24	139	126
+74	2006-11-05	442	17
+75	2015-05-21	361	39
+76	2010-01-06	140	78
+77	2019-09-11	445	101
+78	2009-12-23	462	13
+79	2007-12-31	38	77
+80	2003-03-02	471	180
+81	2005-04-13	313	128
+82	2005-08-14	262	82
+83	2012-04-05	222	149
+84	2002-11-11	17	76
+85	2010-01-15	136	52
+86	2005-05-20	269	152
+87	2011-09-09	189	72
+88	2018-09-13	111	63
+89	2020-03-26	471	22
+90	2011-03-13	103	76
+91	2010-09-17	217	126
+92	2013-10-09	53	70
+93	2020-10-14	55	80
+94	2000-09-29	132	28
+95	2000-05-24	478	52
+96	2018-12-02	261	156
+97	2015-12-06	420	181
+98	2002-06-26	447	84
+99	2010-01-10	255	154
+100	2012-02-16	166	131
+101	2010-12-04	327	46
+102	2016-11-30	353	195
+103	2020-05-23	221	124
+104	2019-03-19	450	84
+105	2003-10-02	163	171
+106	2003-09-08	379	5
+107	2013-01-02	60	152
+108	2010-01-27	279	167
+109	2000-04-06	202	89
+110	2011-03-16	105	79
+111	2012-07-06	202	142
+112	2018-02-26	297	48
+113	2007-11-25	30	19
+114	2007-10-27	279	168
+115	2011-12-26	12	59
+116	2014-06-16	31	94
+117	2007-09-13	235	166
+118	2013-05-20	250	95
+119	2005-11-27	314	157
+120	2011-05-15	239	71
+121	2010-01-26	430	35
+122	2009-11-03	225	196
+123	2006-03-05	210	32
+124	2002-10-22	372	25
+125	2004-05-21	454	13
+126	2008-12-05	200	135
+127	2016-07-11	249	111
+128	2003-09-23	42	150
+129	2008-05-03	131	65
+130	2003-05-28	146	164
+131	2007-07-01	82	7
+132	2009-10-02	244	19
+133	2018-09-02	266	129
+134	2014-02-28	175	80
+135	2009-02-05	395	99
+136	2003-11-23	125	86
+137	2014-09-15	121	55
+138	2010-08-20	433	168
+139	2018-03-02	5	179
+140	2016-07-03	214	26
+141	2009-12-31	443	136
+142	2016-04-02	365	183
+143	2013-07-03	195	180
+144	2011-06-20	357	171
+145	2010-03-14	223	86
+146	2009-05-31	320	112
+147	2010-09-11	500	196
+148	2013-04-15	7	192
+149	2016-03-08	196	111
+150	2002-04-11	136	30
+151	2008-11-01	358	115
+152	2012-03-24	113	18
+153	2007-06-17	273	21
+154	2006-01-16	464	172
+155	2009-02-07	224	77
+156	2000-11-01	61	43
+157	2012-08-31	427	69
+158	2012-09-24	8	173
+159	2012-08-01	462	157
+160	2002-03-27	491	69
+161	2019-03-09	266	92
+162	2002-05-03	300	96
+163	2018-07-08	78	66
+164	2017-05-06	291	162
+165	2019-09-25	414	138
+166	2013-04-13	304	62
+167	2019-09-02	59	152
+168	2003-10-15	230	7
+169	2008-11-28	37	90
+170	2010-06-10	358	53
+171	2017-05-18	393	44
+172	2009-07-07	449	141
+173	2011-10-28	280	120
+174	2013-07-26	460	191
+175	2008-04-21	80	122
+176	2020-06-30	484	154
+177	2010-11-29	138	39
+178	2000-12-21	348	156
+179	2001-01-04	265	137
+180	2001-07-08	8	52
+181	2007-04-27	227	144
+182	2006-05-13	131	182
+183	2003-11-26	410	48
+184	2009-12-27	233	167
+185	2002-04-28	218	159
+186	2011-04-22	465	185
+187	2007-04-01	257	96
+188	2013-02-06	201	123
+189	2008-07-07	169	82
+190	2019-06-27	328	48
+191	2008-07-03	168	40
+192	2020-12-09	242	188
+193	2018-09-08	326	39
+194	2015-12-31	472	92
+195	2018-05-06	284	37
+196	2002-02-15	414	62
+197	2012-08-25	465	135
+198	2011-02-16	493	161
+199	2007-06-21	314	69
+200	2016-07-18	104	91
+201	2001-06-30	187	43
+202	2006-10-16	246	96
+203	2016-06-02	145	46
+204	2007-03-13	284	83
+205	2005-03-01	156	66
+206	2016-08-04	476	115
+207	2018-05-11	377	150
+208	2003-07-28	19	24
+209	2005-07-13	120	100
+210	2020-08-17	111	40
+211	2013-02-01	286	139
+212	2020-04-19	486	86
+213	2019-08-14	147	200
+214	2014-08-10	81	96
+215	2005-04-04	174	46
+216	2020-07-19	95	66
+217	2013-01-02	411	180
+218	2006-08-08	394	108
+219	2005-02-13	483	95
+220	2006-07-07	275	188
+221	2017-11-21	487	161
+222	2015-08-25	395	155
+223	2012-01-12	45	2
+224	2005-11-14	79	160
+225	2013-10-26	43	127
+226	2015-11-05	263	44
+227	2002-03-14	291	179
+228	2010-03-19	38	108
+229	2000-08-06	453	74
+230	2018-12-24	309	7
+231	2012-03-15	255	175
+232	2012-10-08	53	144
+233	2008-06-02	353	118
+234	2006-09-15	39	99
+235	2005-02-27	211	173
+236	2019-05-20	175	6
+237	2006-11-20	311	112
+238	2015-05-04	208	200
+239	2007-06-06	314	21
+240	2004-06-10	255	24
+241	2015-02-17	280	76
+242	2011-09-27	309	13
+243	2007-04-10	144	36
+244	2020-12-04	300	166
+245	2004-01-05	250	82
+246	2007-06-23	477	92
+247	2008-10-29	125	152
+248	2000-10-20	294	181
+249	2000-11-22	494	112
+250	2011-05-24	257	47
+251	2012-06-19	353	13
+252	2013-02-05	335	50
+253	2008-05-06	77	72
+254	2004-12-20	57	156
+255	2002-07-31	463	124
+256	2009-09-09	193	43
+257	2016-10-07	353	112
+258	2019-05-22	294	142
+259	2006-07-09	253	2
+260	2019-06-02	243	166
+261	2007-09-29	431	18
+262	2018-01-06	445	48
+263	2006-08-03	437	63
+264	2020-06-01	264	143
+265	2005-09-18	213	30
+266	2008-02-25	170	75
+267	2011-08-22	483	21
+268	2006-09-20	225	67
+269	2016-06-06	369	166
+270	2017-02-23	126	168
+271	2015-02-08	200	139
+272	2007-01-10	499	125
+273	2015-06-07	282	83
+274	2000-11-09	388	108
+275	2002-12-24	351	52
+276	2014-03-23	365	80
+277	2010-10-21	303	71
+278	2020-01-17	71	127
+279	2011-08-11	296	107
+280	2019-09-13	242	30
+281	2000-04-13	303	101
+282	2010-11-19	351	185
+283	2016-12-17	340	45
+284	2007-09-18	313	113
+285	2003-10-24	417	102
+286	2009-11-27	51	7
+287	2004-05-05	170	98
+288	2007-01-28	59	193
+289	2018-08-12	1	100
+290	2018-10-06	313	56
+291	2009-06-26	29	50
+292	2007-04-02	221	11
+293	2016-11-02	283	187
+294	2004-01-22	150	50
+295	2002-04-15	471	175
+296	2004-06-28	336	11
+297	2019-12-26	341	58
+298	2013-12-11	319	153
+299	2014-05-30	350	57
+300	2013-01-08	296	136
+301	2007-03-26	45	95
+302	2008-10-05	463	143
+303	2001-07-12	427	4
+304	2005-05-31	270	95
+305	2018-02-09	260	98
+306	2007-12-02	455	166
+307	2002-11-05	302	37
+308	2015-03-18	419	38
+309	2003-11-26	158	141
+310	2000-05-13	125	187
+311	2015-03-23	182	44
+312	2014-07-16	18	170
+313	2001-07-09	187	72
+314	2014-07-13	339	51
+315	2004-03-01	291	10
+316	2001-01-05	438	69
+317	2015-08-22	294	194
+318	2015-04-16	413	50
+319	2017-08-25	109	67
+320	2009-04-30	441	75
+321	2010-04-07	270	59
+322	2019-07-25	425	100
+323	2004-10-14	446	198
+324	2003-03-17	355	138
+325	2017-01-22	143	143
+326	2016-07-11	294	62
+327	2014-01-26	241	46
+328	2003-12-24	447	114
+329	2014-02-25	347	194
+330	2008-11-15	306	56
+331	2007-02-05	365	114
+332	2008-11-01	251	100
+333	2007-05-15	485	188
+334	2007-08-01	435	11
+335	2012-05-15	94	178
+336	2016-02-03	110	72
+337	2010-05-09	354	51
+338	2003-09-07	325	180
+339	2006-02-11	359	142
+340	2013-12-25	418	191
+341	2016-04-12	500	118
+342	2009-01-15	285	152
+343	2013-09-12	269	116
+344	2014-07-14	342	184
+345	2007-05-15	456	17
+346	2014-10-20	449	174
+347	2003-09-25	415	140
+348	2011-08-29	294	52
+349	2020-11-12	454	10
+350	2001-03-27	496	24
+351	2018-08-02	351	52
+352	2016-04-01	23	105
+353	2008-08-27	327	162
+354	2000-11-24	449	148
+355	2017-08-18	197	188
+356	2020-04-12	430	143
+357	2015-02-11	462	171
+358	2004-09-07	45	174
+359	2008-04-01	253	64
+360	2001-01-08	134	29
+361	2009-06-23	132	87
+362	2005-02-03	101	53
+363	2005-03-27	45	158
+364	2013-04-20	315	13
+365	2017-06-22	227	23
+366	2013-03-26	75	108
+367	2013-01-31	262	130
+368	2011-06-12	32	191
+369	2004-09-11	379	199
+370	2019-06-12	191	133
+371	2006-04-11	46	121
+372	2014-11-18	58	87
+373	2016-09-13	212	180
+374	2004-02-09	73	103
+375	2007-07-16	195	156
+376	2012-08-11	171	36
+377	2010-08-19	448	80
+378	2014-03-10	300	12
+379	2014-11-07	392	76
+380	2001-10-11	496	67
+381	2008-10-03	373	96
+382	2002-04-27	131	103
+383	2005-11-03	160	105
+384	2015-04-01	161	111
+385	2004-03-05	204	21
+386	2006-09-22	397	178
+387	2000-01-08	350	16
+388	2012-10-02	463	164
+389	2009-07-25	178	56
+390	2014-02-08	183	165
+391	2003-05-04	96	155
+392	2005-05-08	206	118
+393	2002-10-13	272	118
+394	2008-09-26	458	106
+395	2016-05-08	294	89
+396	2011-03-19	63	142
+397	2017-11-22	287	190
+398	2006-05-03	204	184
+399	2001-05-20	323	64
+400	2005-07-04	82	60
+401	2010-01-23	113	128
+402	2009-12-17	412	157
+403	2014-12-20	386	5
+404	2017-11-17	418	91
+405	2012-09-09	368	89
+406	2009-02-11	10	30
+407	2002-01-02	29	142
+408	2010-06-23	427	6
+409	2019-01-15	228	24
+410	2015-06-15	352	10
+411	2020-12-18	111	25
+412	2006-09-04	485	75
+413	2011-08-04	159	76
+414	2003-12-24	401	163
+415	2010-10-29	184	129
+416	2006-09-21	264	143
+417	2018-05-13	401	18
+418	2011-05-29	81	126
+419	2004-04-03	494	157
+420	2007-03-15	163	16
+421	2012-06-11	28	121
+422	2000-05-28	34	111
+423	2007-12-26	46	49
+424	2017-12-19	281	89
+425	2014-12-25	27	13
+426	2012-10-29	185	96
+427	2015-04-16	448	100
+428	2001-05-20	38	136
+429	2002-02-02	370	140
+430	2015-07-25	18	90
+431	2019-12-20	5	82
+432	2018-12-10	32	155
+433	2008-02-01	208	140
+434	2015-08-30	436	116
+435	2007-02-11	349	145
+436	2005-03-26	232	146
+437	2011-09-30	348	199
+438	2013-06-28	364	21
+439	2010-09-01	179	56
+440	2005-11-27	337	69
+441	2001-05-15	411	7
+442	2017-02-25	477	27
+443	2009-09-18	24	159
+444	2017-10-23	462	65
+445	2014-09-07	74	98
+446	2012-03-09	44	133
+447	2008-01-14	262	53
+448	2013-08-31	297	40
+449	2019-11-05	112	9
+450	2000-07-19	344	85
+451	2004-09-21	500	11
+452	2007-10-14	12	28
+453	2013-02-01	475	159
+454	2005-03-24	27	121
+455	2006-02-18	277	140
+456	2000-01-27	443	111
+457	2018-10-22	474	166
+458	2016-05-25	22	89
+459	2008-10-17	449	128
+460	2008-03-16	484	20
+461	2015-04-22	207	180
+462	2000-11-30	303	49
+463	2006-07-10	495	40
+464	2007-04-16	198	116
+465	2018-09-06	234	12
+466	2015-02-02	341	153
+467	2018-04-19	433	145
+468	2017-05-19	282	49
+469	2008-10-25	87	47
+470	2004-02-21	21	175
+471	2001-03-19	425	42
+472	2006-04-28	415	144
+473	2006-10-25	99	141
+474	2014-05-23	165	48
+475	2019-02-24	137	80
+476	2017-12-25	434	159
+477	2018-09-03	182	165
+478	2002-05-12	481	74
+479	2019-08-26	368	2
+480	2012-07-17	413	78
+481	2013-07-09	73	54
+482	2015-01-22	418	28
+483	2018-11-20	418	178
+484	2011-10-07	473	52
+485	2010-03-29	266	34
+486	2001-06-13	378	135
+487	2010-06-19	210	188
+488	2015-03-31	32	5
+489	2018-10-30	264	16
+490	2006-11-13	160	62
+491	2000-05-01	141	169
+492	2014-07-06	217	6
+493	2009-06-18	15	76
+494	2015-04-10	281	121
+495	2005-12-11	193	9
+496	2004-06-20	382	87
+497	2002-11-03	343	181
+498	2013-08-08	5	125
+499	2016-06-08	369	67
+500	2003-02-06	419	172
+501	2000-01-08	437	87
+502	2002-04-17	482	135
+503	2014-06-24	71	20
+504	2005-07-30	54	105
+505	2016-08-16	463	110
+506	2004-10-27	342	88
+507	2000-03-06	116	195
+508	2000-10-25	393	50
+509	2002-01-21	127	81
+510	2020-07-15	471	93
+511	2015-05-30	169	181
+512	2016-05-27	204	165
+513	2008-12-30	48	60
+514	2011-06-22	401	122
+515	2002-07-29	491	88
+516	2009-04-12	322	18
+517	2007-05-20	107	160
+518	2016-09-05	402	76
+519	2016-01-20	482	27
+520	2019-11-19	50	161
+521	2010-09-08	7	70
+522	2010-09-11	376	88
+523	2002-03-05	196	192
+524	2004-08-23	105	94
+525	2018-04-28	87	107
+526	2014-03-05	65	127
+527	2009-10-31	83	165
+528	2019-07-03	438	15
+529	2001-09-19	56	35
+530	2011-04-24	399	9
+531	2009-08-24	445	32
+532	2010-11-24	208	102
+533	2001-08-10	162	26
+534	2000-08-13	482	65
+535	2015-10-03	233	185
+536	2008-01-09	251	43
+537	2010-12-21	431	50
+538	2020-11-29	324	146
+539	2020-04-10	21	193
+540	2016-06-16	115	129
+541	2014-12-19	27	152
+542	2016-10-09	385	156
+543	2006-09-14	218	51
+544	2016-04-02	83	75
+545	2015-04-17	420	112
+546	2000-07-13	365	184
+547	2002-06-25	293	9
+548	2009-05-14	105	139
+549	2013-05-05	473	62
+550	2009-12-24	443	19
+551	2001-04-19	38	141
+552	2015-11-14	202	186
+553	2008-08-12	280	66
+554	2002-03-29	293	154
+555	2010-09-25	156	117
+556	2012-10-17	190	55
+557	2001-11-25	499	37
+558	2006-11-14	260	78
+559	2011-03-23	235	1
+560	2001-07-14	464	38
+561	2007-12-03	181	42
+562	2018-04-12	5	57
+563	2012-05-25	464	4
+564	2007-08-31	199	151
+565	2011-03-12	55	196
+566	2010-07-25	241	79
+567	2003-05-04	240	21
+568	2015-10-24	456	2
+569	2020-01-27	10	103
+570	2020-06-18	392	33
+571	2010-06-04	170	129
+572	2012-07-18	90	42
+573	2005-03-16	2	137
+574	2019-10-28	112	164
+575	2019-12-15	260	38
+576	2011-09-02	288	195
+577	2019-10-04	429	148
+578	2001-12-26	88	144
+579	2019-12-12	499	86
+580	2008-03-29	222	72
+581	2006-02-18	37	142
+582	2005-11-04	438	15
+583	2018-02-01	350	106
+584	2019-07-07	52	56
+585	2015-03-02	259	145
+586	2006-12-01	273	69
+587	2008-02-17	109	78
+588	2008-08-08	420	176
+589	2011-02-08	450	142
+590	2002-08-07	171	42
+591	2001-07-28	434	111
+592	2020-01-16	119	165
+593	2010-02-05	349	74
+594	2011-12-22	359	183
+595	2016-11-23	320	159
+596	2017-07-26	319	122
+597	2016-03-18	183	60
+598	2009-12-19	331	96
+599	2017-04-28	171	174
+600	2000-06-14	44	3
+601	2012-07-29	235	63
+602	2013-05-05	488	17
+603	2000-05-05	121	82
+604	2016-06-04	69	49
+605	2006-07-12	318	20
+606	2002-01-19	84	18
+607	2012-03-19	179	66
+608	2004-09-03	10	6
+609	2014-04-11	15	27
+610	2004-09-07	407	58
+611	2005-12-17	275	117
+612	2004-10-25	135	105
+613	2007-01-18	224	194
+614	2002-06-01	95	78
+615	2014-03-28	266	55
+616	2014-09-22	311	119
+617	2017-03-28	479	146
+618	2020-07-26	421	102
+619	2011-01-12	485	54
+620	2018-12-24	19	117
+621	2000-09-02	220	79
+622	2004-02-19	148	130
+623	2014-12-26	426	165
+624	2009-05-14	64	15
+625	2000-09-21	180	26
+626	2004-12-14	222	139
+627	2011-09-28	205	90
+628	2014-03-17	395	12
+629	2007-08-26	249	106
+630	2000-11-26	176	29
+631	2006-08-28	8	103
+632	2005-08-13	414	58
+633	2020-03-09	238	82
+634	2004-07-09	43	97
+635	2001-12-01	284	191
+636	2007-08-07	243	50
+637	2017-03-05	168	62
+638	2001-08-04	434	81
+639	2002-01-10	54	193
+640	2019-11-04	148	120
+641	2005-09-12	302	33
+642	2015-11-21	204	130
+643	2008-06-10	293	123
+644	2000-06-25	198	188
+645	2013-01-02	393	101
+646	2010-12-22	207	18
+647	2018-02-22	473	8
+648	2016-06-13	246	149
+649	2008-04-23	216	156
+650	2018-02-03	231	118
+651	2019-09-21	481	86
+652	2003-03-14	470	60
+653	2004-04-17	261	35
+654	2006-07-30	48	73
+655	2009-09-21	294	155
+656	2001-06-02	32	20
+657	2010-03-11	74	180
+658	2012-10-28	370	169
+659	2005-10-17	433	134
+660	2007-01-09	299	58
+661	2020-01-04	92	100
+662	2009-10-18	172	66
+663	2016-06-04	417	20
+664	2003-03-13	212	113
+665	2015-07-14	441	7
+666	2005-04-23	425	148
+667	2002-12-01	150	54
+668	2005-06-11	43	154
+669	2009-08-26	63	124
+670	2018-10-07	267	85
+671	2016-07-14	348	156
+672	2003-09-07	190	171
+673	2010-07-11	193	7
+674	2010-11-05	5	200
+675	2009-09-28	374	109
+676	2004-02-17	117	183
+677	2018-02-22	139	106
+678	2016-09-01	85	180
+679	2013-09-21	94	78
+680	2013-05-08	217	97
+681	2015-12-09	498	17
+682	2009-05-06	341	196
+683	2014-06-11	102	195
+684	2006-03-28	134	178
+685	2000-01-17	404	33
+686	2001-05-23	325	24
+687	2006-11-29	462	112
+688	2006-09-13	17	134
+689	2020-02-08	124	18
+690	2006-06-05	14	58
+691	2015-05-05	396	84
+692	2006-12-03	217	93
+693	2008-07-10	299	87
+694	2008-10-02	433	31
+695	2002-05-31	159	112
+696	2006-08-08	177	137
+697	2005-04-19	383	126
+698	2007-11-18	16	173
+699	2007-12-11	161	136
+700	2015-03-07	67	99
+701	2008-10-07	364	8
+702	2001-10-02	68	105
+703	2001-11-07	224	105
+704	2002-03-31	214	21
+705	2012-11-09	106	20
+706	2013-08-09	217	147
+707	2000-06-04	252	175
+708	2000-05-31	29	69
+709	2019-09-01	227	181
+710	2007-06-26	116	167
+711	2009-07-29	411	42
+712	2020-09-24	338	57
+713	2008-07-12	232	10
+714	2016-04-05	423	12
+715	2019-12-18	342	138
+716	2002-05-11	484	135
+717	2012-01-12	197	80
+718	2006-09-10	251	153
+719	2003-07-19	315	88
+720	2005-07-14	89	186
+721	2007-11-07	156	121
+722	2016-04-14	345	26
+723	2014-06-23	143	17
+724	2018-03-13	41	164
+725	2004-08-21	450	100
+726	2010-03-11	164	57
+727	2007-11-23	120	156
+728	2000-04-30	119	51
+729	2002-08-06	159	168
+730	2007-01-09	408	40
+731	2000-08-22	184	45
+732	2000-01-27	130	38
+733	2006-11-25	423	3
+734	2005-07-01	226	120
+735	2011-08-30	480	136
+736	2007-12-31	22	195
+737	2011-07-30	317	154
+738	2015-02-02	481	146
+739	2016-04-08	466	80
+740	2007-04-19	216	21
+741	2007-12-09	145	84
+742	2008-06-18	448	20
+743	2008-05-31	201	112
+744	2012-09-23	262	152
+745	2017-04-25	470	163
+746	2013-03-26	198	63
+747	2007-05-29	473	183
+748	2016-12-10	473	43
+749	2007-04-20	367	35
+750	2018-10-17	250	85
+751	2016-09-18	456	47
+752	2007-07-23	344	140
+753	2017-05-31	394	139
+754	2011-04-24	200	82
+755	2016-09-25	85	49
+756	2014-09-01	396	54
+757	2003-09-21	485	173
+758	2019-09-01	159	153
+759	2009-09-05	464	149
+760	2000-10-04	12	191
+761	2004-08-07	495	154
+762	2006-02-26	232	186
+763	2016-02-22	128	31
+764	2005-11-26	443	90
+765	2010-07-22	363	110
+766	2019-11-16	191	16
+767	2002-01-30	115	73
+768	2000-12-07	390	144
+769	2009-10-12	442	170
+770	2001-06-06	155	43
+771	2012-07-20	379	121
+772	2012-10-24	429	51
+773	2003-10-27	284	102
+774	2016-03-17	297	15
+775	2002-09-22	212	2
+776	2006-09-24	91	37
+777	2011-08-16	287	99
+778	2019-10-05	68	20
+779	2011-05-07	474	35
+780	2001-08-06	18	15
+781	2008-01-01	407	197
+782	2010-12-30	364	29
+783	2007-02-03	75	74
+784	2011-06-20	459	114
+785	2004-06-08	246	97
+786	2013-09-26	358	23
+787	2015-01-01	318	145
+788	2005-01-30	278	46
+789	2005-01-14	200	89
+790	2014-12-30	416	106
+791	2000-06-04	420	170
+792	2017-03-17	219	162
+793	2017-05-30	443	92
+794	2007-07-28	104	178
+795	2008-10-11	178	103
+796	2017-09-02	411	196
+797	2008-02-16	474	159
+798	2013-02-11	249	149
+799	2009-10-09	13	107
+800	2015-12-16	449	162
+801	2009-06-26	40	20
+802	2008-07-08	415	62
+803	2016-07-18	312	146
+804	2001-01-31	354	55
+805	2017-04-13	245	50
+806	2001-08-04	384	126
+807	2017-09-16	255	123
+808	2006-01-22	413	196
+809	2010-05-14	293	184
+810	2009-04-28	381	9
+811	2000-02-10	75	15
+812	2008-06-18	119	66
+813	2019-10-14	285	12
+814	2000-08-13	348	137
+815	2017-09-02	454	25
+816	2012-01-08	396	184
+817	2001-07-13	226	154
+818	2009-04-28	454	25
+819	2010-08-23	84	144
+820	2019-10-07	331	196
+821	2014-12-19	357	116
+822	2014-08-05	393	119
+823	2013-02-28	186	187
+824	2018-03-31	342	54
+825	2002-03-13	203	79
+826	2007-12-20	201	102
+827	2019-01-13	152	90
+828	2010-07-26	63	119
+829	2005-12-08	237	115
+830	2001-06-15	425	103
+831	2020-04-22	260	119
+832	2005-06-24	192	78
+833	2011-07-18	335	19
+834	2013-11-02	494	132
+835	2012-04-21	318	89
+836	2004-08-12	188	121
+837	2011-03-26	267	123
+838	2001-09-21	494	14
+839	2012-06-10	424	126
+840	2010-11-30	461	191
+841	2009-10-18	261	106
+842	2012-07-06	320	25
+843	2003-05-21	428	155
+844	2012-10-26	94	53
+845	2007-06-19	283	1
+846	2016-04-16	380	22
+847	2002-09-30	91	9
+848	2012-04-04	209	2
+849	2015-11-07	485	113
+850	2009-10-19	27	77
+851	2005-11-23	342	18
+852	2018-07-10	233	100
+853	2013-06-19	434	106
+854	2004-02-03	373	131
+855	2004-02-11	462	19
+856	2008-03-27	193	122
+857	2015-07-19	65	178
+858	2020-03-08	462	190
+859	2009-09-28	487	52
+860	2006-03-03	98	73
+861	2006-07-08	475	93
+862	2019-01-24	11	59
+863	2009-10-06	78	113
+864	2001-04-20	98	38
+865	2020-11-08	75	133
+866	2001-07-16	31	192
+867	2019-08-30	69	35
+868	2014-10-17	350	150
+869	2017-08-13	283	148
+870	2007-03-16	157	105
+871	2017-04-19	439	21
+872	2013-07-14	400	65
+873	2000-07-07	393	137
+874	2015-06-05	410	191
+875	2014-01-08	409	165
+876	2013-12-03	446	27
+877	2001-12-04	457	23
+878	2007-07-08	406	74
+879	2019-02-25	451	130
+880	2020-01-08	493	176
+881	2015-11-22	483	44
+882	2015-07-25	189	131
+883	2001-07-06	480	176
+884	2013-10-12	226	170
+885	2009-10-23	492	11
+886	2015-03-02	461	152
+887	2013-09-22	104	49
+888	2004-02-28	393	141
+889	2019-02-14	483	37
+890	2016-03-24	411	15
+891	2001-07-20	352	148
+892	2007-12-03	66	108
+893	2013-02-22	124	41
+894	2009-03-15	221	129
+895	2012-08-09	392	132
+896	2008-09-25	392	21
+897	2014-10-15	2	171
+898	2011-10-01	54	32
+899	2010-07-07	372	94
+900	2002-09-08	312	16
+901	2006-10-08	100	70
+902	2001-08-01	460	169
+903	2003-08-17	114	152
+904	2019-08-26	237	75
+905	2010-09-14	194	53
+906	2010-04-18	161	126
+907	2000-02-19	36	184
+908	2015-01-30	347	196
+909	2002-04-11	224	2
+910	2011-06-04	100	183
+911	2002-10-01	339	182
+912	2007-09-04	447	175
+913	2007-07-27	273	89
+914	2004-08-13	412	163
+915	2020-08-28	136	35
+916	2009-12-29	253	148
+917	2019-07-16	162	183
+918	2020-09-02	208	142
+919	2017-12-24	411	19
+920	2017-08-27	93	33
+921	2009-07-07	271	142
+922	2001-07-11	107	51
+923	2003-08-14	377	69
+924	2004-11-03	167	192
+925	2018-08-13	134	72
+926	2014-08-22	465	84
+927	2005-10-09	15	91
+928	2010-12-16	421	87
+929	2000-11-15	460	69
+930	2006-02-26	89	41
+931	2019-04-30	310	6
+932	2008-01-20	57	15
+933	2013-12-30	207	15
+934	2006-02-04	480	69
+935	2010-09-01	455	176
+936	2012-02-20	357	1
+937	2007-08-25	490	146
+938	2009-05-11	326	130
+939	2006-06-02	19	155
+940	2009-01-01	257	180
+941	2009-04-07	72	96
+942	2009-11-01	459	191
+943	2012-02-27	405	31
+944	2003-02-13	65	182
+945	2010-07-08	419	97
+946	2010-10-12	455	46
+947	2012-01-16	156	135
+948	2011-04-18	233	21
+949	2004-09-07	268	175
+950	2002-12-21	358	196
+951	2015-12-07	25	2
+952	2000-05-01	328	31
+953	2006-05-20	421	186
+954	2010-06-04	220	165
+955	2012-07-27	19	147
+956	2001-06-21	180	13
+957	2020-04-15	491	14
+958	2016-04-28	256	188
+959	2008-01-21	462	21
+960	2020-08-22	158	150
+961	2016-09-30	116	183
+962	2011-10-26	384	177
+963	2006-11-27	11	163
+964	2002-08-13	163	11
+965	2019-06-06	200	140
+966	2003-08-19	343	55
+967	2004-09-28	377	16
+968	2003-12-24	183	108
+969	2014-06-21	54	95
+970	2001-01-09	291	158
+971	2008-09-24	431	166
+972	2010-05-18	158	109
+973	2000-12-05	399	179
+974	2001-07-18	17	43
+975	2015-09-28	265	123
+976	2018-01-05	458	4
+977	2018-09-01	33	147
+978	2018-02-14	400	150
+979	2010-04-26	171	88
+980	2013-05-20	453	49
+981	2008-04-02	69	91
+982	2006-07-18	215	46
+983	2017-07-05	469	31
+984	2004-04-28	482	53
+985	2003-10-27	52	134
+986	2001-12-19	230	139
+987	2016-09-15	42	30
+988	2011-02-08	8	119
+989	2019-05-11	369	111
+990	2008-04-12	232	73
+991	2016-09-13	391	112
+992	2010-10-24	333	91
+993	2009-05-03	319	15
+994	2018-03-30	275	88
+995	2002-05-29	37	102
+996	2010-08-07	7	182
+997	2001-02-12	340	121
+998	2014-12-22	409	120
+999	2016-08-27	48	170
+1000	2012-05-30	464	50
 \.
 
 
@@ -22749,159 +26648,319 @@ COPY public."Product" (id, name, brand, manufacturer, manufacture_date, cost) FR
 833	V-MODA - Crossfade Wireless Headphones - Gunmetal Black	V-MODA		2017-02-04	299
 834	Details About New Logitech G230 981000541 Headset	Logitech		2018-01-30	59
 835	Lowepro - Slingshot Edge 250 AW Camera Backpack - Black	Lowepro	Lowepro	2016-06-10	62
-836	Microsoft Surface Pro 4 Type Cover with Fingerprint ID	Microsoft	Microsoft	2015-11-13	957
-837	Boytone - 2500W 2.1-Ch. Home Theater System - Black Diamond	Boytone	Boytone	2015-05-18	2760
-838	Sanus VLF410B1 10-Inch Super Slim Full-Motion Mount for 37 - 84 Inches TV's	Sanus		2015-04-13	760
-839	Ultimate Ears MEGABLAST Portable Wi-Fi/Bluetooth Speaker with hands-free Amazon Alexa voice control (waterproof) - Graphite Black	Ultimate Ears		2018-03-14	2820
-840	Flipside 300 Backpack (Black)	Lowepro	Lowepro	2015-08-18	3667
-841	Corsair CMSA8GX3M2A1066C7 Apple 8 GB Dual Channel Kit DDR3 1066 (PC3 8500) 204-Pin DDR3 Laptop SO-DIMM Memory 1.5V	Corsair		2017-07-18	1712
-842	iHome Rechargeable Splash Proof Stereo Bluetooth Speaker - Black (IBT33BC)	Sdi Technologies, Inc.	iHome	2016-11-07	4103
-843	Verizon MiFi 6620L Jetpack 4G LTE Mobile Hotspot (Verizon Wireless)	Verizon Wireless	Novatel	2015-10-20	4525
-844	JVC KD-X320BTS Apple iPod and Android Digital Media Receiver with Bluetooth	JVC		2015-07-06	227
-845	JBL - 6" x 8" 2-Way Coaxial Car Speakers with Polypropylene Cones (Pair) - Black	JBL		2015-09-20	4603
-846	Lenovo - AC Adapter for Select Lenovo Yoga Laptops - Black	Lenovo	Lenovo Idea	2015-10-16	3804
-847	SiriusXM SXEZR1V1 XM Onyx EZR Satellite Radio Receiver with Vehicle Kit	Siriusxm	Siriusxm	2017-06-22	1467
-848	PNY Anarchy 16GB Kit (2x8GB) DDR4 2400MHz (PC4-19200) CL15 Desktop Memory (BLUE) - MD16GK2D4240015AB	Pny		2016-03-11	1475
-849	Slingbox M2	Sling Media	Slingbox	2015-09-30	722
-850	Sony SRSHG1/BLK Hi-Res Wireless Speaker- Charcoal black	Sony	Sony	2016-07-07	744
-851	Midland Weather Alert Radio, 1.0 CT	Midland	Midland	2015-09-20	924
-852	Sony Mini Digital Video Cassettes - DVC - 1 Hour	Sony	Sony	2015-11-16	4425
-853	SRS-ZR7 Wireless Speaker	Sony		2016-06-11	3984
-854	Toshiba - 3TB Internal Serial ATA III Hard Drive for Desktops	Toshiba		2017-07-25	1539
-855	Power Acoustik - Gothic Series 10" Dual-Voice-Coil 2-Ohm Subwoofer - Black	Power Acoustik		2015-12-02	2360
-856	The Rebel BT On-Ear Wireless Bluetooth Headphones (Black)	House of Marley	House of Marley	2016-08-02	2627
-857	CRX-322 CD Receiver	Yamaha	Yamaha	2015-08-22	4806
-858	DreamWave - Tremor Portable Bluetooth Speaker - Green,Black	DreamWave		2015-10-17	2898
-859	Alpine	Glengery	Glengery	2014-11-20	1761
-860	XPS 8920 Tower Desktop Computer	Dell		2017-05-22	1964
-861	Air-Fi Runaway AF32 Stereo Bluetooth Wireless Headphones with Hidden Microphone (White)	MEE audio		2015-08-18	1943
-862	SAMSUNG 40'' Class FHD (1080P) Smart LED TV (UN40M5300)	Samsung		2017-08-21	3832
-863	NS-SP1800BL 5.1-Channel Home Theater System (Black)	Yamaha	YAMAHA	2015-07-03	2782
-864	Acoustimass 6 Series V Home Theater Speaker System (Black)	Bose	Bose	2015-05-11	1422
-865	Logitech G403 Wireless Gaming Mouse with High Performance Gaming Sensor	Logitech		2017-03-06	2884
-866	Sony MEXM100BT 160W RMS Marine CD Receiver with Bluetooth (Black) and SiriusXM Ready	Sony	Sony	2016-05-31	2650
-867	Sony SRSXB30/BLK XB30 Portable Wireless Speaker with Bluetooth	Sony		2017-03-27	807
-868	Sony LBT-GPX555 Mini-System with Bluetooth and NFC	Sony	Sony	2015-10-23	2212
-869	NS-IW480CWH In-Ceiling 8 Natural Sound Three-Way Speaker System (Pair)	Yamaha	Yamaha	2014-10-29	4581
-870	Motorola Wi-Fi Pet Video Camera	Motorola	Motorola	2015-05-11	2771
-871	AW6500 All-Weather Outdoor Speaker (White, Single)	Definitive Technology	5 Years	2015-07-06	3254
-872	Alpine - 6-1/2" 2-Way Coaxial Car Speakers with Polypropylene Cones (Pair) - Black	Alpine		2015-11-09	620
-873	Travel RockStar 3-in-1 2A USB and Dual-Outlet Wall Charger with Internal 3000mAh Battery Pack	Belkin	Belkin	2015-11-16	3686
-874	Bowers & Wilkins P7 Wired Over Ear Headphones	Bowers & Wilkins		2015-09-11	3653
-875	Everest Elite 700 Around-Ear Wireless Headphones (White)	JBL	JBL	2016-05-30	4823
-876	Clarity - Super-Loud Phone Ringer - White	CLARITY-TELECOM	Allround Software	2015-12-02	3850
-877	House of Marley EM-DH003-PS TTR Noise-Cancelling Over-Ear Headphones (Black)	House of Marley		2015-09-11	2460
-878	Toshiba Micro Component Speaker System: Wireless Bluetooth Speaker Sound System with FM	Toshiba		2017-07-31	3055
-879	Kicker 41IK5BT2V2 Amphitheater High-Performance Audio System with Bluetooth, Black	Kicker		2015-09-11	2939
-880	Prime Three-Way Center Channel Speaker (Premium Black Ash)	SVS		2015-07-13	1124
-881	2TB Red 5400 rpm SATA III 3.5 Internal NAS HDD	WD		2015-08-16	3697
-882	Nighthawk AC1900 Dual-Band Wi-Fi USB Adapter	Netgear		2017-07-25	619
-883	Samsung Universal 3100mAh Portable External Battery Charger - White	Samsung	SAMSUNG	2015-02-26	3600
-884	Logitech 915-000224  Harmony Ultimate One 15-Device Universal Infrared Remote with Customizable Touch Screen Control - Black	Logitech	Logitech	2015-05-18	4221
-885	Round LCD/Projector Ceiling Plate - Black	Peerless-AV	Peerless	2015-07-13	1218
-886	A Taste for Honey (The Mycroft Holmes Mysteries Book 1)			2020-12-13	7
-887	Kareem: Minority of One			2020-12-13	619
-888	Mycroft Holmes			2020-12-13	0
-889	Microsoft Surface Pro 3 (128 GB, Intel Core i5) (Renewed)			2020-12-13	1118
-890	Writings on the Wall: Searching for a New Equality Beyond Black and White			2020-12-13	39
-891	Mycroft and Sherlock: The Empty Birdcage			2020-12-13	0
-892	Mycroft and Sherlock			2020-12-13	0
-893	Mycroft Holmes and The Apocalypse Handbook			2020-12-13	2831
-894	Sherlock Holmes and the Seven Deadly Sins Murders			2020-12-13	7
-895	Black Profiles in Courage: A Legacy of African-American Achievement			2020-12-13	40
-896	An Android Dog's Tale: A Sci-Fi Counter-Fantasy Novel			2020-12-13	0
-897	Coach Wooden and Me: Our 50-Year Friendship On and Off the Court			2020-12-13	17
-898	The Hundred Year Wait (Mycroft Holmes Adventures Book 1)			2020-12-13	0
-899	On the Shoulders of Giants: My Journey Through the Harlem Renaissance			2020-12-13	16
-900	$25 Xbox Gift Card [Digital Code]			2020-12-13	25
-901	Dell USB 3.0 Ultra HD/4K Triple Display Docking Station (D3100), Black			2020-12-13	2138
-902	Microsoft Office Home and Business 2019 Download 1 Person Compatible on Windows 10 and Apple MacOS			2020-12-13	4470
-903	Shoeboy's Polish Application Brush/Premium Horsehair/Made in Germany/Gray			2020-12-13	19
-904	Microsoft Surface Pro 7 – 12.3" Touch-Screen - 10th Gen Intel Core i5 - 8GB Memory - 128GB SSD (Latest Model) – Platinum with Black Type Cover			2020-12-13	2692
-905	Microsoft 365 Personal | 12-Month Subscription, 1 person | Premium Office apps | 1TB OneDrive cloud storage | PC/Mac Download			2020-12-13	2802
-906	Microsoft Sculpt Ergonomic Keyboard for Business (5KV-00001 )			2020-12-13	1597
-907	Office Mac Home & Business 2011 Key Card (1PC/1User)			2020-12-13	916
-908	Microsoft Surface Pro 7 – 12.3" Touch-Screen - Intel Core i7 - 16GB Memory - 256GB SSD (Latest Model) – Matte Black (VNX-00016)			2020-12-13	1124
-909	Office 2019 Home and Business Boxed 1 PC or 1MAC Word Excel PowerPoint OneNote Outlook - USA Version			2020-12-13	3486
-910	Microsoft Surface Dock (Pd9-00003),Black			2020-12-13	3799
-911	Office Mac Home & Student 2011 - 1MAC/1User (Disc Version)			2020-12-13	4140
-912	Microsoft Surface Arc Mouse – Ice Blue			2020-12-13	66
-913	Microsoft Sculpt Ergonomic Desktop USB Port Keyboard and Mouse Combo (L5V-00002)			2020-12-13	1770
-914	OLD VERSION Microsoft Office Home and Student 2010 Family Pack, 3PC (Disc Version)			2020-12-13	249
-915	Office Suite 2019 USB Alternative to Office Home Student and Business Compatible with Word, Excel, PowerPoint for Windows 10 8 7 Vista XP by Apache OpenOffice ms Word ms Office (USB-Drive)			2020-12-13	4766
-916	Perixx Periboard-612 Wireless Ergonomic Split Keyboard with Dual Mode 2.4G and Bluetooth Feature, Compatible with Windows 10 and Mac OS X System, Black, US English Layout			2020-12-13	79
-917	Microsoft Office Home and Student 2016 for Mac Key Card w/ Norton Security Deluxe - 5 Devices [Key Card]			2020-12-13	789
-918	Microsoft Ergonomic Keyboard (LXM-00001)			2020-12-13	2265
-919	Logitech M557 Bluetooth Mouse – Wireless Mouse with 1 Year Battery Life, Side-to-Side Scrolling, and Right or Left Hand Use with Apple Mac or Microsoft Windows Computers and Laptops, Gray			2020-12-13	2211
-920	Microsoft Modern Mobile Mouse (KTF-00013), Black			2020-12-13	4734
-921	New Microsoft Surface Pro 7 Bundle: 10th Gen Intel Core i5-1035G4, 8GB RAM, 256GB SSD (Latest Model) – Platinum with Black Type Cover and Surface Pen, 12.3" Touch-Screen Pixelsense Display			2020-12-13	90
-922	Microsoft Surface Precision Mouse, Light Grey			2020-12-13	79
-923	Microsoft FHD-00001 Surface Arc Mouse Light Grey, Gray			2020-12-13	75
-924	Microsoft RVF-00052 Arc Touch Mouse,Black			2020-12-13	41
-925	10" Windows 10 Fusion5 Ultra Slim Windows Tablet PC- (4GB RAM, 128GB Storage, USB 3.0, Intel, 5MP and 2MP Cameras, Windows 10 S Tablet PC) (128GB)			2020-12-13	239
-926	Microsoft WS3-00001 Surface Mouse			2020-12-13	42
-927	Microsoft Surface Mobile Mouse (Silver) - KGY-00001			2020-12-13	3068
-928	Microsoft  Surface Pro 6 (Intel Core i5, 8GB RAM, 128GB)			2020-12-13	739
-929	Microsoft Surface Dock Compatible with Surface Book, Surface Pro 4, and Surface Pro 3 (Renewed)			2020-12-13	145
-930	Perixx PERIDUO-606 Wireless Mini Ergonomic Keyboard with Portable Vertical Mouse, Adjustable Palm Rest Stand and Membrane Low Profile Keys, US English Layout			2020-12-13	59
-931	Kensington Pro Fit Ergonomic Wireless Keyboard - Black (K75401US)			2020-12-13	49
-932	Microsoft Sculpt Ergonomic Wireless Desktop Keyboard and Mouse - L5V-00001,Black			2020-12-13	2544
-933	Surface Pro Dock for Surface Pro 4/Pro 5/Pro 6 USB Hub Docking Station with Gigabit Ethernet, 4K HDMI VGA DP Display, 3xUSB 3.0, Audio Out, USB C, SD/TF Card Slot Combo Dock Only for Surface Pro 4/5/6			2020-12-13	85
-934	Minecraft Dungeons 3.25" Skeleton Necromancer and Wraith			2020-12-13	18
-935	Minecraft: Java Edition for PC/Mac [Online Game Code]			2020-12-13	26
-936	LEGO Minecraft The Pillager Outpost 21159 Awesome Action Figure Brick Building Playset for Kids Minecraft Gift, New 2020 (303 Pieces)			2020-12-13	689
-937	Mattel Games UNO Minecraft Card Game, Now UNO fun includes the world of Minecraft, Multicolor, Basic Pack			2020-12-13	4
-938	Minecraft: Epic Bases			2020-12-13	11
-939	Minecraft Survival Pack			2020-12-13	14
-940	Minecraft Starter Collection - PlayStation 4			2020-12-13	29
-941	Minecraft Hot Wheels Character Vehicle 5-Pk Collector Set, 1:64 Scale Collectible Cars and Trucks for Play and Display, Gift for Kids Age 3 and Older			2020-12-13	23
-943	Minecraft Toys Redstone Torch 12.6 Inch LED Lamp | USB Rechargeable for Nightlight, Costume Cosplay, Roleplay			2020-12-13	4471
-944	Diary of a Minecraft Zombie Book 1: A Scare of A Dare			2020-12-13	5
-945	Minecraft Carry Along Potion Plus Exclusive Mini Figure, Carrying Case for Mini Figures, Based on Video Game, Toys for Kids Age 6 and Up			2020-12-13	4
-946	Minecraft Dungeons Hero Edition - Nintendo Switch			2020-12-13	1777
-947	PACKGOUT STEM Toys Gifts for Boy Teen Remote Control Building Kits for Boy Girl Teen Gift 5/6/7 Year Old Boy Gifts Build Own Gift			2020-12-13	30
-948	LEGO Star Wars Darth Vader's Castle 75251 Building Kit includes TIE Fighter, Darth Vader Minifigures, Bacta Tank and more (1,060 Pieces) - (Amazon Exclusive)			2020-12-13	116
-949	Smack it Card Game for Kids			2020-12-13	8
-950	Wrangler Authentics Men’s Classic Relaxed Fit Flex Jean			2020-12-13	25
-951	Robe Factory LLC Minecraft Mini Mob 4-Piece Figure Mood Light Set | Battery Operated LED Lights			2020-12-13	1140
-952	Minecraft Dungeons Hero Edition - PlayStation 4			2020-12-13	20
-953	JINX Minecraft Pig Plush Stuffed Toy, Pink, 12" Long			2020-12-13	46
-954	Jada Toys Nano METALFIGS Minecraft 20-Pack Wave 3, 1.65" Die-Cast Collectible Figures 31431			2020-12-13	40
-955	The Official Minecraft Guide Collection 8 Books Box Set By Mojang (Ocean Survival, Farming, PVP Minigames, Enchantments & Potions, The Nether & The End, Redstone, Survival, Creative)			2020-12-13	4161
-956	Mattel Minecraft Dungeons 3.25-in Figures 2-Pk Battle Figures, Adriene and Skeleton with Battle Accessories Age 6 and Older			2020-12-13	19
-957	Minecraft (Nintendo Switch)			2020-12-13	42
-958	ThinkGeek Minecraft Light-Up Wall Torch - Mounts To Your Wall - Officially Licensed Minecraft Collectible			2020-12-13	3892
-959	Minecraft: The Island: An Official Minecraft Novel			2020-12-13	4437
-960	Minecraft Comic Maker Multipack Attack Set with Evoker and Vexes, Based on Video Game, Toys for Girls and Boys Age 6 and Up			2020-12-13	7
-961	Minecraft - Nintendo Switch			2020-12-13	2524
-962	Minecraft Redstone Series 11 Build-A-Mini Figure Blind Box (Pack of 4)			2020-12-13	29
-963	Red Light, Green Light, 1-2-3 - Card Game for Ages 5 and Up			2020-12-13	7
-964	Box Buddies Monyamo - Pack of 12 Monster Paper Toy Cards			2020-12-13	8
-965	Jada Toys Minecraft 20-Pack Wave 1 Nano METALFIGS 1.65" Die - Cast Figures, Multicolor (30125)			2020-12-13	39
-966	Minecraft Boxer Briefs (3 Pack) Creeper Crew Underwear for Boys			2020-12-13	20
-967	Minecraft: Guide Collection 4-Book Boxed Set: Exploration; Creative; Redstone; The Nether & the End			2020-12-13	4337
-968	Minecraft Dungeons (Nintendo Switch)			2020-12-13	42
-969	Minecraft Dungeons: DLC Season Pass - Xbox Series X [Digital Code]			2020-12-13	19
-970	Portal Gun Mod for Minecraft PE			2020-12-13	2933
-971	Ravensburger Minecraft: Builders & Biomes - Farmer's Market Expansion Strategy Board Game Ages 10 & Up - Amazon Exclusive			2020-12-13	19
-972	Minecraft Grass Block Storage Cube Organizer | Minecraft Storage Cube | Grass Block From Minecraft Cubbies Storage Cubes | Organization Cubes | 15-Inch Square Bin With Lid			2020-12-13	3214
-973	Songs Of War (Minecraft Animation)			2020-12-13	2215
-974	Minecraft 3.25 Scale Mega Redstone Monstrosity			2020-12-13	24
-975	Minecraft Dungeons Hero Edition - Xbox One			2020-12-13	1672
-976	LEGO Minecraft The Polar Igloo 21142 Building Kit (278 Pieces) (Discontinued by Manufacturer)			2020-12-13	89
-977	The Ultimate Unofficial Encyclopedia for Minecrafters: An A - Z Book of Tips and Tricks the Official Guides Don't Teach You			2020-12-13	4122
-942	Minecraft		Anrew	2020-12-13	6
-978	Minecraft Earth Boost Mini Figures 2-Pack NFC-Chip Toys, Earth Augmented Reality Mobile Game, Based on Video Game, Great for Playing, Trading, and Collecting, Adventure Toy for Boys and Girl			2020-12-13	4
-979	Minecraft Boys' Creeper Button Down Shirt			2020-12-13	23
-980	Minecraft Creeper Glitter Motion Light | 12-Inch LED Mood Light Battery Lamp			2020-12-13	4220
-981	Minecraft Starter Collection - Xbox One			2020-12-13	2056
-982	JINX Minecraft Steve Plush Stuffed Toy, Multi-Colored, 12" Tall			2020-12-13	44
-983	Minecraft Transforming Sword/Pickaxe			2020-12-13	234
-984	LEGO Minecraft The End Battle 21151 Ender Dragon Building Kit includes Dragon Slayer and Enderman Toy Figures for Dragon Fighting Adventures (222 Pieces)			2020-12-13	3897
-985	LEGO Minecraft The Crafting Box 3.0 21161 Minecraft Brick Construction Toy and Minifigures, Castle and Farm Building Set, Great Gift for Minecraft Players Aged 8 and up, New 2020 (564 Pieces)			2020-12-13	3443
-986	Minecraft Hardcore Gameplay - Dallas Gamer			2020-12-13	4851
-987	Minecraft: The Shipwreck: An Official Minecraft Novel			2020-12-13	12
-988	Houses Guide for Minecraft			2020-12-13	2377
+836	Cuisinart DGB-400 Automatic Grind & Brew 12-Cup Coffeemaker, Black/Silver			2020-12-17	361
+837	Cuisinart DGB-550BKP1 Grind & Brew Automatic Coffeemaker, 12 Cup, Black			2020-12-17	99
+838	Single Serve Coffee Maker, Sboly Grind and Brew Automatic Coffee Machine, Single Cup Coffee Maker with Coffee Grinder Built-in a 12oz Glass Coffee Pot			2020-12-17	84
+839	Cuisinart DGB-1FR Single Cup Grind and Brew Ground Coffee Maker (Renewed)			2020-12-17	59
+840	(6) Water Filters for Cuisinart DGB-650BC Grind & Brew Coffeemaker NEW"			2020-12-17	11
+841	Cuisinart (DGB-700BC) 12 Cup Grind & Brew Coffeemaker			2020-12-17	399
+842	Parts 4R Сuisinаrt Coffee Maker Clear Replacement Grinder Assembly Lid DGB-500GLID			2020-12-17	22
+843	Coffee Maker,500ML Apacity Removable Grinding and Filter Holder Grinding Coffee Maker (Silver)			2020-12-17	95
+844	Reusable Basket-style 10-12 Cup Coffee Filter with Screen Bottom To Fit Cuisinart DGB-500 DGB-600BC DGB-650 DGB-700 DGB-900 (1)			2020-12-17	2669
+845	Cuisinart DGB-500GLID Grinder Assembly Lid, Clear			2020-12-17	3828
+846	Cuisinart DGB-500GLID Grinder Assembly Lid, Clear			2020-12-17	832
+847	Cuisinart 12-Cup coffee maker gold tone filter GTFB (japan import)			2020-12-17	324
+848	Cuisinart Grind & Brew DGB-550BK Coffee Maker			2020-12-17	2286
+849	Conscious Luck: Eight Secrets to Intentionally Change Your Fortune			2020-12-17	18
+850	Any Luck at All (Asheville Brewing Book 1)			2020-12-17	0
+851	Just My Luck			2020-12-17	1283
+852	Conscious Luck: Eight Secrets to Intentionally Change Your Fortune			2020-12-17	0
+853	Liquid Luck: The Good Fortune Handbook			2020-12-17	0
+854	Luck			2020-12-17	3833
+855	Uncut Gems			2020-12-17	2499
+856	Luck-Key			2020-12-17	700
+857	Pure Luck			2020-12-17	3563
+858	Luck: Season 1			2020-12-17	1585
+859	Banfeng Lucky Wind Chimes Feng Shui Bell for Good Luck Home Garden Patio Hanging Decoration Gift (6 Bells)			2020-12-17	10
+860	Art of the Root, Ltd. Spellbound Oil for Glamour Magic, Enchantment, Charisma, Attraction & Persuasion (Wiccan, Pagan, Conjure, Hoodoo, Magick)			2020-12-17	7
+861	Good Night, and Good Luck			2020-12-17	764
+862	Success and Luck: Good Fortune and the Myth of Meritocracy			2020-12-17	17
+863	Educated Luck (Twisted Luck Book 3)			2020-12-17	0
+864	The Luck Factor: The Scientific Study of the Lucky Mind			2020-12-17	0
+865	Lucky Dog			2020-12-17	590
+866	Dumb Luck and the Kindness of Strangers (John Gierach's Fly-fishing Library)			2020-12-17	18
+867	The Joy Luck Club: A Novel			2020-12-17	12
+868	The Biggest Bluff: How I Learned to Pay Attention, Master Myself, and Win			2020-12-17	19
+869	Dalai Lama - Quote : Sometimes, not getting what you want is a superb stroke of luck - Inspirational Wall Art Vintage Art Print - Home or Office Decor - No Frame			2020-12-17	9
+870	Zorbitz Inc. - Lucky Karma Bracelet with Tiger's Eye for Protection & Balance			2020-12-17	7
+871	VFDB Women's Bowtie Mule Slippers Summer Pointy Toe Loafers Slip On Flat Shoes			2020-12-17	22
+872	VFDB Women Ballet Flats Bowtie Pointy Toe Flats Shoes Wedding Shoes Lightweight Comfortable Ladies Casual Flat Shoes			2020-12-17	15
+873	VFDB Women's Faux Suede Slip On Ballets Loafers,Metal Buckle Square Toe Comfort Light Walking Moccasin Loafers			2020-12-17	12
+874	VFDB Women‘s Pointy Toe Metal Buckle Formal Dress Flats for OL Ladies Slip On Width Work Shoes			2020-12-17	19
+875	VFDB Women's Faux Suede Slip-on Loafer Flat Shoes,Summer Pointy Toe Shallow Casual Work Shoes Walking Ballerina Shoes			2020-12-17	12
+876	VFDB Women Bowite Round Toe Cute Single Shoes Soft PU Leather Slip On Dress Shoes			2020-12-17	12
+877	VFDB Women Metal Ring Slip On Comfortable Ballest Loafers,Square Toe Simple Design Classic Flats Shoes for Dress,Wedding Shoes			2020-12-17	12
+878	VFDB Women's Fashion Faux Suede Floral Ballets Flats,Slip On Pointy Toe Comfort Driving Loafers Big Size 10,Black			2020-12-17	14
+879	VFDB Women's Plaid Flats Shoes Pointy Toe Grid Bowknot Working Shoes			2020-12-17	12
+880	VFDB Women's Pom Pom Flats Square Toe Ballet Flats Comfortable Slip On Loafer，Soft Faux Suede Moccasins Office Work Shoes			2020-12-17	12
+881	VFDB Women/Men Open Toe Striped Anti-Slip Summer House Slippers for Couples Soft Slip On Unisex Indoor Sliders			2020-12-17	11
+882	VFDB Women Slingback Thong Sandals Open Toe Summer Platform T-Strap Flip Flops Shoes			2020-12-17	14
+883	VFDB Women's PU Leather Pointy Toe Flats Driving Shoes,Slip On Lightweight Walking Shoes for Work,Casual Loafers,Black			2020-12-17	12
+884	VFDB Women's Peep Toe Mid Block Heel Summer Slide Sandals,Slip On Casual Transparent Sandals Slippers PVC Sandals			2020-12-17	14
+885	VFDB Women's Faux Suede Lace Up Pointy Toe Flats Loafers,Strappy British Style Single Shoes Driving Moccasins Shoes			2020-12-17	12
+886	VFDB Women Slingback Thong Sandals Open Toe Summer Platform T-Strap Flip Flops Shoes Y-Beige US 5.5			2020-12-17	14
+887	VFDB Women's Faux Suede Slip-on Ballets Flat Shoes with Metal Ring Decor, Square Toe Style Casual Work Shoes,Driving Shoes,Black			2020-12-17	12
+888	VFDB Women Mid Calf Boot Suede Faux Fur Tassel Outdoor Winter Snow Suede Flat Shoes			2020-12-17	23
+889	VFDB Women Comfort Square Toe Ballets Flats, Slip On Classical Walking Shoes for Wedding/Driving/Dating			2020-12-17	14
+890	VFDB Women's Floral Pointy Toe Slip On Ballets Flats,Comfort Walking Flat Loafer Dress Shoes			2020-12-17	14
+891	Vacmaster 4 Gallon Dust Bag, 3 Pack, VFDB			2020-12-17	8
+892	Husqvarna 545157901 Grade Muffler Genuine Original Equipment Manufacturer (OEM) Part			2020-12-17	4485
+893	Echo & SHINDAIWA Genuine 13001606434 Gasket New OEM Replaces 13001606430, 13001606431, 13001606433 Factory Package			2020-12-17	5
+894	Genuine GM 15208496 Radiator Air Baffle, Right			2020-12-17	56
+895	Dorman 904-7701 Exhaust Gas Temperature (EGT) Sensor for Select Mack/Volvo Models (OE FIX)			2020-12-17	72
+896	Genuine GM Retainer Part# 25744385			2020-12-17	2571
+897	Crankshaft Position Sensor for Saab 9-3, 900, 9000 | OEM# 1238358/6238313 / 90213515 | Heavy Duty			2020-12-17	39
+898	Apple AirPods Pro			2020-12-17	1363
+899	New Apple Watch SE (GPS, 44mm) - Silver Aluminum Case with White Sport Band			2020-12-17	2417
+900	Apple Watch Series 3 (GPS, 38mm) - Space Gray Aluminium Case with Black Sport Band			2020-12-17	303
+901	New Apple Watch Series 6 (GPS, 40mm) - Gold Aluminum Case with Pink Sand Sport Band			2020-12-17	4665
+902	Apple 20W USB-C Power Adapter			2020-12-17	3055
+903	Apple TV (32GB, 4th generation)			2020-12-17	624
+904	Lightning Charger Cable iPhone Charger Cable 5 Pack 6FT USB Fast Charging Syncing Cord Cables Compatible iPhone XS/Max/XR/X/8/8Plus/7/7P/6S/iPad/IOS White sharllen			2020-12-17	14
+905	Apple AirPods with Wireless Charging Case			2020-12-17	4194
+906	3 in 1 Aluminum Charging Station for Apple Watch Charger Stand Dock for iWatch Series 4/3/2/1,iPad,AirPods and iPhone Xs/X Max/XR/X/8/8Plus/7/7 Plus /6S /6S Plus（Black）			2020-12-17	21
+907	Apple MacBook Air MD760LL/A 13.3-Inch Laptop (Intel Core i5 Dual-Core 1.3GHz up to 2.6GHz, 4GB RAM, 128GB SSD, Wi-Fi, Bluetooth 4.0) (Renewed)			2020-12-17	499
+908	3Pack Original [Apple MFi Certified] Charger Lightning to USB Cable Compatible iPhone 11 Pro/11/XS MAX/XR/8/7/6s/6/plus,iPad Pro/Air/Mini,iPod Touch(White 1M/3.3FT)			2020-12-17	19
+909	Willful Smart Watch for Android Phones and iOS Phones Compatible iPhone Samsung, IP68 Swimming Waterproof Smartwatch Fitness Tracker Fitness Watch Heart Rate Monitor Watches for Men Women (Green-Gold)			2020-12-17	35
+910	Powerbeats Pro Wireless Earphones - Apple H1 Headphone Chip, Class 1 Bluetooth, 9 Hours Of Listening Time, Sweat Resistant Earbuds - Black			2020-12-17	1097
+911	Apple Smart Keyboard Folio for iPad Pro 12.9-inch (4th Generation) - US English			2020-12-17	4917
+912	Tissyee Watch Charger, Charging Cable Magnetic Wireless Portable Charger Compatible for Apple Watch Series Se 6, 5, 4, 3			2020-12-17	11
+913	Apple Watch Series 5 (GPS + Cellular, 44mm) - Gold Stainless Steel Case with Stone Sport Band			2020-12-17	3622
+914	Apple Watch Magnetic Charging Cable (1m)			2020-12-17	2236
+915	Lightning Cable MFi Certified - iPhone Charger 3Pack 6ft Durable Lightning to USB A Charging Cable Cord Compatible with iPhone 12 SE 2020 11 Xs Max XR X 8 7 6S 6 Plus 5S iPad Pro iPod Airpods - White			2020-12-17	14
+916	OriBear Compatible with Apple Watch Band 40mm 38mm Elegant Floral Bands for Women Soft Silicone Solid Pattern Printed Replacement Strap Band for Iwatch Series 4/3/2/1 M/L Sexy Leopard			2020-12-17	9
+917	Apple Watch Series 5 (GPS + Cellular, 40MM) - Space Gray Aluminum Case with Black Sport Band (Renewed)			2020-12-17	324
+918	MEFEO Adjustable Elastic Bands Compatible with Apple Watch Bands 38mm 40mm 42mm 44mm, Soft Stretch Bracelet Replacement for iWatch Series 6/5/4/3/2/1 & SE Women Girls (Rainbow, 42mm/44mm)			2020-12-17	9
+919	POWER PRIMACY Bands Compatible with Apple Watch Band 38mm 40mm 42mm 44mm, Top Grain Leather Smart Watch Strap Compatible for Men Women iWatch Series 6 5 4 3 2 1,SE (Black/Rosegold, 38mm/40mm)			2020-12-17	16
+920	Seagate One Touch 4TB External Hard Drive HDD – Silver USB 3.0 for PC Laptop and Mac, 1 Year MylioCreate, 4 Months Adobe Creative Cloud Photography Plan (STKC4000401)			2020-12-17	99
+921	LK 6 Pack Screen Protector Compatible with Apple Watch Series 6 5 4 SE 44mm Flexible TPU HD Clear Film Bubble-Free (UF-010)			2020-12-17	14
+922	Apple Magic Keyboard for iPad Pro 12.9-inch (4th Generation) - US English			2020-12-17	2089
+923	Apple Watch Series 5 (GPS, 40MM) - Space Gray Aluminum Case with Black Sport Band (Renewed)			2020-12-17	3916
+924	Apple Pencil (2nd Generation)			2020-12-17	619
+925	Apple AirPods with Charging Case (Wired)			2020-12-17	2383
+926	Apple Gift Card - App Store, iTunes, iPhone, iPad, Airpods, Macbook, accessories and more (Email Delivery)			2020-12-17	25
+927	Apple TV 4K (32GB, Latest Model)			2020-12-17	3431
+928	LK [6 Pack] Screen Protector for Apple Watch 40mm SE/Series 4/5/6 and Apple Watch 38mm Series 3/2/1- Bubble-Free Scratch-resistant iWatch 38mm/40mm Flexible TPU Clear Film (UF-001)			2020-12-17	13
+929	Julk Series 3 38mm Case Compatible with Apple Watch Screen Protector, Overall Protective Case TPU HD Clear Ultra-Thin Cover (2-Pack)			2020-12-17	7
+930	Apple Pencil			2020-12-17	272
+931	iPhone Charger Cord 4Pack iPhone Charger Cable MFi Certified Lightning Cable Fast iPhone Charging Cord Nylon Braided iPhone Charging Cable Compatible with Phone 11 Pro max/XR max/8/7/6/6s/SE 2020,iPad			2020-12-17	12
+932	iiteeology Compatible with Apple Watch Band 42mm 44mm, Upgraded Version Solid Stainless Steel Band Business Replacement iWatch Strap for Apple Watch Series 6/5/4/3/2/1/SE - Space Gray			2020-12-17	19
+933	Apple Smart Keyboard for iPad (7th and 8th Generation) and iPad Air (3rd Generation) - US English			2020-12-17	2930
+934	VKP Brands VKP1010 Johnny Apple Peeler, Stainless Steel Blades, Red			2020-12-17	25
+935	2Pack Apple Original Charger [Apple MFi Certified] Lightning to USB Cable Compatible iPhone Xs Max/Xr/Xs/X/8/7/6s/6plus/5s,iPad Pro/Air/Mini,iPod Touch(White 1M/3.3FT) Original Certified			2020-12-17	14
+936	Apple			2020-12-17	2163
+937	[8 Items] Ferilinso 6Pcs for Apple Watch Bands 44mm [Soft Silicone Sport Strap] + 2Pcs Apple Watch Series 6/Series 5/Series 4/SE 44mm Hard PC Case with Tempered Glass Screen Protector for iWatch 44mm			2020-12-17	20
+938	Apple Magic Keyboard for iPad Air (4th Generation) and iPad Pro 11-inch - US English			2020-12-17	3129
+939	ZALAVER Bands Compatible with Apple Watch Band 38mm 40mm 42mm 44mm, Soft Silicone Sport Replacement Band Compatible with iWatch Series 6 5 4 3 2 1 Women Men Pine Green 38mm/40mm S/M			2020-12-17	5
+940	Tourist [3 Pack] Compatible for Apple Watch Tempered Glass Screen Protecto 38mm Series 3 / 2 / 1, 9H Hardness, Anti-scratch, Anti-fingerprint, Anti-bubble Easy Installation with Lifetime Replacements			2020-12-17	6
+941	Apples to Apples Party Box [Packaging May Vary]			2020-12-17	14
+942	Apple Pencil Tips (4 pack)			2020-12-17	28
+943	AmazonBasics Nylon Braided Lightning to USB Cable - MFi Certified Apple iPhone Charger, Rose Gold, 3-Foot (2-Pack) (Durability Rated 4,000 Bends)			2020-12-17	18
+944	RUOQINI 4 Pack Compatible with Apple Watch Band 38mm 40mm,Sport Silicone Soft Replacement Band Compatible for Apple Watch Series 5/4/3/2/1 [S/M Size - Rosered/MidnightBlue/Black/White]			2020-12-17	14
+945	[2-Pack] Julk Case for Apple Watch Series 6 / SE/Series 5 / Series 4 Screen Protector 40mm, Overall Protective Case TPU HD Clear Ultra-Thin Cover (2 Transparent)			2020-12-17	7
+946	Minecraft: Java Edition for PC/Mac [Online Game Code]			2020-12-17	26
+947	Mattel Games UNO Minecraft Card Game, Now UNO fun includes the world of Minecraft, Multicolor, Basic Pack			2020-12-17	5
+948	LEGO Minecraft The Pillager Outpost 21159 Awesome Action Figure Brick Building Playset for Kids Minecraft Gift, New 2020 (303 Pieces)			2020-12-17	836
+949	Minecraft: Epic Bases			2020-12-17	11
+950	Minecraft Survival Pack			2020-12-17	17
+951	Minecraft Light-Up Adventure Sword			2020-12-17	31
+952	Minecraft Dungeons Hero Edition - Nintendo Switch			2020-12-17	28
+953	Minecraft Comic Maker Multipack Attack Set with Evoker and Vexes, Based on Video Game, Toys for Girls and Boys Age 6 and Up			2020-12-17	14
+954	Minecraft			2020-12-17	6
+955	Minecraft Carry Along Potion Plus Exclusive Mini Figure, Carrying Case for Mini Figures, Based on Video Game, Toys for Kids Age 6 and Up			2020-12-17	10
+956	Minecraft Starter Collection - PlayStation 4			2020-12-17	29
+957	Minecraft Mini Battle in a Box - Dungeons			2020-12-17	13
+958	The Official Minecraft Guide Collection 8 Books Box Set By Mojang (Ocean Survival, Farming, PVP Minigames, Enchantments & Potions, The Nether & The End, Redstone, Survival, Creative)			2020-12-17	4612
+959	Ravensburger Minecraft: Builders & Biomes - Farmer's Market Expansion Strategy Board Game Ages 10 & Up - Amazon Exclusive			2020-12-17	19
+960	Wrangler Authentics Men’s Classic Relaxed Fit Flex Jean			2020-12-17	25
+961	Minecraft 3.25 Scale Mega Redstone Monstrosity			2020-12-17	24
+962	Minecraft (Nintendo Switch)			2020-12-17	37
+963	Songs Of War (Minecraft Animation)			2020-12-17	1437
+964	Minecraft Earth Boost Mini Figures 2-Pack NFC-Chip Toys, Earth Augmented Reality Mobile Game, Based on Video Game, Great for Playing, Trading, and Collecting, Adventure Toy for Boys and Girl			2020-12-17	9
+965	Diary of a Minecraft Zombie Book 1: A Scare of A Dare			2020-12-17	5
+966	Mojang Minecraft Blue Plush Blanket 40" x 50" Fleece Throw Soft & Cozy			2020-12-17	2403
+967	Minecraft - Nintendo Switch			2020-12-17	4849
+968	JINX Minecraft Slime Plush Stuffed Toy, Green, 9.5" Square			2020-12-17	24
+969	Minecraft: The Island: An Official Minecraft Novel			2020-12-17	899
+970	CIRO Robot Building Kits for Kids, STEM Remote Controlled Building Toys Kits Educational Learning Science STEM Projects for Kids Ages 8-12			2020-12-17	50
+971	PlayMonster Snap Ships Sawfly K.L.A.W. Minelayer			2020-12-17	9
+972	TUPARKA 18 Pcs Video Game Wristbands Rubber Bracelet Game Party Wristbands Supplies for Birthday Party Baby Shower Party Favors, 6 Styles			2020-12-17	7
+973	Houses Guide for Minecraft			2020-12-17	735
+974	Skechers Kids' Mega-Craft-Cubotrons Sneaker			2020-12-17	49
+975	The Ultimate Unofficial Encyclopedia for Minecrafters: An A - Z Book of Tips and Tricks the Official Guides Don't Teach You			2020-12-17	657
+976	Exclusive Set Lego Minecraft: The Bee Farm, The Abandoned Mine, The Trading Post and The Skeleton Defense Bundle			2020-12-17	4318
+977	Minecraft Dungeons Hero Edition - PlayStation 4			2020-12-17	23
+978	Minecraft T-Shirt Sprites Characters Gamer Gifts Boys Black Short Sleeve Top			2020-12-17	19
+979	Minecraft Dungeons: DLC Season Pass - Xbox Series X [Digital Code]			2020-12-17	19
+980	LEGO Minecraft 853610 Mini Figure Pack			2020-12-17	38
+981	LEGO Minecraft The Polar Igloo 21142 Building Kit (278 Pieces) (Discontinued by Manufacturer)			2020-12-17	79
+982	Minecraft Dungeons (Nintendo Switch)			2020-12-17	42
+983	Minecraft Core Zombie Figure Pack			2020-12-17	14
+984	Diary of a Farting Creeper: Book 1: Why Does the Creeper Fart When He Should Explode? (Volume 1)			2020-12-17	5
+985	JINX Minecraft Wolf Plush Stuffed Toy, Gray, 15" Long			2020-12-17	49
+986	Jada Toys Minecraft 20-Pack Wave 1 Nano METALFIGS 1.65" Die - Cast Figures, Multicolor (30125)			2020-12-17	39
+987	Minecraft Starter Collection - Xbox One			2020-12-17	4025
+988	LEGO Minecraft The Iron Golem 21123			2020-12-17	89
+989	Clip: Mitch - Minecraft Hello Neighbor			2020-12-17	1036
+990	Portal Gun Mod for Minecraft PE			2020-12-17	2599
+991	JINX Minecraft MineFaire Baby Sheep Plush Stuffed Toy, Orange, 7" Tall			2020-12-17	14
+992	Mattel Minecraft Dungeons 3.25-in Figures 2-Pk Battle Figures, Adriene and Skeleton with Battle Accessories Age 6 and Older			2020-12-17	19
+993	LEGO Minecraft The Crafting Box 3.0 21161 Minecraft Brick Construction Toy and Minifigures, Castle and Farm Building Set, Great Gift for Minecraft Players Aged 8 and up, New 2020 (564 Pieces)			2020-12-17	4145
+994	LEGO Minecraft The End Battle 21151 Ender Dragon Building Kit includes Dragon Slayer and Enderman Toy Figures for Dragon Fighting Adventures (222 Pieces)			2020-12-17	1828
+995	Minecraft Windows 10 Starter Collection - Windows 10 [Digital Code]			2020-12-17	29
+996	Minecraft Story Mode Season 2 - Nintendo Switch			2020-12-17	39
+997	FUDYNMALC Women's Casual Walking Shoes Lightweight Breathable Mesh Athletic Running Shoes Fashion Slip-on Sock Sneakers Comfort Work			2020-12-17	21
+998	Hidden Figures			2020-12-17	3971
+999	High School Musical			2020-12-17	899
+1000	The Man in the High Castle - Season 4			2020-12-17	2791
+1001	High School Musical 2			2020-12-17	4577
+1002	Hi, My Name is Dicky			2020-12-17	3876
+1003	High School Musical 3: Senior Year			2020-12-17	1940
+1004	The Man in the High Castle - Season 1			2020-12-17	1171
+1005	Maia Hi Maia Ho - MagMus Purple			2020-12-17	796
+1006	BOTANIC HEARTH Argan Oil Shampoo and Conditioner Set - with Keratin, Restorative & Moisturizing, Sulfate Free - All Hair Types & Color Treated Hair, Men and Women - (Packaging May Vary) -16 fl oz each			2020-12-17	24
+1007	Hi LA			2020-12-17	4692
+1008	The Man in the High Castle - Season 2			2020-12-17	4760
+1009	Hi-Rail Layouts, Part One			2020-12-17	1630
+1010	Broken Ceiling			2020-12-17	732
+1011	Hi Five (An IQ Novel, 4)			2020-12-17	15
+1012	The Hi Jackers			2020-12-17	1
+1013	Hi-Jinks_Season 1			2020-12-17	1
+1014	Hi-5			2020-12-17	297
+1015	Apple AirPods Pro			2020-12-17	1291
+1016	New Apple Watch SE (GPS, 44mm) - Silver Aluminum Case with White Sport Band			2020-12-17	2134
+1017	Apple Watch Series 3 (GPS, 38mm) - Space Gray Aluminium Case with Black Sport Band			2020-12-17	4466
+1018	New Apple Watch Series 6 (GPS, 40mm) - Gold Aluminum Case with Pink Sand Sport Band			2020-12-17	4033
+1019	Apple 20W USB-C Power Adapter			2020-12-17	3063
+1020	Apple TV (32GB, 4th generation)			2020-12-17	3256
+1021	Lightning Charger Cable iPhone Charger Cable 5 Pack 6FT USB Fast Charging Syncing Cord Cables Compatible iPhone XS/Max/XR/X/8/8Plus/7/7P/6S/iPad/IOS White sharllen			2020-12-17	14
+1022	Apple AirPods with Wireless Charging Case			2020-12-17	1617
+1023	3 in 1 Aluminum Charging Station for Apple Watch Charger Stand Dock for iWatch Series 4/3/2/1,iPad,AirPods and iPhone Xs/X Max/XR/X/8/8Plus/7/7 Plus /6S /6S Plus（Black）			2020-12-17	21
+1024	Apple MacBook Air MD760LL/A 13.3-Inch Laptop (Intel Core i5 Dual-Core 1.3GHz up to 2.6GHz, 4GB RAM, 128GB SSD, Wi-Fi, Bluetooth 4.0) (Renewed)			2020-12-17	499
+1025	3Pack Original [Apple MFi Certified] Charger Lightning to USB Cable Compatible iPhone 11 Pro/11/XS MAX/XR/8/7/6s/6/plus,iPad Pro/Air/Mini,iPod Touch(White 1M/3.3FT)			2020-12-17	19
+1026	Willful Smart Watch for Android Phones and iOS Phones Compatible iPhone Samsung, IP68 Swimming Waterproof Smartwatch Fitness Tracker Fitness Watch Heart Rate Monitor Watches for Men Women (Green-Gold)			2020-12-17	35
+1027	Powerbeats Pro Wireless Earphones - Apple H1 Headphone Chip, Class 1 Bluetooth, 9 Hours Of Listening Time, Sweat Resistant Earbuds - Black			2020-12-17	3105
+1028	Apple Smart Keyboard Folio for iPad Pro 12.9-inch (4th Generation) - US English			2020-12-17	4877
+1029	Tissyee Watch Charger, Charging Cable Magnetic Wireless Portable Charger Compatible for Apple Watch Series Se 6, 5, 4, 3			2020-12-17	11
+1030	Apple Watch Series 5 (GPS + Cellular, 44mm) - Gold Stainless Steel Case with Stone Sport Band			2020-12-17	3939
+1031	Apple Watch Magnetic Charging Cable (1m)			2020-12-17	466
+1137	BSN N.O.-XPLODE Pre Workout Supplement with Creatine, Beta-Alanine, and Energy, Flavor: Fruit Punch, 60 Servings			2020-12-17	4436
+1032	Lightning Cable MFi Certified - iPhone Charger 3Pack 6ft Durable Lightning to USB A Charging Cable Cord Compatible with iPhone 12 SE 2020 11 Xs Max XR X 8 7 6S 6 Plus 5S iPad Pro iPod Airpods - White			2020-12-17	14
+1033	OriBear Compatible with Apple Watch Band 40mm 38mm Elegant Floral Bands for Women Soft Silicone Solid Pattern Printed Replacement Strap Band for Iwatch Series 4/3/2/1 M/L Sexy Leopard			2020-12-17	9
+1034	Apple Watch Series 5 (GPS + Cellular, 40MM) - Space Gray Aluminum Case with Black Sport Band (Renewed)			2020-12-17	324
+1035	MEFEO Adjustable Elastic Bands Compatible with Apple Watch Bands 38mm 40mm 42mm 44mm, Soft Stretch Bracelet Replacement for iWatch Series 6/5/4/3/2/1 & SE Women Girls (Rainbow, 42mm/44mm)			2020-12-17	9
+1036	POWER PRIMACY Bands Compatible with Apple Watch Band 38mm 40mm 42mm 44mm, Top Grain Leather Smart Watch Strap Compatible for Men Women iWatch Series 6 5 4 3 2 1,SE (Black/Rosegold, 38mm/40mm)			2020-12-17	16
+1037	Seagate One Touch 4TB External Hard Drive HDD – Silver USB 3.0 for PC Laptop and Mac, 1 Year MylioCreate, 4 Months Adobe Creative Cloud Photography Plan (STKC4000401)			2020-12-17	99
+1038	LK 6 Pack Screen Protector Compatible with Apple Watch Series 6 5 4 SE 44mm Flexible TPU HD Clear Film Bubble-Free (UF-010)			2020-12-17	14
+1039	Apple Magic Keyboard for iPad Pro 12.9-inch (4th Generation) - US English			2020-12-17	2053
+1040	Apple Watch Series 5 (GPS, 40MM) - Space Gray Aluminum Case with Black Sport Band (Renewed)			2020-12-17	3570
+1041	Apple Pencil (2nd Generation)			2020-12-17	4485
+1042	Apple AirPods with Charging Case (Wired)			2020-12-17	3227
+1043	Apple Gift Card - App Store, iTunes, iPhone, iPad, Airpods, Macbook, accessories and more (Email Delivery)			2020-12-17	25
+1044	Apple TV 4K (32GB, Latest Model)			2020-12-17	728
+1045	LK [6 Pack] Screen Protector for Apple Watch 40mm SE/Series 4/5/6 and Apple Watch 38mm Series 3/2/1- Bubble-Free Scratch-resistant iWatch 38mm/40mm Flexible TPU Clear Film (UF-001)			2020-12-17	13
+1046	Julk Series 3 38mm Case Compatible with Apple Watch Screen Protector, Overall Protective Case TPU HD Clear Ultra-Thin Cover (2-Pack)			2020-12-17	7
+1047	Apple Pencil			2020-12-17	1054
+1048	iPhone Charger Cord 4Pack iPhone Charger Cable MFi Certified Lightning Cable Fast iPhone Charging Cord Nylon Braided iPhone Charging Cable Compatible with Phone 11 Pro max/XR max/8/7/6/6s/SE 2020,iPad			2020-12-17	12
+1049	iiteeology Compatible with Apple Watch Band 42mm 44mm, Upgraded Version Solid Stainless Steel Band Business Replacement iWatch Strap for Apple Watch Series 6/5/4/3/2/1/SE - Space Gray			2020-12-17	19
+1050	Apple Smart Keyboard for iPad (7th and 8th Generation) and iPad Air (3rd Generation) - US English			2020-12-17	398
+1051	VKP Brands VKP1010 Johnny Apple Peeler, Stainless Steel Blades, Red			2020-12-17	25
+1052	2Pack Apple Original Charger [Apple MFi Certified] Lightning to USB Cable Compatible iPhone Xs Max/Xr/Xs/X/8/7/6s/6plus/5s,iPad Pro/Air/Mini,iPod Touch(White 1M/3.3FT) Original Certified			2020-12-17	14
+1053	Apple			2020-12-17	1284
+1054	[8 Items] Ferilinso 6Pcs for Apple Watch Bands 44mm [Soft Silicone Sport Strap] + 2Pcs Apple Watch Series 6/Series 5/Series 4/SE 44mm Hard PC Case with Tempered Glass Screen Protector for iWatch 44mm			2020-12-17	20
+1055	Apple Magic Keyboard for iPad Air (4th Generation) and iPad Pro 11-inch - US English			2020-12-17	2934
+1056	ZALAVER Bands Compatible with Apple Watch Band 38mm 40mm 42mm 44mm, Soft Silicone Sport Replacement Band Compatible with iWatch Series 6 5 4 3 2 1 Women Men Pine Green 38mm/40mm S/M			2020-12-17	5
+1057	Tourist [3 Pack] Compatible for Apple Watch Tempered Glass Screen Protecto 38mm Series 3 / 2 / 1, 9H Hardness, Anti-scratch, Anti-fingerprint, Anti-bubble Easy Installation with Lifetime Replacements			2020-12-17	6
+1058	Apples to Apples Party Box [Packaging May Vary]			2020-12-17	14
+1059	Apple Pencil Tips (4 pack)			2020-12-17	28
+1060	AmazonBasics Nylon Braided Lightning to USB Cable - MFi Certified Apple iPhone Charger, Rose Gold, 3-Foot (2-Pack) (Durability Rated 4,000 Bends)			2020-12-17	18
+1061	RUOQINI 4 Pack Compatible with Apple Watch Band 38mm 40mm,Sport Silicone Soft Replacement Band Compatible for Apple Watch Series 5/4/3/2/1 [S/M Size - Rosered/MidnightBlue/Black/White]			2020-12-17	14
+1062	[2-Pack] Julk Case for Apple Watch Series 6 / SE/Series 5 / Series 4 Screen Protector 40mm, Overall Protective Case TPU HD Clear Ultra-Thin Cover (2 Transparent)			2020-12-17	7
+1063	iBUYPOWER Gaming PC Computer Desktop Trace 4 9310 (AMD Ryzen 5 3600 3.6GHz, AMD Radeon RX 5500 XT 4GB, 8GB DDR4 RAM, 240GB SSD, WiFi Ready, Windows 10 Home)			2020-12-17	699
+1064	Razer DeathAdder Essential Gaming Mouse: 6400 DPI Optical Sensor - 5 Programmable Buttons - Mechanical Switches - Rubber Side Grips - White			2020-12-17	29
+1065	ASUS - TUF Gaming 15.6" Full HD Laptop - Intel Core i5-10300H- 8GB Memory - 256GB SSD -NVIDIA GeForce GTX 1650 Ti – Black			2020-12-17	724
+1066	Turtle Beach Stealth 600 Gen 2 Wireless Gaming Headset for Xbox One and Xbox Series X|S			2020-12-17	99
+1067	Gaming Glasses | Blue Light Blocking Glasses | Enigma/Smoke by Gunnar | 65% Blue Light Protection, 100% UV Light, Anti-Reflective, Protect & Reduce Eye Strain & Dryness			2020-12-17	49
+1068	ASUS TUF Gaming A15 Gaming Laptop, 15.6” 144Hz Full HD IPS-Type Display, AMD Ryzen 5 4600H, GeForce GTX 1650, 8GB DDR4, 512GB PCIe SSD, RGB Keyboard, Windows 10 Home, Bonfire Black, FA506IH-AS53			2020-12-17	749
+1069	Razer Kraken Gaming Headset: Lightweight Aluminum Frame, Retractable Noise Isolating Microphone, For PC, PS4, PS5, Switch, Xbox One, Xbox Series X & S, Mobile, 3.5 mm Audio Jack, Black			2020-12-17	64
+1070	Logitech G502 SE Hero High Performance RGB Gaming Mouse with 11 Programmable Buttons			2020-12-17	49
+1071	Razer Sphex V2 Gaming Mouse Pad: Ultra-Thin Form Factor - Optimized Gaming Surface - Polycarbonate Finish			2020-12-17	14
+1072	HyperX Pulsefire Dart - Wireless RGB Gaming Mouse, Software-Controlled Customization, 6 Programmable Buttons, Qi-Charging Battery up to 50 Hours - PC, PS4, Xbox One Compatible			2020-12-17	79
+1073	Razer Kraken X Ultralight Gaming Headset: 7.1 Surround Sound - Lightweight Aluminum Frame - Bendable Cardioid Microphone - PC, PS4, PS5, Switch, Xbox One, Xbox Series X & S, Mobile - Black			2020-12-17	44
+1074	AOPEN 27HC5R Pbiipx 27" 1500R Curved Full HD (1920 x 1080) VA Gaming Monitor with AMD Radeon FREESYNC Premium Technology, 165Hz (Display Port & 2 x HDMI Ports), Black			2020-12-17	189
+1075	Razer Kraken Tournament Edition THX 7.1 Surround Sound Gaming Headset: Retractable Noise Cancelling Mic - USB DAC -  For PC, PS4, PS5, Nintendo Switch, Xbox One, Xbox Series X & S, Mobile – Black			2020-12-17	64
+1076	Gaming Keyboard and Mouse and Mouse pad and Gaming Headset, Wired LED RGB Backlight Bundle for PC Gamers and Xbox and PS4 Users - 4 in 1 Edition Hornet RX-250			2020-12-17	49
+1077	HyperX Cloud Flight - Wireless Gaming Headset, with Long Lasting Battery Upto 30 hours of Use, Detachable Noise Cancelling Microphone, Red LED Light, Bass, Comfortable Memory Foam, PS4, PC, PS4 Pro			2020-12-17	99
+1078	Logitech G432 DTS:X 7.1 Surround Sound Wired PC Gaming Headset (Leatherette)			2020-12-17	1064
+1079	2020 Asus TUF 15.6" FHD Premium Gaming Laptop, 10th Gen Intel Quad-Core i5-10300H, 16GB RAM, 1TB SSD, NVIDIA GeForce GTX 1650Ti 4GB GDDR6, RGB Backlit Keyboard, Windows 10 Home			2020-12-17	869
+1080	Razer Blade 15 Base Gaming Laptop 2020: Intel Core i7-10750H 6 Core, NVIDIA GeForce RTX 2070 Max-Q, 15.6" FHD 1080p 144Hz, 16GB RAM, 512GB SSD, CNC Aluminum, Chroma RGB Lighting, Thunderbolt 3, Black			2020-12-17	599
+1081	SteelSeries Apex 3 RGB Gaming Keyboard – 10-Zone RGB Illumination – IP32 Water Resistant – Premium Magnetic Wrist Rest (Whisper Quiet Gaming Switch)			2020-12-17	49
+1082	Corsair VOID RGB Elite Wireless Premium Gaming Headset with 7.1 Surround Sound - Discord Certified - Works with PC, PS5 and PS4 - White			2020-12-17	99
+1083	Cougar Revenger Wired USB Optical Gaming Mouse with 12,000 DPI, Black (CGR-WOMI-REV)			2020-12-17	49
+1084	HyperX Cloud Stinger - Gaming Headset – Comfortable HyperX Signature Memory Foam, Swivel to Mute Noise-Cancellation Microphone, Compatible with PC, Xbox One, PS4, Nintendo Switch, and Mobile Devices			2020-12-17	39
+1085	NEW Microsoft Surface Go 2 - 10.5" Touch-Screen - Intel Pentium - 4GB Memory - 64GB - Wifi - Platinum (Latest Model)			2020-12-17	4434
+1086	$25 Xbox Gift Card [Digital Code]			2020-12-17	25
+1087	NEW Microsoft Surface Dock 2			2020-12-17	173
+1088	Microsoft Surface Laptop 3 – 13.5" Touch-Screen – Intel Core i5 - 8GB Memory - 128GB Solid State Drive (Latest Model) – Platinum with Alcantara			2020-12-17	4254
+1089	Microsoft Surface Pro 7 – 12.3" Touch-Screen - 10th Gen Intel Core i5 - 8GB Memory - 128GB SSD (Latest Model) – Platinum (VDV-00001)			2020-12-17	3695
+1090	NEW Microsoft Surface Headphones 2 - Matte Black			2020-12-17	249
+1091	$100 Xbox Gift Card [Digital Code]			2020-12-17	100
+1092	Microsoft Surface Pro 7 – 12.3" Touch-Screen - 10th Gen Intel Core i5 - 8GB Memory - 128GB SSD (Latest Model) – Platinum with Black Type Cover			2020-12-17	2858
+1093	Microsoft Windows 10 Pro | USB Flash Drive + Microsoft Office 365 Home with Auto-Renew			2020-12-17	291
+1094	Microsoft Surface Laptop Go - 12.4" Touchscreen - Intel Core i5 - 8GB Memory - 128GB SSD - Sandstone			2020-12-17	699
+1095	NEW Microsoft Ergonomic Desktop			2020-12-17	796
+1096	NEW Microsoft Surface Duo 128GB (Unlocked) - Glacier			2020-12-17	855
+1097	NEW Microsoft Surface Go Signature Type Cover - Ice Blue			2020-12-17	96
+1098	Microsoft Surface Dock (Pd9-00003),Black			2020-12-17	2276
+1099	Microsoft  Surface Pro 6 (Intel Core i5, 8GB RAM, 128GB)			2020-12-17	753
+1100	Microsoft Surface Pen Platinum Model 1776 (EYU-00009)			2020-12-17	72
+1101	Microsoft Xbox One Wireless Adapter for Windows (Bulk Packaging)			2020-12-17	2042
+1102	Microsoft Surface Keyboard, WS2-00025, Silver			2020-12-17	79
+1103	Microsoft Surface Dock Compatible with Surface Book, Surface Pro 4, and Surface Pro 3 (Renewed)			2020-12-17	158
+1104	Microsoft Surface Pen, Charcoal Black, Model: 1776 (EYU-00001)			2020-12-17	64
+1105	$50 Xbox Gift Card [Digital Code]			2020-12-17	50
+1106	Microsoft Outlook 365 Mail, Calendar, People, Tasks, Notes Quick Reference - Windows Version (Cheat Sheet of Instructions, Tips & Shortcuts - Laminated Guide)			2020-12-17	7
+1107	Microsoft Surface Laptop 3 – 13.5" Touch-Screen – Intel Core i5 - 8GB Memory - 128GB Solid State Drive (Latest Model) – Platinum with Alcantara (Renewed)			2020-12-17	740
+1108	Microsoft Surface Pro Signature Type Cover – Ice Blue			2020-12-17	113
+1109	Microsoft Project  Standard 2010			2020-12-17	3295
+1110	Elite Series 2 Controller - Black			2020-12-17	715
+1111	Microsoft P3Q-00001 Wireless Display Adapter			2020-12-17	2804
+1112	New Microsoft Surface Pro X Signature Keyboard with Slim Pen			2020-12-17	192
+1113	Microsoft Xbox One Wireless Gaming Controller Arctic Camo Special Edition			2020-12-17	59
+1114	Microsoft Arc Mouse (ELG-00001) Black			2020-12-17	3729
+1115	Microsoft Surface Dial			2020-12-17	84
+1116	Microsoft Surface Book 2 15" (Intel Core i7, 16GB RAM, 512 GB), Silver			2020-12-17	1932
+1117	Microsoft FMM-00001 Type Cover for Surface Pro - Black			2020-12-17	2301
+1118	Microsoft Surface Pro 6 12.3" (2736 x 1824) Touch Screen - Intel 8th Gen Core i5 (up to 3.40 GHz) - 8GB Memory - 256GB SSD - with Keyboard and Surface Pen - Black			2020-12-17	999
+1119	Xbox One Chat Headset			2020-12-17	389
+1120	Microsoft Surface Pro X – 13" Touch-Screen – SQ1 - 8GB Memory - 128GB Solid State Drive – Wifi, 4G Lte – Matte Black			2020-12-17	2979
+1121	Microsoft LifeCam Studio for Business			2020-12-17	3249
+1122	Microsoft Surface Laptop 1769 (KSR-00001) Intel Core i5, 8GB RAM, 128GB SSD, 13.5-in Touchscreen, Win10 S			2020-12-17	788
+1123	Office Professional 2013 Key Card 1PC/1User			2020-12-17	249
+1124	Microsoft Surface Pro 3 Docking Station (Renewed)			2020-12-17	74
+1125	Xbox Wireless Controller - Shock Blue			2020-12-17	64
+1126	Microsoft Xbox Wireless Controller + Wireless Adapter for Windows 10			2020-12-17	1394
+1127	NEW Microsoft USB-C Travel Hub			2020-12-17	2597
+1128	Microsoft Xbox Wireless Controller + USB-C Cable - Xbox			2020-12-17	59
+1129	Microsoft Surface Pro 7 128GB i5 8GB RAM with Windows 10 Pro (Wi-Fi, Quad-Core i5-1035G4, Newest Version) Platinum PVQ-00001			2020-12-17	744
+1130	NEW Microsoft Mobile Mouse - Peach			2020-12-17	613
+1131	$10 Xbox Gift Card [Digital Code]			2020-12-17	10
+1132	Microsoft Surface Pro 7 MS7 12.3” (2736x1824) 10-Point Touch Display Tablet PC W/Surface Type Cover & Surface Pen, Intel 10th Gen Core i3, 4GB RAM, 128GB SSD, Windows 10, Platinum (Latest Model)			2020-12-17	761
+1133	Double Upple			2020-12-17	1174
+1134	Think and Grow Rich			2020-12-17	0
+1135	BACtrack S80 Breathalyzer | Professional-Grade Accuracy | DOT & NHTSA Approved | FDA 510(k) Cleared | Portable Breath Alcohol Tester for Personal & Professional Use			2020-12-17	129
+1136	NOW Supplements, DHA-500 with 250 EPA, Molecularly Distilled, Supports Brain Health*, 180 Softgels			2020-12-17	1468
+1138	Dermoplast Pain & Itch Spray, 2.75 Ounce Can (Packaging May Vary)			2020-12-17	4246
+1139	Nutricost Quercetin 880mg, 240 Veggie Capsules with Bromelain (165mg) - 120 Servings (440mg Quercetin Per Cap) - Gluten Free, Non-GMO			2020-12-17	577
+1140	NOW Sports Nutrition, L-Citrulline, Extra Strength 1200 mg, Amino Acid, 120 Tablets			2020-12-17	503
+1141	Dermoplast First Aid Spray, 2.75 Ounce Can, Antiseptic & Anesthetic (Packaging May Vary)			2020-12-17	3868
+1142	Genuine New for Lenovo Yoga 900S 900S-12ISK US Keyboard Bezel Upple Case Palmrest			2020-12-17	56
+1143	NOW Supplements, 5-HTP (5-hydroxytryptophan) 100 mg, Neurotransmitter Support, 120 Veg Capsules			2020-12-17	4821
+1144	NOW Supplements, D-Mannose 500 mg, Non-GMO Project Verified, Healthy Urinary Tract*, 240 Veg Capsules			2020-12-17	625
+1145	MHP Anadrox Pump & Burn, Nitric Oxide Fat Burning Inferno, 112 capsules			2020-12-17	1198
+1146	Anti Hair Loss Shampoo - Wick & Strom (Caffeine, Biotin, Saw Palmetto, Aloe Leaf, Keto.+ No Minoxidil Formula) Stimulates Hair Growth For Men and Women/12oz.			2020-12-17	15
+1147	Regress			2020-12-17	4563
+1148	Solaray Yeast-Cleanse | with Caprylic Acid, PAU Darco, Grapefruit Seed Extract & Tea Tree Oil | Healthy Cleansing Support | 30 Servings | 180 VegCaps			2020-12-17	4635
 \.
 
 
@@ -22909,28 +26968,28 @@ COPY public."Product" (id, name, brand, manufacturer, manufacture_date, cost) FR
 -- Name: Category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Category_id_seq"', 2029, true);
+SELECT pg_catalog.setval('public."Category_id_seq"', 2023, true);
 
 
 --
 -- Name: Client_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Client_id_seq"', 301, true);
+SELECT pg_catalog.setval('public."Client_id_seq"', 200, true);
 
 
 --
 -- Name: Order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Order_id_seq"', 1500, true);
+SELECT pg_catalog.setval('public."Order_id_seq"', 1000, true);
 
 
 --
 -- Name: Product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."Product_id_seq"', 988, true);
+SELECT pg_catalog.setval('public."Product_id_seq"', 1148, true);
 
 
 --

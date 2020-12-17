@@ -12,7 +12,6 @@ def recreate_database():
     print('Recreating database...')
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
-    initCustomFunctions()
 
 
 def defineGenerateStringFunc():

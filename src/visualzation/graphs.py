@@ -9,19 +9,24 @@ from sqlalchemy import func, Integer
 
 
 def getTop15Categories():
-    results = session.query(Category.name, func.count(Category.name).label('count')) \
-        .join(Product, Category.Products) \
-        .group_by(Category.name) \
-        .order_by(func.count('count').desc()) \
-        .limit(15).all()
+    try:
+        results = session.query(Category.name, func.count(Category.name).label('count')) \
+            .join(Product, Category.Products) \
+            .group_by(Category.name) \
+            .order_by(func.count('count').desc()) \
+            .limit(15).all()
 
-    listed = list(zip(*results))
-    series = pd.Series(np.array(listed[1]), index=listed[0], name='')
+        listed = list(zip(*results))
 
-    series.plot.pie(figsize=(9, 7), title="Top 15 categories:")
+        series = pd.Series(np.array(listed[1]), index=listed[0], name='')
 
-    plt.plot(series)
-    plt.show()
+        series.plot.pie(figsize=(9, 7), title="Top 15 categories:")
+
+        plt.plot(series)
+        plt.show()
+    except Exception as err:
+        print(err)
+        exit(1)
 
 
 def getManufactureDateStat():
