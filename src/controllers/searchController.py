@@ -1,5 +1,3 @@
-import sys
-
 from db import session
 from models.product import Product
 from models.order import Order
